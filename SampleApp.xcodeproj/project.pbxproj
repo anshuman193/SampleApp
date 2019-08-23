@@ -33,7 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F38CA69231066FC009AF085 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F38CA69231066FC009AF085 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA6C231066FC009AF085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F38CA6E231066FC009AF085 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0F38CA70231066FC009AF085 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		0F38CA6A231066FC009AF085 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F38CA69231066FC009AF085 /* SampleApp.app */,
+				0F38CA69231066FC009AF085 /* Tracker.app */,
 				0F38CA7B231066FC009AF085 /* SampleAppTests.xctest */,
 				0F38CA86231066FC009AF085 /* SampleAppUITests.xctest */,
 			);
@@ -127,9 +127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F38CA68231066FC009AF085 /* SampleApp */ = {
+		0F38CA68231066FC009AF085 /* Tracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleApp" */;
+			buildConfigurationList = 0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Tracker" */;
 			buildPhases = (
 				0F38CA65231066FC009AF085 /* Sources */,
 				0F38CA66231066FC009AF085 /* Frameworks */,
@@ -139,9 +139,9 @@
 			);
 			dependencies = (
 			);
-			name = SampleApp;
+			name = Tracker;
 			productName = SampleApp;
-			productReference = 0F38CA69231066FC009AF085 /* SampleApp.app */;
+			productReference = 0F38CA69231066FC009AF085 /* Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F38CA7A231066FC009AF085 /* SampleAppTests */ = {
@@ -216,7 +216,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0F38CA68231066FC009AF085 /* SampleApp */,
+				0F38CA68231066FC009AF085 /* Tracker */,
 				0F38CA7A231066FC009AF085 /* SampleAppTests */,
 				0F38CA85231066FC009AF085 /* SampleAppUITests */,
 			);
@@ -280,12 +280,12 @@
 /* Begin PBXTargetDependency section */
 		0F38CA7D231066FC009AF085 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F38CA68231066FC009AF085 /* SampleApp */;
+			target = 0F38CA68231066FC009AF085 /* Tracker */;
 			targetProxy = 0F38CA7C231066FC009AF085 /* PBXContainerItemProxy */;
 		};
 		0F38CA88231066FC009AF085 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F38CA68231066FC009AF085 /* SampleApp */;
+			target = 0F38CA68231066FC009AF085 /* Tracker */;
 			targetProxy = 0F38CA87231066FC009AF085 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,7 +430,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tracker;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -448,7 +448,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tracker;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -543,7 +543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleApp" */ = {
+		0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F38CA90231066FC009AF085 /* Debug */,
