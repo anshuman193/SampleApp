@@ -39,27 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? ViewController else { return }
         uiHandler.makePopOver(vc: vc, uiElement: statusItem)
-        
     }
     
-    private func agentName(plistname name: String, and key : String) -> String {
-        
-        var agentName = "Tracker" // default value
-        
-        var dict: NSDictionary?
-    
-        if let path = Bundle.main.path(forResource: name, ofType: "plist") {
-            dict = NSDictionary(contentsOfFile: path)
-        }
-        
-        if let name = dict?.value(forKey: key) as? String {
-            
-            agentName = name
-        }
-        
-        return agentName
-    
-    }
-
 }
 

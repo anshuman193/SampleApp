@@ -9,10 +9,7 @@
 import Foundation
 import AppKit
 
-@objcMembers class UIHandler<T> {
-    
-    typealias actionOnUI = String
-}
+@objcMembers class UIHandler<T> {}
 
 extension UIHandler where T == NSStatusItem {
     
@@ -50,9 +47,7 @@ extension UIHandler where T == NSStatusItem {
         return agentName
         
     }
-    
-    
-    
+        
     
     fileprivate func displayPopOver(_ popOverView: NSPopover, uiElement: NSStatusItem) {
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
@@ -69,9 +64,5 @@ extension UIHandler where T == NSStatusItem {
         return popOverView
     }
 
-    
-
-
-    
 }
 
