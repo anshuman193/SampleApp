@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func initializeAppUI(){
-        uiHandler.setupUI(uiElement: statusItem)
+        uiHandler.setup(uiElement: statusItem)
         configMenuItems()
     }
     

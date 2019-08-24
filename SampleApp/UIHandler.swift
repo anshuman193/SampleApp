@@ -8,12 +8,15 @@
 
 import Foundation
 import AppKit
+import MapKit
 
 @objcMembers class UIHandler<T> {}
 
+
+
 extension UIHandler where T == NSStatusItem {
     
-    func setupUI(uiElement: NSStatusItem) {
+    func setup(uiElement: NSStatusItem) {
         
         let statusItem = uiElement
         statusItem.button?.title = agentName(plistname: "Info", and: "Agent Name")

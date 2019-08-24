@@ -14,5 +14,9 @@ class WebServiceHandler: NSObject {
         
     }
     
+    private func prepareRequest(){
+        
+    }
+    
     
 }
