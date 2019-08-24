@@ -30,11 +30,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func configMenuItems(){
         statusItem.menu = NSMenu()
-        let separator = NSMenuItem(title: "Settings", action: #selector(showSettings), keyEquivalent: " ")
+        let separator = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
         statusItem.menu?.addItem(separator)
     }
     
-    @objc func showSettings(){
+    fileprivate func displayPopOver(_ popOverView: NSPopover) {
+        popOverView.show(relativeTo: statusItem.button!.bounds, of: statusItem.button!, preferredEdge: .maxY)
+    }
+    
+    fileprivate func closePopOver(_ popOverView: NSPopover) {
+        popOverView.close()
+    }
+    
+    fileprivate func constructPopOver(_ vc: ViewController) -> NSPopover {
+        let popOverView =  NSPopover()
+        popOverView.contentViewController = vc
+        popOverView.behavior = .transient
+        return popOverView
+    }
+    
+    @objc func settings(){
+        
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? ViewController else { return }
+        
+        let popOverView = constructPopOver(vc)
+        displayPopOver(popOverView)
         
     }
     
