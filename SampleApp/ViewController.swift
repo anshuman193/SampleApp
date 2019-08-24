@@ -37,7 +37,8 @@ class ViewController: NSViewController {
     }
     
     @IBAction func currLocationButtonAction(_ sender: Any){
-        print("current location button clicked")
+        
+        Logger.debugLog("current location button clicked")
         
     }
 

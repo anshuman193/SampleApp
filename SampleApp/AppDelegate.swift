@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func initializeAppUI(){
         statusItem.button?.title = agentName(plistname: "Info", and: "Agent Name")
         configMenuItems()
+        Logger.debugLog("initializeAppUI")
     }
     
     private func configMenuItems(){
