@@ -7,13 +7,22 @@
 //
 
 import Cocoa
+import MapKit
 
 class ViewController: NSViewController {
 
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var currLocationButton: NSButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear() {
+        
     }
 
     override var representedObject: Any? {
@@ -27,6 +36,10 @@ class ViewController: NSViewController {
         
     }
     
+    @IBAction func currLocationButtonAction(_ sender: Any){
+        print("current location button clicked")
+        
+    }
 
 }
 

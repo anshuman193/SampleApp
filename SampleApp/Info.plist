@@ -30,5 +30,9 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>Agent Name</key>
+	<string>Weather Tracker</string>
 </dict>
 </plist>

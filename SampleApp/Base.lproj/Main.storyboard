@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -704,15 +705,45 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewcontroller1" id="XfG-lQ-9wD" customClass="ViewController" customModule="Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="475"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YmK-mo-ZcL">
+                                <rect key="frame" x="20" y="102" width="560" height="347"/>
+                            </mapView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-TV-sFx">
+                                <rect key="frame" x="182.5" y="34" width="236" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="235" id="ndR-gb-QWc"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundTextured" title="Use my current location" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="currLocationButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ihi-TV-sFx" firstAttribute="top" secondItem="YmK-mo-ZcL" secondAttribute="bottom" constant="45" id="8AA-IN-LdS"/>
+                            <constraint firstAttribute="bottom" secondItem="ihi-TV-sFx" secondAttribute="bottom" constant="35" id="CCs-Z9-RJO"/>
+                            <constraint firstItem="YmK-mo-ZcL" firstAttribute="centerX" secondItem="ihi-TV-sFx" secondAttribute="centerX" id="bN7-e7-c3R"/>
+                            <constraint firstItem="YmK-mo-ZcL" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="bie-S1-KxP"/>
+                            <constraint firstItem="YmK-mo-ZcL" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="26" id="u6S-sq-kYU"/>
+                            <constraint firstAttribute="trailing" secondItem="YmK-mo-ZcL" secondAttribute="trailing" constant="20" symbolic="YES" id="usS-1Z-AWU"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currLocationButton" destination="ihi-TV-sFx" id="nzF-1v-NOy"/>
+                        <outlet property="mapView" destination="YmK-mo-ZcL" id="7ik-xe-2Q7"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="654.5"/>
         </scene>
     </scenes>
 </document>

@@ -15,15 +15,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        setupInStatusBar()
+        initializeAppUI()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-    private func setupInStatusBar(){
-        statusItem.button?.title = "Fetching…"
+    private func initializeAppUI(){
+        statusItem.button?.title = agentName(plistname: "Info", and: "Agent Name")
         configMenuItems()
     }
     
@@ -35,6 +35,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func showSettings(){
         
+    }
+    
+    private func agentName(plistname name: String, and key : String) -> String {
+        
+        var agentName = "Tracker" // default value
+        
+        var dict: NSDictionary?
+    
+        if let path = Bundle.main.path(forResource: name, ofType: "plist") {
+            dict = NSDictionary(contentsOfFile: path)
+        }
+        
+        if let name = dict?.value(forKey: key) as? String {
+            
+            agentName = name
+        }
+        
+        return agentName
+    
     }
 
 }
