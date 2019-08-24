@@ -12,7 +12,8 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
+    let uiHandler = UIHandler<NSStatusItem>()
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         initializeAppUI()
@@ -23,39 +24,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func initializeAppUI(){
-        statusItem.button?.title = agentName(plistname: "Info", and: "Agent Name")
+        uiHandler.initializeUI(uiElement: statusItem)
         configMenuItems()
-        Logger.debugLog("initializeAppUI")
     }
     
     private func configMenuItems(){
         statusItem.menu = NSMenu()
-        let separator = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-        statusItem.menu?.addItem(separator)
-    }
-    
-    fileprivate func displayPopOver(_ popOverView: NSPopover) {
-        popOverView.show(relativeTo: statusItem.button!.bounds, of: statusItem.button!, preferredEdge: .maxY)
-    }
-    
-    fileprivate func closePopOver(_ popOverView: NSPopover) {
-        popOverView.close()
-    }
-    
-    fileprivate func constructPopOver(_ vc: ViewController) -> NSPopover {
-        let popOverView =  NSPopover()
-        popOverView.contentViewController = vc
-        popOverView.behavior = .transient
-        return popOverView
+        let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
+        statusItem.menu?.addItem(settingMenuItem)
     }
     
     @objc func settings(){
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? ViewController else { return }
-        
-        let popOverView = constructPopOver(vc)
-        displayPopOver(popOverView)
+        uiHandler.makePopOver(vc: vc, uiElement: statusItem)
         
     }
     
