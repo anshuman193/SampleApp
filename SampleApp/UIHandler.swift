@@ -13,8 +13,7 @@ import AppKit
 
 extension UIHandler where T == NSStatusItem {
     
-    
-    func initializeUI(uiElement: NSStatusItem) {
+    func setupUI(uiElement: NSStatusItem) {
         
         let statusItem = uiElement
         statusItem.button?.title = agentName(plistname: "Info", and: "Agent Name")
@@ -24,8 +23,8 @@ extension UIHandler where T == NSStatusItem {
     func makePopOver(vc: NSViewController, uiElement: T) -> Void {
         let popOverView = constructPopOver(vc)
         displayPopOver(popOverView, uiElement: uiElement)
+        Logger.debugLog("makePopOver called")
     }
-    
     
     //MARK: helper methods
 
@@ -33,19 +32,11 @@ extension UIHandler where T == NSStatusItem {
         
         var agentName = "Tracker" // default value
         
-        var dict: NSDictionary?
-        
-        if let path = Bundle.main.path(forResource: name, ofType: "plist") {
-            dict = NSDictionary(contentsOfFile: path)
+        if let value = Utility.readValue(fromplistFile: "Config" , forKey: key) {
+            agentName = value
         }
-        
-        if let name = dict?.value(forKey: key) as? String {
-            
-            agentName = name
-        }
-        
+
         return agentName
-        
     }
         
     

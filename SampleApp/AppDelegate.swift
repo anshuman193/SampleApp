@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func initializeAppUI(){
-        uiHandler.initializeUI(uiElement: statusItem)
+        uiHandler.setupUI(uiElement: statusItem)
         configMenuItems()
     }
     
@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu?.addItem(settingMenuItem)
     }
     
-    @objc func settings(){
+    @objc private func settings(){
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? ViewController else { return }
