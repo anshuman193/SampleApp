@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum ViewControllerType {
+    
+    case Map
+}
+
 class Utility: NSObject {
     
     class func readValue(fromplistFile name: String, forKey key: String) -> String? {

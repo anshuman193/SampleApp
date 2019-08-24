@@ -37,7 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func settings(){
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? ViewController else { return }
+        guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? NSViewController else { return }
         uiHandler.makePopOver(vc: vc, uiElement: statusItem)
     }
     
