@@ -22,18 +22,11 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
     private var baseUrl: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "BaseURL")
     }
-
-    
-    fileprivate func loadDataFromRemoteServer() {
-        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude) {
-            
-            webServiceHandler.fetchData()
-        }
-    }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         loadCoordinatesFromDefaults()
+        populateLastKnownCoordinates(lat: latitude, long: longitude)
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
         
@@ -43,7 +36,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-//        captureUserLocation()
+        captureUserLocation()
         Logger.debugLog("viewWillDisappear")
         
     }
@@ -61,15 +54,24 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
         longitude = defaults.double(forKey: "longitude")
     }
     
+    fileprivate func updateDefaults(_ annotation: MKAnnotation) {
+        defaults.set(annotation.coordinate.latitude, forKey: "latitude")
+        defaults.set(annotation.coordinate.longitude, forKey: "longitude")
+    }
+    
     private func captureUserLocation() {
         
         let annotation = mapView.annotations[0]
-        defaults.set(annotation.coordinate.latitude, forKey: "latitude")
-        defaults.set(annotation.coordinate.longitude, forKey: "longitude")
-        Logger.debugLog("annotation.coordinate.latitude \(annotation.coordinate.latitude)")
-        Logger.debugLog("annotation.coordinate.longitude \(annotation.coordinate.longitude)")
+        updateDefaults(annotation)
+        Logger.debugLog("captured user location latitude \(annotation.coordinate.latitude)")
+        Logger.debugLog("captured user location longitude \(annotation.coordinate.longitude)")
     }
     
+    private func populateLastKnownCoordinates(lat: Double, long: Double){
+        let anno = MKPointAnnotation()
+        anno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        mapView.addAnnotation(anno)
+    }
     
     @objc private func mapClicked(recognizer: NSClickGestureRecognizer) {
         mapView.removeAnnotations(mapView.annotations)
@@ -84,6 +86,14 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
         annotation.coordinate = coordinate
         annotation.title = "Your location"
         mapView.addAnnotation(annotation)
+    }
+    
+    
+    fileprivate func loadDataFromRemoteServer() {
+        
+        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude) {
+            webServiceHandler.fetchData()
+        }
     }
     
     @IBAction func currLocationButtonAction(_ sender: Any){

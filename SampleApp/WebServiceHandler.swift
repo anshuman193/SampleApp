@@ -14,6 +14,7 @@ class WebServiceHandler: NSObject {
     private var latitude: Double?
     private var longitude: Double?
     private var datasource: String?
+    private var responseParser = Parser()
     
     
     private var apiKey: String? {
@@ -54,24 +55,26 @@ class WebServiceHandler: NSObject {
             guard let url = self.prepareRequest(source: self.datasource!) else { return }
             Logger.debugLog("url --> \(url)")
             guard let data = try? String(contentsOf: url) else {
-                DispatchQueue.main.async { [unowned self] in
+                DispatchQueue.main.async {
                     
                     Logger.debugLog("Problem in API call")
                 }
                 return
             }
             
-            let newFeed = JSON(parseJSON: data)
-            Logger.debugLog("response::::::::>>>>> \(newFeed)")
+            let newData = JSON(parseJSON: data)
+            Logger.debugLog("response::::::::>>>>> \(newData)")
             
             DispatchQueue.main.async {
-//                self.feed = newFeed
-//                self.updateDisplay()
-//                self.refreshSubmenuItems()
+                    self.responseParser.parse(data: newData)
+                }
+                
             }
         }
     
-    }
-    
-    
 }
+    
+
+
+
+
