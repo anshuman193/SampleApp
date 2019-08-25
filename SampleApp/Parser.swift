@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol PareserDataUpdateDelegate {
 //    associatedtype M
-    func newDataDidBecomeAvaialble()
+    func newDataDidBecomeAvaialble(model: CurrentWeatherInfo)
 }
 
 class Parser: NSObject {
@@ -24,8 +24,8 @@ class Parser: NSObject {
     func parse(data: JSON){
         
         currWeatherInfo = CurrentWeatherInfo(json: data)
-
-        self.delegate?.newDataDidBecomeAvaialble()
         
+        guard let _ = currWeatherInfo else { return }
+        self.delegate?.newDataDidBecomeAvaialble(model: currWeatherInfo!)
     }
 }

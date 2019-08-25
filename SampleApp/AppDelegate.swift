@@ -12,7 +12,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    let uiHandler = UIHandler<NSStatusItem>()
+//    let uiHandler = UIHandler()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -24,8 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func initializeAppUI(){
-        uiHandler.setup(uiElement: statusItem)
+        UIHandler.shared.setup(uiElement: statusItem)
+//        UIHandler.shared.configMenuItems(uiElement: statusItem)
         configMenuItems()
+        
     }
     
     private func configMenuItems(){
@@ -38,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? NSViewController else { return }
-        uiHandler.makePopOver(vc: vc, uiElement: statusItem)
+        UIHandler.shared.makePopOver(vc: vc, uiElement: statusItem)
     }
     
 }

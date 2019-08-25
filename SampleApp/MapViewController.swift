@@ -12,12 +12,13 @@ import SwiftyJSON
 
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate {
-
+ 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private let defaults = UserDefaults.standard
+    
 
     private var baseUrl: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "BaseURL")
@@ -104,9 +105,9 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble() {
+    func newDataDidBecomeAvaialble(model: CurrentWeatherInfo) {
         Logger.debugLog("newDataDidBecomeAvaialble")
-        
+        UIHandler.shared.updateSubmenuItems(model: model)
     }
 
 }

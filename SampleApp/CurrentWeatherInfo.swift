@@ -13,7 +13,7 @@ import SwiftyJSON
 struct CurrentWeatherInfo {
     
     var summary : String?
-    var time : Int?
+    var time : Double?
     var temperature : Int?
     var humidity : Int?
     
@@ -24,7 +24,7 @@ struct CurrentWeatherInfo {
             summary = _summary
         }
         
-        if let _time = json["currently"]["time"].int {
+        if let _time = json["currently"]["time"].double {
             time = _time
         }
         
