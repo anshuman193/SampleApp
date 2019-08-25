@@ -16,18 +16,17 @@ class WebServiceHandler: NSObject {
     private var datasource: String?
     
     
-    
     private var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
-    init?(with baseurl: URL, latitude: Double, longitude: Double) {
+    init?(with baseurl: String, latitude: Double, longitude: Double) {
         super.init()
         
         if let _apiKey = self.apiKey {
             
             let coordinates = String(format:"\(latitude),\(longitude)")
-            self.datasource = baseurl.absoluteString + _apiKey + coordinates
+            self.datasource = baseurl + _apiKey + "/" + coordinates
             self.latitude = latitude
             self.longitude = longitude
         } else {
@@ -50,17 +49,20 @@ class WebServiceHandler: NSObject {
             return
         }
         
-        DispatchQueue.global(qos: .utility).async { [unowned self] in
+        DispatchQueue.global(qos: .utility).async {
             
             guard let url = self.prepareRequest(source: self.datasource!) else { return }
+            Logger.debugLog("url --> \(url)")
             guard let data = try? String(contentsOf: url) else {
                 DispatchQueue.main.async { [unowned self] in
-//                    self.statusItem.button?.title = "Bad API call"
+                    
+                    Logger.debugLog("Problem in API call")
                 }
                 return
             }
             
             let newFeed = JSON(parseJSON: data)
+            Logger.debugLog("response::::::::>>>>> \(newFeed)")
             
             DispatchQueue.main.async {
 //                self.feed = newFeed

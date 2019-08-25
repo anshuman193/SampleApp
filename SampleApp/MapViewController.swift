@@ -17,8 +17,19 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
     @IBOutlet var currLocationButton: NSButton!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
+
+    private var baseUrl: String? {
+        return Utility.readValue(fromplistFile: "Config", forKey: "BaseURL")
+    }
+
     
+    fileprivate func loadDataFromRemoteServer() {
+        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude) {
+            
+            webServiceHandler.fetchData()
+        }
+    }
     
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -26,12 +37,15 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
         
+        loadDataFromRemoteServer()
+        
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        captureUserLocation()
+//        captureUserLocation()
         Logger.debugLog("viewWillDisappear")
+        
     }
 
     override var representedObject: Any? {
@@ -76,6 +90,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
         
         Logger.debugLog("current location button clicked")
     }
+    
 
 }
 
