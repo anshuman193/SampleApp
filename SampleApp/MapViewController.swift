@@ -12,10 +12,6 @@ import SwiftyJSON
 
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate {
-    func newDataDidBecomeAvaialble() {
-        Logger.debugLog("newDataDidBecomeAvaialble")
-    }
-    
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
@@ -95,9 +91,8 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     fileprivate func loadDataFromRemoteServer() {
         
-        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude) {
+        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude, parserDelegate: self) {
             webServiceHandler.fetchData()
-            webServiceHandler.setParserDelegate(object: self)
         }
     }
     
@@ -106,6 +101,13 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         Logger.debugLog("current location button clicked")
     }
     
+    
+    //MARK:PareserDataUpdateDelegate
+    
+    func newDataDidBecomeAvaialble() {
+        Logger.debugLog("newDataDidBecomeAvaialble")
+        
+    }
 
 }
 

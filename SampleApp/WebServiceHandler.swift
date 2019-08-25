@@ -17,16 +17,11 @@ class WebServiceHandler: NSObject {
     private var responseParser = Parser()
     
     
-    func setParserDelegate(object: PareserDataUpdateDelegate) {
-        responseParser.delegate = object
-    }
-    
-    
     private var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
-    init?(with baseurl: String, latitude: Double, longitude: Double) {
+    init?(with baseurl: String, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
         super.init()
         
         if let _apiKey = self.apiKey {
@@ -35,6 +30,7 @@ class WebServiceHandler: NSObject {
             self.datasource = baseurl + _apiKey + "/" + coordinates
             self.latitude = latitude
             self.longitude = longitude
+            responseParser.delegate = delegate
         } else {
             Logger.debugLog("Can't initialize WebServiceHandler because API Key is nil")
             return nil

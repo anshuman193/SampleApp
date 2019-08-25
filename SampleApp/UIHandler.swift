@@ -57,6 +57,9 @@ extension UIHandler where T == NSStatusItem {
         popOverView.behavior = .transient
         return popOverView
     }
+    
+    func updateSubmenuItems() {
+    }
 
 }
 
