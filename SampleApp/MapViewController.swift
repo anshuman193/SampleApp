@@ -11,7 +11,11 @@ import MapKit
 import SwiftyJSON
 
 
-class MapViewController: GenericViewController<ViewControllerType.Type> {
+class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate {
+    func newDataDidBecomeAvaialble() {
+        Logger.debugLog("newDataDidBecomeAvaialble")
+    }
+    
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
@@ -93,6 +97,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type> {
         
         if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude) {
             webServiceHandler.fetchData()
+            webServiceHandler.setParserDelegate(object: self)
         }
     }
     

@@ -9,17 +9,23 @@
 import Foundation
 import SwiftyJSON
 
+protocol PareserDataUpdateDelegate {
+//    associatedtype M
+    func newDataDidBecomeAvaialble()
+}
+
 class Parser: NSObject {
     
+    
+    var delegate: PareserDataUpdateDelegate?
     private var jsonData: JSON?
     private(set) var currWeatherInfo: CurrentWeatherInfo?
-    
-    override init() {
-        
-    }
     
     func parse(data: JSON){
         
         currWeatherInfo = CurrentWeatherInfo(json: data)
+
+        self.delegate?.newDataDidBecomeAvaialble()
+        
     }
 }

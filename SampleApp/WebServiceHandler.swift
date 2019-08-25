@@ -17,6 +17,11 @@ class WebServiceHandler: NSObject {
     private var responseParser = Parser()
     
     
+    func setParserDelegate(object: PareserDataUpdateDelegate) {
+        responseParser.delegate = object
+    }
+    
+    
     private var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
