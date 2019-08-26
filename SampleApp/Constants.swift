@@ -10,6 +10,8 @@ import Foundation
 
 struct Constants {
     
+    static let kAgentDefaultName = "Tracker"
+    
     struct ErrorMessage {
         static let kPleaseWait = "Please wait...we are fetching data"
     }

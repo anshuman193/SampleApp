@@ -22,7 +22,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
 
     fileprivate var baseUrl: String? {
         
-        return Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist, forKey: "BaseURL")
+        return Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist, forKey: Constants.Plist.kBaseURL)
     }
     
     override func viewWillAppear() {

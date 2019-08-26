@@ -22,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     fileprivate func initializeAppUI(){
         
-        let agent = agentName(plistname: "Config", and: "Agent Name")
-        let interval = refreshInterval(plistname: "Config", and: "Data Refresh Frequency")
+        let agent = agentName(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyAgentName)
+        let interval = refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
         AgentUICoordinator.shared.setup(withTitle: agent)
         AgentUICoordinator.shared.configMenuItems()
         let mapVC = MapViewController()
@@ -33,8 +33,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     fileprivate func agentName(plistname name: String, and key : String) -> String {
         
-        var agentName = "Tracker" // default value
-        if let value = Utility.readValue(fromplistFile: "Config" , forKey: key) {
+        var agentName = Constants.kAgentDefaultName
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key) {
             agentName = value
         }
         return agentName
@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     fileprivate func refreshInterval(plistname name: String, and key : String) -> Int {
         
         var interval = 300 // default value in seconds
-        if let value = Utility.readValue(fromplistFile: "Config" , forKey: key), let refreshInterval = Int(value) {
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key), let refreshInterval = Int(value) {
             interval = refreshInterval
         }
         return interval
