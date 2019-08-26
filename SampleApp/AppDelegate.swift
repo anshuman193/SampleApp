@@ -11,9 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-//    let uiHandler = UIHandler()
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         initializeAppUI()
@@ -24,24 +21,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func initializeAppUI(){
-        UIHandler.shared.setup(uiElement: statusItem)
-//        UIHandler.shared.configMenuItems(uiElement: statusItem)
-        configMenuItems()
         
+        let agent = agentName(plistname: "Info", and: "Agent Name")
+        AgentUICoordinator.shared.setup(withTitle: agent)
+        AgentUICoordinator.shared.configMenuItems()
     }
     
-    private func configMenuItems(){
-        statusItem.menu = NSMenu()
-        let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-        statusItem.menu?.addItem(settingMenuItem)
-    }
-    
-    @objc private func settings(){
+    private func agentName(plistname name: String, and key : String) -> String {
         
-        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: "viewcontroller1") as? NSViewController else { return }
-        UIHandler.shared.makePopOver(vc: vc, uiElement: statusItem)
+        var agentName = "Tracker" // default value
+        
+        if let value = Utility.readValue(fromplistFile: "Config" , forKey: key) {
+            agentName = value
+        }
+        
+        return agentName
     }
-    
 }
 

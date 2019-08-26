@@ -105,9 +105,9 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble(model: CurrentWeatherInfo) {
+    func newDataDidBecomeAvaialble(models: [CurrentWeatherInfo]) {
         Logger.debugLog("newDataDidBecomeAvaialble")
-        UIHandler.shared.updateSubmenuItems(model: model)
+        AgentUICoordinator.shared.refreshMenuItems(model: models)
     }
 
 }
