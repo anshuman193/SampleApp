@@ -22,7 +22,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
 
     fileprivate var baseUrl: String? {
         
-        return Utility.readValue(fromplistFile: "Config", forKey: "BaseURL")
+        return Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist, forKey: "BaseURL")
     }
     
     override func viewWillAppear() {
@@ -66,14 +66,14 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     fileprivate func loadCoordinatesFromDefaults() {
         
-        latitude = defaults.double(forKey: "latitude")
-        longitude = defaults.double(forKey: "longitude")
+        latitude = defaults.double(forKey: Constants.Location.kLatitude)
+        longitude = defaults.double(forKey: Constants.Location.kLongitude)
     }
     
     fileprivate func updateDefaults(_ annotation: MKAnnotation) {
         
-        defaults.set(annotation.coordinate.latitude, forKey: "latitude")
-        defaults.set(annotation.coordinate.longitude, forKey: "longitude")
+        defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.kLatitude)
+        defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.kLongitude)
     }
     
     fileprivate func captureUserLocation() {

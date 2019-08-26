@@ -47,7 +47,7 @@ extension AgentUICoordinator {
     @objc fileprivate func settings(){
 
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: "mapviewcontroller") as? NSViewController else { return }
+        guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.kMapviewController) as? NSViewController else { return }
         makePopOver(vc: vc, uiElement: statusItem)
     }
 
@@ -69,7 +69,7 @@ extension AgentUICoordinator {
     fileprivate func getAgentName() -> String {
         
         var agentName = "Tracker"
-        if let value = Utility.readValue(fromplistFile: "Config" , forKey: "Agent Name") {
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: Constants.Plist.kKeyAgentName) {
             agentName = value
         }
         
@@ -91,7 +91,7 @@ extension AgentUICoordinator {
             self.statusItem.button?.title = agentName
         } else {
             blinkStatus = true
-            self.statusItem.button?.title = "Please wait...we are fetching data"
+            self.statusItem.button?.title = Constants.StatusMessage.kPleaseWait
         }
     }
 

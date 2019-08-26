@@ -82,11 +82,6 @@ class WebServiceHandler: NSObject {
 
             })
             
-//            DispatchQueue.main.async {
-//                    self.responseParser.parse(data: newData)
-//                    self.delegate?.stopAnimation()
-//                }
-            
             }
         }
     
