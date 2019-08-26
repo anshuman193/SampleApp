@@ -18,8 +18,8 @@ class Parser: NSObject {
     
     
     var delegate: PareserDataUpdateDelegate?
-    private var jsonData: JSON?
-    private(set) var currWeatherInfo: CurrentWeatherInfo?
+    fileprivate var jsonData: JSON?
+    fileprivate(set) var currWeatherInfo: CurrentWeatherInfo?
     
     func parse(data: JSON){
         

@@ -8,5 +8,7 @@
 	<string>Weather Tracker</string>
 	<key>API Key</key>
 	<string>d28732d50b83d749d705adb3655de71a</string>
+	<key>Data Refresh Frequency</key>
+	<string>500</string>
 </dict>
 </plist>

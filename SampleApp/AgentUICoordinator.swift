@@ -13,9 +13,13 @@ import MapKit
 @objcMembers class AgentUICoordinator {
     
     static let shared = AgentUICoordinator()
-    private var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    private init(){}
-    private var dataModelArr: [CurrentWeatherInfo]?
+    fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
+    fileprivate init(){}
+    fileprivate var dataModelArr: [CurrentWeatherInfo]?
+    fileprivate var timer: Timer?
+    fileprivate var blinkStatus: Bool = false
+
 }
 
 extension AgentUICoordinator {
@@ -36,12 +40,11 @@ extension AgentUICoordinator {
     func configMenuItems() {
 
         statusItem.menu = NSMenu()
-        let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
         settingMenuItem.target = self
         statusItem.menu?.addItem(settingMenuItem)
     }
 
-    @objc private func settings(){
+    @objc fileprivate func settings(){
 
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: "mapviewcontroller") as? NSViewController else { return }
@@ -57,7 +60,41 @@ extension AgentUICoordinator {
     
     //MARK: helper methods
 
+
+    func startTextAnimator(){
+        timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(self.blink), userInfo: nil, repeats: true)
+        timer?.fire()
+    }
+    
+    fileprivate func getAgentName() -> String {
         
+        var agentName = "Tracker"
+        if let value = Utility.readValue(fromplistFile: "Config" , forKey: "Agent Name") {
+            agentName = value
+        }
+        
+        return agentName
+    }
+    
+    func stopTextAnimator(){
+        
+        timer?.invalidate()
+        self.statusItem.button?.title = getAgentName()
+    }
+    
+    @objc fileprivate func blink() {
+
+        let agentName = getAgentName()
+        
+        if blinkStatus {
+            blinkStatus = false
+            self.statusItem.button?.title = agentName
+        } else {
+            blinkStatus = true
+            self.statusItem.button?.title = "Please wait...we are fetching data"
+        }
+    }
+
     
     fileprivate func displayPopOver(_ popOverView: NSPopover, uiElement: NSStatusItem) {
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
@@ -74,11 +111,13 @@ extension AgentUICoordinator {
         return popOverView
     }
     
-    private func updateSubmenuItems(modelArray: [CurrentWeatherInfo]) {
+    fileprivate func updateSubmenuItems(modelArray: [CurrentWeatherInfo]) {
         
         statusItem.menu?.removeAllItems()
         
         for model in modelArray {
+            
+            var title = "Data not available..."
             
             if let time = model.time {
                 
@@ -86,17 +125,22 @@ extension AgentUICoordinator {
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
                 let formattedDate = formatter.string(from: date)
-
-                let summary = model.summary
-                let temperature = model.temperature
-                let title = "\(formattedDate): \(String(describing: summary)) (\(String(describing: temperature))°)"
-
-                let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-                statusItem.menu?.addItem(menuItem)
-             
-
+                title = (formattedDate)
             }
+
+            if let summary = model.summary {
+                title.append(": \(summary)")
+            }
+            
+            if let temperature = model.temperature {
+                title.append(" \(temperature)°F")
+            }
+
+            let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+            statusItem.menu?.addItem(menuItem)
         }
+        
+        statusItem.menu?.addItem(settingMenuItem)
         
     }
 

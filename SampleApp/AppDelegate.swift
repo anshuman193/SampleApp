@@ -20,22 +20,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    private func initializeAppUI(){
+    fileprivate func initializeAppUI(){
         
-        let agent = agentName(plistname: "Info", and: "Agent Name")
+        let agent = agentName(plistname: "Config", and: "Agent Name")
+        let interval = refreshInterval(plistname: "Config", and: "Data Refresh Frequency")
         AgentUICoordinator.shared.setup(withTitle: agent)
         AgentUICoordinator.shared.configMenuItems()
+        let mapVC = MapViewController()
+        mapVC.startLoadingData(withTimeInterval: interval)
+        
     }
     
-    private func agentName(plistname name: String, and key : String) -> String {
+    fileprivate func agentName(plistname name: String, and key : String) -> String {
         
         var agentName = "Tracker" // default value
-        
         if let value = Utility.readValue(fromplistFile: "Config" , forKey: key) {
             agentName = value
         }
-        
         return agentName
+    }
+    
+    fileprivate func refreshInterval(plistname name: String, and key : String) -> Int {
+        
+        var interval = 300 // default value in seconds
+        if let value = Utility.readValue(fromplistFile: "Config" , forKey: key), let refreshInterval = Int(value) {
+            interval = refreshInterval
+        }
+        return interval
     }
 }
 

@@ -9,15 +9,22 @@
 import Foundation
 import SwiftyJSON
 
+protocol WebServiceProtocol {
+    
+    func startAnimation()
+    func stopAnimation()
+}
+
 class WebServiceHandler: NSObject {
     
-    private var latitude: Double?
-    private var longitude: Double?
-    private var datasource: String?
-    private var responseParser = Parser()
+    var delegate: WebServiceProtocol?
+    fileprivate var latitude: Double?
+    fileprivate var longitude: Double?
+    fileprivate var datasource: String?
+    fileprivate var responseParser = Parser()
     
     
-    private var apiKey: String? {
+    fileprivate var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
@@ -38,7 +45,7 @@ class WebServiceHandler: NSObject {
 
     }
 
-    private func prepareRequest(source: String) -> URL? {
+    fileprivate func prepareRequest(source: String) -> URL? {
         guard let url = URL(string: source) else { return nil }
         return url
         
@@ -50,6 +57,8 @@ class WebServiceHandler: NSObject {
             Logger.debugLog("Can't fetch data because datasource is nil")
             return
         }
+        
+        self.delegate?.startAnimation()
         
         DispatchQueue.global(qos: .utility).async {
             
@@ -66,10 +75,18 @@ class WebServiceHandler: NSObject {
             let newData = JSON(parseJSON: data)
             Logger.debugLog("response::::::::>>>>> \(newData)")
             
-            DispatchQueue.main.async {
-                    self.responseParser.parse(data: newData)
-                }
-                
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: { //TODO: Delay induced for demo purpose
+                self.responseParser.parse(data: newData)
+                self.delegate?.stopAnimation()
+
+            })
+            
+//            DispatchQueue.main.async {
+//                    self.responseParser.parse(data: newData)
+//                    self.delegate?.stopAnimation()
+//                }
+            
             }
         }
     
