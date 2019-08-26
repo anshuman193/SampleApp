@@ -12,6 +12,8 @@ import SwiftyJSON
 
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol {
+
+    
  
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
@@ -125,10 +127,10 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble(models: [CurrentWeatherInfo]) {
+    func newDataDidBecomeAvaialble(models: [CurrentWeatherInfo?]) {
         
         Logger.debugLog("newDataDidBecomeAvaialble")
-        AgentUICoordinator.shared.refreshMenuItems(model: models)
+        AgentUICoordinator.shared.refreshMenuItems(modelArr: models)
     }
 
     

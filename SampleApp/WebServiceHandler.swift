@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-protocol WebServiceProtocol {
+protocol WebServiceProtocol: class {
     
     func startAnimation()
     func stopAnimation()
@@ -17,7 +17,7 @@ protocol WebServiceProtocol {
 
 class WebServiceHandler: NSObject {
     
-    var delegate: WebServiceProtocol?
+    weak var delegate: WebServiceProtocol?
     fileprivate var latitude: Double?
     fileprivate var longitude: Double?
     fileprivate var datasource: String?
@@ -76,7 +76,7 @@ class WebServiceHandler: NSObject {
             Logger.debugLog("response::::::::>>>>> \(newData)")
             
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: { //TODO: Delay induced for demo purpose
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { //TODO: Delay induced for demo purpose
                 self.responseParser.parse(data: newData)
                 self.delegate?.stopAnimation()
 

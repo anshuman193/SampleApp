@@ -13,11 +13,11 @@ struct Constants {
     static let kAgentDefaultName = "Tracker"
     
     struct ErrorMessage {
-        static let kPleaseWait = "Please wait...we are fetching data"
+        static let kNoDataAvailable = "Data not available..."
     }
     
     struct StatusMessage {
-        static let kPleaseWait = "Please wait...we are fetching data"
+        static let kPleaseWait = "Loading..."
         static let kUIInitiated = "initializeUI called"
     }
     

@@ -30,11 +30,9 @@ extension AgentUICoordinator {
         Logger.debugLog("initializeUI called")
     }
     
-    func refreshMenuItems(model: [CurrentWeatherInfo]) {
+    func refreshMenuItems(modelArr: [CurrentWeatherInfo?]) {
 
-        dataModelArr = model
-        guard let _ = dataModelArr else { return }
-        updateSubmenuItems(modelArray: dataModelArr!)
+        updateSubmenuItems(modelArray: modelArr)
     }
     
     func configMenuItems() {
@@ -111,15 +109,17 @@ extension AgentUICoordinator {
         return popOverView
     }
     
-    fileprivate func updateSubmenuItems(modelArray: [CurrentWeatherInfo]) {
+    fileprivate func updateSubmenuItems(modelArray: [CurrentWeatherInfo?]) {
         
         statusItem.menu?.removeAllItems()
         
         for model in modelArray {
             
-            var title = "Data not available..."
+            guard let dataModel = model else {return}
             
-            if let time = model.time {
+            var title = Constants.ErrorMessage.kNoDataAvailable
+            
+            if let time = dataModel.time {
                 
                 let date = Date(timeIntervalSince1970: time)
                 let formatter = DateFormatter()
@@ -128,15 +128,16 @@ extension AgentUICoordinator {
                 title = (formattedDate)
             }
 
-            if let summary = model.summary {
+            if let summary = dataModel.summary {
                 title.append(": \(summary)")
             }
             
-            if let temperature = model.temperature {
+            if let temperature = dataModel.temperature {
                 title.append(" \(temperature)°F")
             }
 
             let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+            menuItem.isEnabled = false
             statusItem.menu?.addItem(menuItem)
         }
         
