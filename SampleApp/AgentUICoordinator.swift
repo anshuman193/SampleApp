@@ -19,7 +19,7 @@ import MapKit
     fileprivate var timer: Timer?
 //    fileprivate var popover: NSPopover
     fileprivate var blinkStatus: Bool = false
-    fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings]
+    fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
     
     fileprivate init(){}
 

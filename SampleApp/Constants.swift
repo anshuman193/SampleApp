@@ -16,7 +16,7 @@ struct Constants {
         static let kSettings = "Settings"
         static let kRefresh = "Refresh"
         static let kSeparator = "Separator"
-        static let kCurrentLocation = "Current Location"
+        static let kCurrentLocation = "Use Current Location"
         
     }
     
