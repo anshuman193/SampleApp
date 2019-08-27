@@ -19,6 +19,7 @@ import MapKit
     fileprivate var dataModelArr: [CurrentWeatherInfo]?
     fileprivate var timer: Timer?
     fileprivate var blinkStatus: Bool = false
+    fileprivate var menuItemsArray = ["Refresh", "Settings"]
 
 }
 
@@ -30,9 +31,9 @@ extension AgentUICoordinator {
         Logger.debugLog("initializeUI called")
     }
     
-    func refreshMenuItems(modelArr: [CurrentWeatherInfo?]) {
+    func refreshMenuItems(model: HourlyWeatherData?) {
 
-        updateSubmenuItems(modelArray: modelArr)
+        updateUI(modelData: model)
     }
     
     func configMenuItems() {
@@ -109,18 +110,48 @@ extension AgentUICoordinator {
         return popOverView
     }
     
-    fileprivate func updateSubmenuItems(modelArray: [CurrentWeatherInfo?]) {
+    
+    fileprivate func updateUI(modelData: HourlyWeatherData?){
         
-        statusItem.menu?.removeAllItems()
+        let staticMenuItems = updateStaticMenuItems(data: modelData)
+        let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItems, data: modelData)
+        updateMenuUI(menuItemsArray: menuItems)
+    }
+    
+    fileprivate func updateStaticMenuItems(data: HourlyWeatherData?) -> Array<String> {
+
+        if let timeZoneInfo = data?.timeZone {
+
+            menuItemsArray.insert(timeZoneInfo, at: 0)
+        } else {
+
+            Logger.debugLog(Constants.StatusMessage.kNoTimeZoneInfo)
+        }
+
+        return menuItemsArray
+    }
+    
+    fileprivate func updateDynamicMenuItems(staticMenuItems: Array<String>, data: HourlyWeatherData?) -> Array<String> {
+        
+        var title = Constants.ErrorMessage.kNoDataAvailable
+        var dynamicMenuItemsArray = [String]()
+        
+        guard let modelArray = data?.dataArray else {
+            
+            Logger.debugLog(Constants.StatusMessage.kNoUpdateForUI)
+            return staticMenuItems
+        }
+        
+        
         
         for model in modelArray {
+
+            guard let dataModel = model else {return staticMenuItems}
             
-            guard let dataModel = model else {return}
-            
-            var title = Constants.ErrorMessage.kNoDataAvailable
-            
+            title = Constants.ErrorMessage.kNoDataAvailable
+
             if let time = dataModel.time {
-                
+
                 let date = Date(timeIntervalSince1970: time)
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
@@ -131,19 +162,30 @@ extension AgentUICoordinator {
             if let summary = dataModel.summary {
                 title.append(": \(summary)")
             }
-            
+
             if let temperature = dataModel.temperature {
                 title.append(" \(temperature)°F")
             }
 
-            let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-            menuItem.isEnabled = false
-            statusItem.menu?.addItem(menuItem)
+            dynamicMenuItemsArray.append(title)
         }
         
-        statusItem.menu?.addItem(settingMenuItem)
-        
+        let finalArray = dynamicMenuItemsArray + staticMenuItems
+        return finalArray
     }
+    
+    
+    fileprivate func updateMenuUI(menuItemsArray: [String]) {
+        
+        statusItem.menu?.removeAllItems()
+        
+        for item in menuItemsArray {
+            
+            let menuItem = NSMenuItem(title: item, action: nil, keyEquivalent: "")
+            statusItem.menu?.addItem(menuItem)
+        }
+    }
+    
 
 }
 

@@ -43,6 +43,7 @@ struct CurrentWeatherInfo {
 struct HourlyWeatherData {
     
     var dataArray = [CurrentWeatherInfo?]()
+    var timeZone: String?
     
     init(json: JSON) {
         
@@ -51,6 +52,10 @@ struct HourlyWeatherData {
             if let weatherInfo = CurrentWeatherInfo(json: data) {
                 dataArray.append(weatherInfo)
             }
+        }
+        
+        if let timezone = json["timezone"].string {
+            self.timeZone = timezone
         }
     }
     

@@ -19,6 +19,8 @@ struct Constants {
     struct StatusMessage {
         static let kPleaseWait = "Loading..."
         static let kUIInitiated = "initializeUI called"
+        static let kNoUpdateForUI = "Nothing to update in UI"
+        static let kNoTimeZoneInfo = "No timezone info available"
     }
     
     struct Location {

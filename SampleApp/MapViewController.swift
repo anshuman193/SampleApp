@@ -30,7 +30,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     override func viewWillAppear() {
         
         super.viewWillAppear()
-        loadCoordinatesFromDefaults()
+//        loadCoordinatesFromDefaults()
         populateLastKnownCoordinates(lat: latitude, long: longitude)
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
@@ -62,6 +62,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     @objc private func loadData() {
         
+        loadCoordinatesFromDefaults()
         loadDataFromRemoteServer()
     }
     
@@ -127,10 +128,10 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble(models: [CurrentWeatherInfo?]) {
+    func newDataDidBecomeAvaialble(model: HourlyWeatherData?) {
         
         Logger.debugLog("newDataDidBecomeAvaialble")
-        AgentUICoordinator.shared.refreshMenuItems(modelArr: models)
+        AgentUICoordinator.shared.refreshMenuItems(model: model)
     }
 
     
