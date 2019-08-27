@@ -15,11 +15,13 @@ import MapKit
     static let shared = AgentUICoordinator()
     fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-    fileprivate init(){}
     fileprivate var dataModelArr: [CurrentWeatherInfo]?
     fileprivate var timer: Timer?
+//    fileprivate var popover: NSPopover
     fileprivate var blinkStatus: Bool = false
-    fileprivate var staticMenuItemsArray = ["Separator","Refresh", "Settings"]
+    fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings]
+    
+    fileprivate init(){}
 
 }
 
@@ -56,11 +58,15 @@ extension AgentUICoordinator {
 
     }
 
+    func dismissPopOver() {
+        
+    }
     
     func makePopOver(vc: NSViewController, uiElement: NSStatusItem) -> Void {
-        let popOverView = constructPopOver(vc)
-        displayPopOver(popOverView, uiElement: self.statusItem)
-        Logger.debugLog("makePopOver called")
+        
+        let popover = constructPopOver(vc)
+        displayPopOver(popover, uiElement: self.statusItem)
+        
     }
     
     //MARK: helper methods
@@ -102,14 +108,17 @@ extension AgentUICoordinator {
 
     
     fileprivate func displayPopOver(_ popOverView: NSPopover, uiElement: NSStatusItem) {
+        
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
     }
     
     fileprivate func closePopOver(_ popOverView: NSPopover) {
+        
         popOverView.close()
     }
     
     fileprivate func constructPopOver(_ vc: NSViewController?) -> NSPopover {
+        
         let popOverView =  NSPopover()
         popOverView.contentViewController = vc
         popOverView.behavior = .transient
@@ -125,6 +134,7 @@ extension AgentUICoordinator {
     
     
     fileprivate func addTimeZone(_ data: HourlyWeatherData?, _ dynamicMenuItemsArray: inout [String]) {
+        
         if let timeZoneInfo = data?.timeZone {
             
             dynamicMenuItemsArray.append(timeZoneInfo)
@@ -145,7 +155,6 @@ extension AgentUICoordinator {
             Logger.debugLog(Constants.StatusMessage.kNoUpdateForUI)
             return staticMenuItems
         }
-        
         
         addTimeZone(data, &dynamicMenuItemsArray)
         
@@ -180,40 +189,46 @@ extension AgentUICoordinator {
     }
     
     
+    fileprivate func prepareMenuItem(basedOn item: String) -> NSMenuItem {
+        
+        var menuItem: NSMenuItem
+        
+        switch item {
+            
+        case Constants.MenuItemName.kSettings:
+            
+            menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
+            menuItem.target = self
+            break
+            
+        case Constants.MenuItemName.kRefresh:
+            
+            menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
+            menuItem.target = self
+            break
+            
+        case Constants.MenuItemName.kSeparator:
+            
+            menuItem = NSMenuItem.separator()
+            break
+            
+        default:
+            
+            menuItem = NSMenuItem(title: item, action: nil, keyEquivalent: "")
+            menuItem.isEnabled = false
+            
+        }
+        
+        return menuItem
+    }
+    
     fileprivate func updateMenuUI(menuItemsArray: [String]) {
         
         statusItem.menu?.removeAllItems()
         
         for item in menuItemsArray {
             
-            var menuItem: NSMenuItem
-          
-            switch item {
-                
-            case Constants.MenuItemName.kSettings:
-            
-                menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
-                menuItem.target = self
-                break
-                
-            case Constants.MenuItemName.kRefresh:
-            
-                menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
-                menuItem.target = self
-                break
-                
-            case Constants.MenuItemName.kSeparator:
-                
-                menuItem = NSMenuItem.separator()
-                break
-                
-            default:
-                
-                menuItem = NSMenuItem(title: item, action: nil, keyEquivalent: "")
-                menuItem.isEnabled = false
-
-            }
-          
+            let menuItem = prepareMenuItem(basedOn: item)
             statusItem.menu?.addItem(menuItem)
         }
     }

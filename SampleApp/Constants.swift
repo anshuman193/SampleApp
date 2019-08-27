@@ -16,6 +16,8 @@ struct Constants {
         static let kSettings = "Settings"
         static let kRefresh = "Refresh"
         static let kSeparator = "Separator"
+        static let kCurrentLocation = "Current Location"
+        
     }
     
     struct ErrorMessage {

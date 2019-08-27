@@ -714,16 +714,16 @@
                                 <rect key="frame" x="20" y="102" width="560" height="347"/>
                             </mapView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-TV-sFx">
-                                <rect key="frame" x="183" y="34" width="235" height="23"/>
+                                <rect key="frame" x="240" y="34" width="121" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="235" id="ndR-gb-QWc"/>
+                                    <constraint firstAttribute="width" constant="121" id="ndR-gb-QWc"/>
                                 </constraints>
-                                <buttonCell key="cell" type="roundTextured" title="Use my current location" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
+                                <buttonCell key="cell" type="roundTextured" title="Done" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="currLocationButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>
+                                    <action selector="doneButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -743,7 +743,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="867"/>
+            <point key="canvasLocation" x="74" y="866.5"/>
         </scene>
     </scenes>
 </document>

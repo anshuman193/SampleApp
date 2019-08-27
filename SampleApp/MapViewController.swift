@@ -120,9 +120,9 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         }
     }
     
-    @IBAction func currLocationButtonAction(_ sender: Any){
+    @IBAction func doneButtonAction(_ sender: Any){
         
-        Logger.debugLog("current location button clicked")
+        Logger.debugLog("Done button clicked")
     }
     
     
