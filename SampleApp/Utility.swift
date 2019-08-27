@@ -31,4 +31,22 @@ class Utility: NSObject {
         return value
     }
     
+    class func refreshInterval(plistname name: String, and key : String) -> Int {
+        
+        var interval = 300 // default value in seconds
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key), let refreshInterval = Int(value) {
+            interval = refreshInterval
+        }
+        return interval
+    }
+    
+    
+    class func agentName(plistname name: String, and key : String) -> String {
+        
+        var agentName = Constants.kAgentDefaultName
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key) {
+            agentName = value
+        }
+        return agentName
+    }
 }

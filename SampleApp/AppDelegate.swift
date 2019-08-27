@@ -20,33 +20,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    fileprivate func loadData(_ mapVC: MapViewController) {
+        
+        let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
+        mapVC.startLoadingData(withTimeInterval: interval)
+    }
+    
+    fileprivate func initializeController() {
+        
+        let mapVC = MapViewController()
+        AgentUICoordinator.shared.delegate = mapVC
+        loadData(mapVC)
+    }
+    
     fileprivate func initializeAppUI(){
         
-        let agent = agentName(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyAgentName)
-        let interval = refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
+        let agent = Utility.agentName(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyAgentName)
         AgentUICoordinator.shared.setup(withTitle: agent)
         AgentUICoordinator.shared.configMenuItems()
-        let mapVC = MapViewController()
-        mapVC.startLoadingData(withTimeInterval: interval)
-        
+        initializeController()
     }
-    
-    fileprivate func agentName(plistname name: String, and key : String) -> String {
-        
-        var agentName = Constants.kAgentDefaultName
-        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key) {
-            agentName = value
-        }
-        return agentName
-    }
-    
-    fileprivate func refreshInterval(plistname name: String, and key : String) -> Int {
-        
-        var interval = 300 // default value in seconds
-        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: key), let refreshInterval = Int(value) {
-            interval = refreshInterval
-        }
-        return interval
-    }
+
+
 }
 

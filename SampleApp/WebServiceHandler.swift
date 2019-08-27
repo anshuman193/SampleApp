@@ -76,7 +76,7 @@ class WebServiceHandler: NSObject {
             Logger.debugLog("response::::::::>>>>> \(newData)")
             
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { //TODO: Delay induced for demo purpose
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
                 self.responseParser.parse(data: newData)
                 self.delegate?.stopAnimation()
 

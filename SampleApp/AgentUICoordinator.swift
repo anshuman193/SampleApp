@@ -10,9 +10,20 @@ import Foundation
 import AppKit
 import MapKit
 
+protocol AgentUICoordinatorProtocol: class {
+    
+    func reloadData()
+}
+
+extension AgentUICoordinatorProtocol {
+    
+    func reloadData() { Logger.debugLog("reloadData") }
+}
+
 @objcMembers class AgentUICoordinator {
     
     static let shared = AgentUICoordinator()
+    weak var delegate: AgentUICoordinatorProtocol?
     fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
     fileprivate var dataModelArr: [CurrentWeatherInfo]?
@@ -54,9 +65,9 @@ extension AgentUICoordinator {
     
     @objc fileprivate func refreshData() {
         
-        Logger.debugLog("refreshData")
-
+       self.delegate?.reloadData()
     }
+
 
     func dismissPopOver() {
         

@@ -11,9 +11,7 @@ import MapKit
 import SwiftyJSON
 
 
-class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol {
-
-    
+class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol {
  
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
@@ -56,6 +54,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     private func startTimerForDataLoad(timeInterval: TimeInterval) {
         
+        timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
         timer?.fire()
     }
@@ -146,5 +145,14 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         
         AgentUICoordinator.shared.stopTextAnimator()
     }
+    
+    //MARK:AgentUICoordinatorProtocol
+    
+    func reloadData() {
+        
+        let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
+        self.startLoadingData(withTimeInterval: interval)
+    }
 }
+
 
