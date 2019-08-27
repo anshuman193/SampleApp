@@ -12,6 +12,12 @@ struct Constants {
     
     static let kAgentDefaultName = "Tracker"
     
+    struct MenuItemName {
+        static let kSettings = "Settings"
+        static let kRefresh = "Refresh"
+        static let kSeparator = "Separator"
+    }
+    
     struct ErrorMessage {
         static let kNoDataAvailable = "Data not available..."
     }

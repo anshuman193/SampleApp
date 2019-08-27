@@ -19,7 +19,7 @@ import MapKit
     fileprivate var dataModelArr: [CurrentWeatherInfo]?
     fileprivate var timer: Timer?
     fileprivate var blinkStatus: Bool = false
-    fileprivate var menuItemsArray = ["Refresh", "Settings"]
+    fileprivate var staticMenuItemsArray = ["Separator","Refresh", "Settings"]
 
 }
 
@@ -48,6 +48,12 @@ extension AgentUICoordinator {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.kMapviewController) as? NSViewController else { return }
         makePopOver(vc: vc, uiElement: statusItem)
+    }
+    
+    @objc fileprivate func refreshData() {
+        
+        Logger.debugLog("refreshData")
+
     }
 
     
@@ -113,22 +119,20 @@ extension AgentUICoordinator {
     
     fileprivate func updateUI(modelData: HourlyWeatherData?){
         
-        let staticMenuItems = updateStaticMenuItems(data: modelData)
-        let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItems, data: modelData)
+        let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
         updateMenuUI(menuItemsArray: menuItems)
     }
     
-    fileprivate func updateStaticMenuItems(data: HourlyWeatherData?) -> Array<String> {
-
+    
+    fileprivate func addTimeZone(_ data: HourlyWeatherData?, _ dynamicMenuItemsArray: inout [String]) {
         if let timeZoneInfo = data?.timeZone {
-
-            menuItemsArray.insert(timeZoneInfo, at: 0)
+            
+            dynamicMenuItemsArray.append(timeZoneInfo)
+            dynamicMenuItemsArray.append(Constants.MenuItemName.kSeparator)
         } else {
-
+            
             Logger.debugLog(Constants.StatusMessage.kNoTimeZoneInfo)
         }
-
-        return menuItemsArray
     }
     
     fileprivate func updateDynamicMenuItems(staticMenuItems: Array<String>, data: HourlyWeatherData?) -> Array<String> {
@@ -143,6 +147,7 @@ extension AgentUICoordinator {
         }
         
         
+        addTimeZone(data, &dynamicMenuItemsArray)
         
         for model in modelArray {
 
@@ -181,7 +186,34 @@ extension AgentUICoordinator {
         
         for item in menuItemsArray {
             
-            let menuItem = NSMenuItem(title: item, action: nil, keyEquivalent: "")
+            var menuItem: NSMenuItem
+          
+            switch item {
+                
+            case Constants.MenuItemName.kSettings:
+            
+                menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
+                menuItem.target = self
+                break
+                
+            case Constants.MenuItemName.kRefresh:
+            
+                menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
+                menuItem.target = self
+                break
+                
+            case Constants.MenuItemName.kSeparator:
+                
+                menuItem = NSMenuItem.separator()
+                break
+                
+            default:
+                
+                menuItem = NSMenuItem(title: item, action: nil, keyEquivalent: "")
+                menuItem.isEnabled = false
+
+            }
+          
             statusItem.menu?.addItem(menuItem)
         }
     }
