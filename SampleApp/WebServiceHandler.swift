@@ -66,7 +66,6 @@ class WebServiceHandler: NSObject {
             Logger.debugLog("url --> \(url)")
             guard let data = try? String(contentsOf: url) else {
                 DispatchQueue.main.async {
-                    
                     Logger.debugLog("Problem in API call")
                 }
                 return
@@ -74,7 +73,6 @@ class WebServiceHandler: NSObject {
             
             let newData = JSON(parseJSON: data)
             Logger.debugLog("response::::::::>>>>> \(newData)")
-            
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
                 self.responseParser.parse(data: newData)
