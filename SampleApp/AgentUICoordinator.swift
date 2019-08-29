@@ -168,11 +168,11 @@ extension AgentUICoordinator {
         
         guard let hourlyData = data.hourly else {
             
-            Logger.debugLog("No hourly data available")
+            Logger.debugLog(Constants.ErrorMessage.kNoHourlyData)
             return staticMenuItems
         }
         
-        for hourlyData in hourlyData.data.prefix(12) {
+        for hourlyData in hourlyData.hourlyDetailsArray.prefix(12) {
             
             if let time = hourlyData?.time {
                 
@@ -184,12 +184,20 @@ extension AgentUICoordinator {
             }
             
             if let summary = hourlyData?.summary {
+                
                 title.append(": \(summary)")
             }
             
             if let temperature = hourlyData?.temperature {
+                
                 title.append(" \(temperature)°F")
             }
+            
+            if let visibility = hourlyData?.visibility {
+                
+                title.append(" | Visibility: \(visibility)")
+            }
+            
 
             dynamicMenuItemsArray.append(title)
         }

@@ -13,7 +13,12 @@ import SwiftyJSON
 struct HourlyWeatherData: Codable {
     
     var summary: String?
-    var data: [HourlyWeatherDataDetails?]
+    var hourlyDetailsArray: [HourlyWeatherDataDetails?]
+    
+    enum CodingKeys: String, CodingKey {
+
+        case hourlyDetailsArray = "data"
+    }
 }
 
 
@@ -25,7 +30,7 @@ struct HourlyWeatherDataDetails: Codable {
     var feelsLikeTemperature: Double?
     var windSpeed: Double?
     var windGust: Double?
-    var visibility: Int?
+    var visibility: Double?
     
     enum Codingkeys: String, CodingKey {
         

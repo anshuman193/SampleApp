@@ -25,6 +25,7 @@ struct Constants {
         static let kParseErrorOccured = "Parsing error occured with error:"
         static let kBadDataSource = "Bad data source"
         static let kBadURL = "Bad URL"
+        static let kNoHourlyData = "No hourly data available"
     }
     
     struct StatusMessage {
