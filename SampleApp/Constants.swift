@@ -13,7 +13,7 @@ struct Constants {
     static let kAgentDefaultName = "Tracker"
     
     struct MenuItemName {
-        static let kSettings = "Settings"
+        static let kSettings = "Select your location on map"
         static let kRefresh = "Refresh"
         static let kSeparator = "Separator"
         static let kCurrentLocation = "Use Current Location"

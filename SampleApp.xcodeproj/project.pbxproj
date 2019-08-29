@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		060AD556231419BD003B2853 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060AD555231419BD003B2853 /* Constants.swift */; };
 		065F116623178DC400841BB9 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065F116523178DC400841BB9 /* WeatherData.swift */; };
+		0F24C8DA231841E500416148 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F24C8D9231841E500416148 /* CoreLocation.framework */; };
 		0F38CA6D231066FC009AF085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38CA6C231066FC009AF085 /* AppDelegate.swift */; };
 		0F38CA6F231066FC009AF085 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38CA6E231066FC009AF085 /* MapViewController.swift */; };
 		0F38CA71231066FC009AF085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F38CA70231066FC009AF085 /* Assets.xcassets */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		060AD555231419BD003B2853 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		065F116523178DC400841BB9 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		0F24C8D9231841E500416148 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0F24C8DB231843C100416148 /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tracker.entitlements; sourceTree = "<group>"; };
 		0F38CA69231066FC009AF085 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA6C231066FC009AF085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F38CA6E231066FC009AF085 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F24C8DA231841E500416148 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,9 +101,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F24C8D8231841E500416148 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F24C8D9231841E500416148 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0F38CA60231066FC009AF085 = {
 			isa = PBXGroup;
 			children = (
+				0F24C8DB231843C100416148 /* Tracker.entitlements */,
 				0FD3616323117CC60022BAF7 /* Podfile.rtf */,
 				0F82B82523129CF700A66B00 /* SampleResponse.json */,
 				0F38CA6B231066FC009AF085 /* SampleApp */,
@@ -107,6 +120,7 @@
 				0F38CA89231066FC009AF085 /* SampleAppUITests */,
 				0F38CA6A231066FC009AF085 /* Products */,
 				4AFBE348C603E1C5FFBB82E7 /* Pods */,
+				0F24C8D8231841E500416148 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -236,6 +250,11 @@
 				TargetAttributes = {
 					0F38CA68231066FC009AF085 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					0F38CA7A231066FC009AF085 = {
 						CreatedOnToolsVersion = 10.3;
@@ -477,7 +496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SampleApp/SampleApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Tracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SampleApp/Info.plist;
@@ -496,7 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SampleApp/SampleApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Tracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SampleApp/Info.plist;

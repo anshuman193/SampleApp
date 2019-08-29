@@ -8,18 +8,14 @@
 
 import Cocoa
 import MapKit
+import CoreLocation
 
 protocol MapViewObserver: class {
     
     func update()
 }
 
-extension MapViewObserver {
-    
-    func update(){}
-}
-
-class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol {
+class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
  
     weak var delegate: MapViewObserver?
     @IBOutlet var mapView: MKMapView!
@@ -40,6 +36,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         populateLastKnownCoordinates(lat: latitude, long: longitude)
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
+//        getCurrentLocationInfo()
     }
     
     override func viewWillDisappear() {
@@ -55,6 +52,20 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         }
     }
 
+    private func getCurrentLocationInfo() {
+        
+        let locationManager = CLLocationManager()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.requestLocation()
+
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
     func startLoadingData(withTimeInterval value: Int) {
         
         startTimerForDataLoad(timeInterval: Double(value))
@@ -130,9 +141,12 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     @IBAction func doneButtonAction(_ sender: Any){
         
-        captureUserLocation()
-        delegate?.update()
-        reloadData()
+        if let mapVCdelegate = delegate {
+            
+            captureUserLocation()
+            mapVCdelegate.update()
+            reloadData()
+        }
         Logger.debugLog("Done button clicked")
     }
     
@@ -165,6 +179,15 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
         self.startLoadingData(withTimeInterval: interval)
     }
+    
+    //MARK:CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
 }
 
 
