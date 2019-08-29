@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+
 
 protocol PareserDataUpdateDelegate: class {
 

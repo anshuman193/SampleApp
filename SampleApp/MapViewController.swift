@@ -8,7 +8,6 @@
 
 import Cocoa
 import MapKit
-import SwiftyJSON
 
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol {
