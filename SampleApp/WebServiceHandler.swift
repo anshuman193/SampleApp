@@ -27,22 +27,23 @@ class WebServiceHandler: NSObject {
     fileprivate var latitude: Double?
     fileprivate var longitude: Double?
     fileprivate var datasource: String?
-//    fileprivate var responseParser: Parser?
+    fileprivate var dataUpdateDelegate: PareserDataUpdateDelegate?
     
     
     fileprivate var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
-    init?(with baseurl: String, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
+    init?(with baseurl: String?, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
         super.init()
         
-        if let _apiKey = self.apiKey {
+        if let _apiKey = self.apiKey, let baseURL = baseurl {
             
             let coordinates = String(format:"\(latitude),\(longitude)")
-            self.datasource = baseurl + _apiKey + "/" + coordinates
+            self.datasource = baseURL + _apiKey + "/" + coordinates
             self.latitude = latitude
             self.longitude = longitude
+            self.dataUpdateDelegate = delegate
         } else {
             Logger.debugLog("Can't initialize WebServiceHandler because API Key is nil")
             return nil
@@ -57,55 +58,42 @@ class WebServiceHandler: NSObject {
     }
     
     func fetchData() {
-        
-        if self.datasource == "" {
-            Logger.debugLog("Can't fetch data because datasource is nil")
-            return
-        }
-        
+ 
         self.delegate?.startAnimation()
         
         DispatchQueue.global(qos: .utility).async {
             
-            guard let url = self.prepareRequest(source: self.datasource!) else { return }
+            guard let dataSrc = self.datasource else {
+                
+                Logger.debugLog(Constants.ErrorMessage.kBadDataSource)
+                return
+            }
+            
+            guard let url = self.prepareRequest(source: dataSrc) else {
+                
+                Logger.debugLog(Constants.ErrorMessage.kBadURL)
+                return
+            }
+            
             Logger.debugLog("url --> \(url)")
-//            guard let data = try? String(contentsOf: url) else {
-//                DispatchQueue.main.async {
-//                    Logger.debugLog("Problem in API call")
-//                }
-//                return
-//            }
-            
-//            let newData = JSON(parseJSON: data)
-//            Logger.debugLog("response::::::::>>>>> \(data)")
-            
             
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 
                 guard let newData = data else {
                     
-                    Logger.debugLog("No data available")
+                    Logger.debugLog(Constants.ErrorMessage.kNoDataAvailable)
                     return
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
                     
-                    let responseParser = Parser(newData)
+                    let responseParser = Parser(newData, delegate: self.dataUpdateDelegate)
                     responseParser.start()
                     self.delegate?.stopAnimation()
                     
                 })
                 
             }).resume()
-            
-
-            
-//            URLSession.shared.dataTask(with: self.datasource) { (data, response
-//                , error) in
-//                
-//            }.resume
-            
-     
             
             }
         }

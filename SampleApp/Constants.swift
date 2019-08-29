@@ -17,11 +17,14 @@ struct Constants {
         static let kRefresh = "Refresh"
         static let kSeparator = "Separator"
         static let kCurrentLocation = "Use Current Location"
-        
     }
     
     struct ErrorMessage {
         static let kNoDataAvailable = "Data not available..."
+        static let kNothingToParse = "No data to parse...parsing aborted"
+        static let kParseErrorOccured = "Parsing error occured with error:"
+        static let kBadDataSource = "Bad data source"
+        static let kBadURL = "Bad URL"
     }
     
     struct StatusMessage {

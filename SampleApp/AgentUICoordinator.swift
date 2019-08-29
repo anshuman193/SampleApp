@@ -26,7 +26,7 @@ extension AgentUICoordinatorProtocol {
     weak var delegate: AgentUICoordinatorProtocol?
     fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-    fileprivate var dataModelArr: [CurrentWeatherInfo]?
+    fileprivate var dataModelArr: [HourlyWeatherDataDetails]?
     fileprivate var timer: Timer?
 //    fileprivate var popover: NSPopover
     fileprivate var blinkStatus: Bool = false
@@ -162,40 +162,38 @@ extension AgentUICoordinator {
         var title = Constants.ErrorMessage.kNoDataAvailable
         var dynamicMenuItemsArray = [String]()
         
-//        guard let modelArray = data.hourlyData else {
-//
-//            Logger.debugLog(Constants.StatusMessage.kNoUpdateForUI)
-//            return staticMenuItems
-//        }
-        
         addTimeZone(data, &dynamicMenuItemsArray)
         
-//        for model in data.hourlyData {
-
-//            guard let dataModel = model else {return staticMenuItems}
+        title = Constants.ErrorMessage.kNoDataAvailable
+        
+        guard let hourlyData = data.hourly else {
             
-            title = Constants.ErrorMessage.kNoDataAvailable
-
-//            if let time = model.time {
-//
-//                let date = Date(timeIntervalSince1970: time)
-//                let formatter = DateFormatter()
-//                formatter.timeStyle = .short
-//                let formattedDate = formatter.string(from: date)
-//                title = (formattedDate)
-//            }
-//
-//            if let summary = dataModel.summary {
-//                title.append(": \(summary)")
-//            }
-//
-//            if let temperature = dataModel.temperature {
-//                title.append(" \(temperature)°F")
-//            }
+            Logger.debugLog("No hourly data available")
+            return staticMenuItems
+        }
+        
+        for hourlyData in hourlyData.data.prefix(12) {
+            
+            if let time = hourlyData?.time {
+                
+                let date = Date(timeIntervalSince1970: TimeInterval(time))
+                let formatter = DateFormatter()
+                formatter.timeStyle = .short
+                let formattedDate = formatter.string(from: date)
+                title = (formattedDate)
+            }
+            
+            if let summary = hourlyData?.summary {
+                title.append(": \(summary)")
+            }
+            
+            if let temperature = hourlyData?.temperature {
+                title.append(" \(temperature)°F")
+            }
 
             dynamicMenuItemsArray.append(title)
-//        }
-        
+        }
+
         let finalArray = dynamicMenuItemsArray + staticMenuItems
         return finalArray
     }

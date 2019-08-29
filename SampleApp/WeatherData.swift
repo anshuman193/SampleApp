@@ -13,15 +13,5 @@ struct WeatherData: Codable {
 
     var latitude: Double?
     var timezone: String?
-    
     var hourly: HourlyWeatherData?
-    
-    struct HourlyWeatherData: Codable {
-        var summary: String?
-        var data: [HourlyWeatherDataDetails?]
-    }
-}
-
-extension WeatherData {
-    
 }

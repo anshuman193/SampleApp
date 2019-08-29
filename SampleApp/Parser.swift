@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 protocol PareserDataUpdateDelegate: class {
-//    associatedtype M
+
     func newDataDidBecomeAvaialble(model: WeatherData)
 }
 
@@ -19,19 +19,19 @@ class Parser: NSObject {
     
     weak var delegate: PareserDataUpdateDelegate?
     fileprivate var newData: Data?
-//    fileprivate(set) var weatherInfo: HourlyWeatherData
     
-    init(_ data: Data) {
+    init(_ data: Data, delegate: PareserDataUpdateDelegate?) {
         
         super.init()
         newData = data
+        self.delegate = delegate
     }
     
     func start() {
         
         guard let dataToParse = newData else {
             
-            Logger.debugLog("No data to parse...parsing aborted")
+            Logger.debugLog(Constants.ErrorMessage.kNothingToParse)
             return
         }
         
@@ -49,7 +49,7 @@ class Parser: NSObject {
             
         } catch let error {
             
-            Logger.debugLog("Parsing error \(error)")
+            Logger.debugLog(Constants.ErrorMessage.kParseErrorOccured + "\(error)")
         }
         
     }
