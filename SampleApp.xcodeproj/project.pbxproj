@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		060AD556231419BD003B2853 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060AD555231419BD003B2853 /* Constants.swift */; };
+		065F116623178DC400841BB9 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065F116523178DC400841BB9 /* WeatherData.swift */; };
 		0F38CA6D231066FC009AF085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38CA6C231066FC009AF085 /* AppDelegate.swift */; };
 		0F38CA6F231066FC009AF085 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38CA6E231066FC009AF085 /* MapViewController.swift */; };
 		0F38CA71231066FC009AF085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F38CA70231066FC009AF085 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		060AD555231419BD003B2853 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		065F116523178DC400841BB9 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0F38CA69231066FC009AF085 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA6C231066FC009AF085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F38CA6E231066FC009AF085 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				0F394C6C2311108A003BEB8F /* Logger.swift */,
 				0F5E0452231188E2002A89B8 /* Utility.swift */,
 				0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */,
+				065F116523178DC400841BB9 /* WeatherData.swift */,
 				060AD555231419BD003B2853 /* Constants.swift */,
 				0F38CA70231066FC009AF085 /* Assets.xcassets */,
 				0F38CA72231066FC009AF085 /* Main.storyboard */,
@@ -363,6 +366,7 @@
 				0F5E0453231188E2002A89B8 /* Utility.swift in Sources */,
 				0F5E044F231187CD002A89B8 /* WebServiceHandler.swift in Sources */,
 				0F82B8242311A1EA00A66B00 /* GenericViewController.swift in Sources */,
+				065F116623178DC400841BB9 /* WeatherData.swift in Sources */,
 				060AD556231419BD003B2853 /* Constants.swift in Sources */,
 				0F82B82A2312B1BA00A66B00 /* Parser.swift in Sources */,
 				0F38CA6D231066FC009AF085 /* AppDelegate.swift in Sources */,

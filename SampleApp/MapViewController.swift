@@ -35,6 +35,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     }
     
     override func viewWillDisappear() {
+        
         super.viewWillDisappear()
         captureUserLocation()
         Logger.debugLog("viewWillDisappear")
@@ -127,7 +128,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble(model: HourlyWeatherData?) {
+    func newDataDidBecomeAvaialble(model: WeatherData) {
         
         Logger.debugLog("newDataDidBecomeAvaialble")
         AgentUICoordinator.shared.refreshMenuItems(model: model)

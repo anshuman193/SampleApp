@@ -44,7 +44,7 @@ extension AgentUICoordinator {
         Logger.debugLog("initializeUI called")
     }
     
-    func refreshMenuItems(model: HourlyWeatherData?) {
+    func refreshMenuItems(model: WeatherData) {
 
         updateUI(modelData: model)
     }
@@ -70,6 +70,7 @@ extension AgentUICoordinator {
 
 
     func dismissPopOver() {
+        
         
     }
     
@@ -137,16 +138,16 @@ extension AgentUICoordinator {
     }
     
     
-    fileprivate func updateUI(modelData: HourlyWeatherData?){
+    fileprivate func updateUI(modelData: WeatherData){
         
         let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
         updateMenuUI(menuItemsArray: menuItems)
     }
     
     
-    fileprivate func addTimeZone(_ data: HourlyWeatherData?, _ dynamicMenuItemsArray: inout [String]) {
+    fileprivate func addTimeZone(_ data: WeatherData, _ dynamicMenuItemsArray: inout [String]) {
         
-        if let timeZoneInfo = data?.timeZone {
+        if let timeZoneInfo = data.timezone {
             
             dynamicMenuItemsArray.append(timeZoneInfo)
             dynamicMenuItemsArray.append(Constants.MenuItemName.kSeparator)
@@ -156,44 +157,44 @@ extension AgentUICoordinator {
         }
     }
     
-    fileprivate func updateDynamicMenuItems(staticMenuItems: Array<String>, data: HourlyWeatherData?) -> Array<String> {
+    fileprivate func updateDynamicMenuItems(staticMenuItems: Array<String>, data: WeatherData) -> Array<String> {
         
         var title = Constants.ErrorMessage.kNoDataAvailable
         var dynamicMenuItemsArray = [String]()
         
-        guard let modelArray = data?.dataArray else {
-            
-            Logger.debugLog(Constants.StatusMessage.kNoUpdateForUI)
-            return staticMenuItems
-        }
+//        guard let modelArray = data.hourlyData else {
+//
+//            Logger.debugLog(Constants.StatusMessage.kNoUpdateForUI)
+//            return staticMenuItems
+//        }
         
         addTimeZone(data, &dynamicMenuItemsArray)
         
-        for model in modelArray {
+//        for model in data.hourlyData {
 
-            guard let dataModel = model else {return staticMenuItems}
+//            guard let dataModel = model else {return staticMenuItems}
             
             title = Constants.ErrorMessage.kNoDataAvailable
 
-            if let time = dataModel.time {
-
-                let date = Date(timeIntervalSince1970: time)
-                let formatter = DateFormatter()
-                formatter.timeStyle = .short
-                let formattedDate = formatter.string(from: date)
-                title = (formattedDate)
-            }
-
-            if let summary = dataModel.summary {
-                title.append(": \(summary)")
-            }
-
-            if let temperature = dataModel.temperature {
-                title.append(" \(temperature)°F")
-            }
+//            if let time = model.time {
+//
+//                let date = Date(timeIntervalSince1970: time)
+//                let formatter = DateFormatter()
+//                formatter.timeStyle = .short
+//                let formattedDate = formatter.string(from: date)
+//                title = (formattedDate)
+//            }
+//
+//            if let summary = dataModel.summary {
+//                title.append(": \(summary)")
+//            }
+//
+//            if let temperature = dataModel.temperature {
+//                title.append(" \(temperature)°F")
+//            }
 
             dynamicMenuItemsArray.append(title)
-        }
+//        }
         
         let finalArray = dynamicMenuItemsArray + staticMenuItems
         return finalArray

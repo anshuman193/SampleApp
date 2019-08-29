@@ -11,19 +11,46 @@ import SwiftyJSON
 
 protocol PareserDataUpdateDelegate: class {
 //    associatedtype M
-    func newDataDidBecomeAvaialble(model: HourlyWeatherData?)
+    func newDataDidBecomeAvaialble(model: WeatherData)
 }
 
 class Parser: NSObject {
     
     
     weak var delegate: PareserDataUpdateDelegate?
-    fileprivate var jsonData: JSON?
-    fileprivate(set) var weatherInfo: HourlyWeatherData?
+    fileprivate var newData: Data?
+//    fileprivate(set) var weatherInfo: HourlyWeatherData
     
-    func parse(data: JSON){
+    init(_ data: Data) {
         
-        weatherInfo = HourlyWeatherData(json: data)
-        self.delegate?.newDataDidBecomeAvaialble(model: weatherInfo)
+        super.init()
+        newData = data
+    }
+    
+    func start() {
+        
+        guard let dataToParse = newData else {
+            
+            Logger.debugLog("No data to parse...parsing aborted")
+            return
+        }
+        
+        parse(data: dataToParse)
+    }
+    
+    private func parse(data: Data){
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            
+            let decodedData = try decoder.decode(WeatherData.self, from: data)
+            self.delegate?.newDataDidBecomeAvaialble(model: decodedData)
+            
+        } catch let error {
+            
+            Logger.debugLog("Parsing error \(error)")
+        }
+        
     }
 }
