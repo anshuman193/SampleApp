@@ -27,7 +27,6 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     override func viewWillAppear() {
         
         super.viewWillAppear()
-//        loadCoordinatesFromDefaults()
         populateLastKnownCoordinates(lat: latitude, long: longitude)
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)

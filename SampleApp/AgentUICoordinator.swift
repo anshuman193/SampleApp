@@ -28,7 +28,6 @@ extension AgentUICoordinatorProtocol {
     fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
     fileprivate var dataModelArr: [HourlyWeatherDataDetails]?
     fileprivate var timer: Timer?
-//    fileprivate var popover: NSPopover
     fileprivate var blinkStatus: Bool = false
     fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
     

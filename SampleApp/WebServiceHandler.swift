@@ -44,13 +44,15 @@ class WebServiceHandler: NSObject {
             self.longitude = longitude
             self.dataUpdateDelegate = delegate
         } else {
-            Logger.debugLog("Can't initialize WebServiceHandler because API Key is nil")
+            
+            Logger.debugLog("Can't initialize WebServiceHandler because API Key or base URL is nil")
             return nil
         }
 
     }
 
     fileprivate func prepareRequest(source: String) -> URL? {
+        
         guard let url = URL(string: source) else { return nil }
         return url
         
@@ -59,7 +61,6 @@ class WebServiceHandler: NSObject {
     func fetchData() {
  
         self.delegate?.startAnimation()
-        
         DispatchQueue.global(qos: .utility).async {
             
             guard let dataSrc = self.datasource else {
