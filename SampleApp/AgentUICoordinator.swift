@@ -15,24 +15,28 @@ protocol AgentUICoordinatorProtocol: class {
     func reloadData()
 }
 
+
 extension AgentUICoordinatorProtocol {
     
     func reloadData() { Logger.debugLog("reloadData") }
 }
 
-@objcMembers class AgentUICoordinator {
+@objcMembers class AgentUICoordinator: MapViewObserver {
     
     static let shared = AgentUICoordinator()
     weak var delegate: AgentUICoordinatorProtocol?
+    fileprivate var popOverView: NSPopover
     fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-    fileprivate var dataModelArr: [HourlyWeatherDataDetails]?
+    fileprivate var dataModelArr: [HourlyWeatherDetails]?
     fileprivate var timer: Timer?
     fileprivate var blinkStatus: Bool = false
     fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
     
-    fileprivate init(){}
-
+    fileprivate init() {
+        
+        popOverView = NSPopover()
+    }
 }
 
 extension AgentUICoordinator {
@@ -67,17 +71,19 @@ extension AgentUICoordinator {
        self.delegate?.reloadData()
     }
 
-
-    func dismissPopOver() {
-        
-        
-    }
     
     func makePopOver(vc: NSViewController, uiElement: NSStatusItem) -> Void {
         
-        let popover = constructPopOver(vc)
-        displayPopOver(popover, uiElement: self.statusItem)
+        preparePopOver(with: vc)
+        displayPopOver(relativeTo: self.statusItem)
+    }
+    
+    
+    //MARK: MapViewObserver
+    
+    func update() {
         
+        closePopOver()
     }
     
     //MARK: helper methods
@@ -118,22 +124,21 @@ extension AgentUICoordinator {
     }
 
     
-    fileprivate func displayPopOver(_ popOverView: NSPopover, uiElement: NSStatusItem) {
+    fileprivate func displayPopOver(relativeTo uiElement: NSStatusItem) {
         
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
     }
     
-    fileprivate func closePopOver(_ popOverView: NSPopover) {
+    fileprivate func closePopOver() {
         
         popOverView.close()
     }
     
-    fileprivate func constructPopOver(_ vc: NSViewController?) -> NSPopover {
+    fileprivate func preparePopOver(with vc: NSViewController?) {
         
-        let popOverView =  NSPopover()
+        (vc as? MapViewController)?.delegate = self
         popOverView.contentViewController = vc
         popOverView.behavior = .transient
-        return popOverView
     }
     
     

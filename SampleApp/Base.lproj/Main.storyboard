@@ -711,16 +711,16 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YmK-mo-ZcL">
-                                <rect key="frame" x="20" y="102" width="560" height="347"/>
+                                <rect key="frame" x="20" y="101" width="560" height="348"/>
                             </mapView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-TV-sFx">
                                 <rect key="frame" x="240" y="34" width="121" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="ndR-gb-QWc"/>
                                 </constraints>
-                                <buttonCell key="cell" type="roundTextured" title="Done" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
+                                <buttonCell key="cell" type="smallSquare" title="DONE" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="systemBold"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="doneButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>

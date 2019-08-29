@@ -9,9 +9,19 @@
 import Cocoa
 import MapKit
 
+protocol MapViewObserver: class {
+    
+    func update()
+}
+
+extension MapViewObserver {
+    
+    func update(){}
+}
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol {
  
+    weak var delegate: MapViewObserver?
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
     fileprivate var latitude: Double = 0.0
@@ -120,6 +130,9 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     @IBAction func doneButtonAction(_ sender: Any){
         
+        captureUserLocation()
+        delegate?.update()
+        reloadData()
         Logger.debugLog("Done button clicked")
     }
     

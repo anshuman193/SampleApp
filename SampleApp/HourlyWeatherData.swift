@@ -12,7 +12,7 @@ import Foundation
 struct HourlyWeatherData: Codable {
     
     var summary: String?
-    var hourlyDetailsArray: [HourlyWeatherDataDetails?]
+    var hourlyDetailsArray: [HourlyWeatherDetails?]
     
     enum CodingKeys: String, CodingKey {
 
@@ -21,7 +21,7 @@ struct HourlyWeatherData: Codable {
 }
 
 
-struct HourlyWeatherDataDetails: Codable {
+struct HourlyWeatherDetails: Codable {
     
     var time: Int?
     var summary: String?
