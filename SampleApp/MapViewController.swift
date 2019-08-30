@@ -18,6 +18,7 @@ protocol MapViewObserver: class {
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
  
     weak var delegate: MapViewObserver?
+    private var webSrvcHandler: WebServiceHandler?
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
     private var latitude: Double = 0.0
@@ -33,7 +34,6 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     override func viewWillAppear() {
         
         super.viewWillAppear()
-        populateLastKnownCoordinates(lat: latitude, long: longitude)
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
 //        getCurrentLocationInfo()
@@ -46,10 +46,11 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         Logger.debugLog("viewWillDisappear")
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+
+    private func prepareWebServiceHandler() {
+        
+        self.webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: latitude, longitude: longitude, parserDelegate: self)
+        self.webSrvcHandler?.delegate = self
     }
 
     private func getCurrentLocationInfo() {
@@ -82,6 +83,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     @objc private func loadData() {
         
         loadCoordinatesFromDefaults()
+        prepareWebServiceHandler()
         loadDataFromRemoteServer()
     }
     
@@ -131,12 +133,9 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     
     private func loadDataFromRemoteServer() {
+
+        self.webSrvcHandler?.fetchData()
         
-        if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude, parserDelegate: self) {
-            
-            webServiceHandler.delegate = self
-            webServiceHandler.fetchData()
-        }
     }
     
     @IBAction func doneButtonAction(_ sender: Any){
