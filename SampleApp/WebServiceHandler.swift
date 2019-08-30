@@ -30,18 +30,24 @@ class WebServiceHandler: NSObject {
     
     
     private var apiKey: String? {
+        
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
     init?(with baseurl: String?, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
+
         super.init()
-        
-        guard let _apiKey = self.apiKey, let baseURL = baseurl else {
+        guard let _apiKey = self.apiKey else {
             
-            Logger.debugLog("Can't initialize WebServiceHandler because API Key or base URL is nil")
+            Logger.debugLog(Constants.ErrorMessage.webServiceHandlerErrorNoAPIKey)
             return nil
         }
         
+        guard let baseURL = baseurl else {
+
+            Logger.debugLog(Constants.ErrorMessage.webServiceHandlerErrorNoBaseURL)
+            return nil
+        }
         
         let coordinates = String(format:"\(latitude),\(longitude)")
         self.datasource = baseURL + _apiKey + "/" + coordinates
@@ -60,7 +66,6 @@ class WebServiceHandler: NSObject {
     func fetchData() {
  
         self.delegate?.startAnimation()
-        
         DispatchQueue.global(qos: .utility).async {
             
             guard let dataSrc = self.datasource else {

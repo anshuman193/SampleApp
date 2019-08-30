@@ -27,6 +27,9 @@ struct Constants {
         static let badDataSource = "Bad data source"
         static let badURL = "Bad URL"
         static let noHourlyData = "No hourly data available"
+        static let webServiceHandlerErrorNoAPIKey = "Can't initialize WebServiceHandler because API Key is nil"
+        static let webServiceHandlerErrorNoBaseURL = "Can't initialize WebServiceHandler because base URL is nil"
+        
     }
     
     struct StatusMessage {
