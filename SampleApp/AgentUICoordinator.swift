@@ -28,7 +28,6 @@ extension AgentUICoordinatorProtocol {
     private var popOverView: NSPopover
     private var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-    private var dataModelArr: [HourlyWeatherDetails]?
     private var timer: Timer?
     private var blinkStatus: Bool = false
     private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
