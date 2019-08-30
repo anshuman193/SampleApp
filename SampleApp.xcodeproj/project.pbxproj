@@ -72,7 +72,6 @@
 		0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		0F82B8292312B1BA00A66B00 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0FD3615F23113D7E0022BAF7 /* AgentUICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentUICoordinator.swift; sourceTree = "<group>"; };
-		0FD3616323117CC60022BAF7 /* Podfile.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Podfile.rtf; path = SampleApp/Podfile.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				0F24C8DB231843C100416148 /* Tracker.entitlements */,
-				0FD3616323117CC60022BAF7 /* Podfile.rtf */,
 				0F82B82523129CF700A66B00 /* SampleResponse.json */,
 				0F38CA6B231066FC009AF085 /* SampleApp */,
 				0F38CA7E231066FC009AF085 /* SampleAppTests */,
@@ -507,7 +505,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleApp;
 				PRODUCT_NAME = Tracker;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -526,7 +524,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleApp;
 				PRODUCT_NAME = Tracker;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

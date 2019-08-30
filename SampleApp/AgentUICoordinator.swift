@@ -25,15 +25,15 @@ extension AgentUICoordinatorProtocol {
     
     static let shared = AgentUICoordinator()
     weak var delegate: AgentUICoordinatorProtocol?
-    fileprivate var popOverView: NSPopover
-    fileprivate var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    fileprivate let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
-    fileprivate var dataModelArr: [HourlyWeatherDetails]?
-    fileprivate var timer: Timer?
-    fileprivate var blinkStatus: Bool = false
-    fileprivate var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
+    private var popOverView: NSPopover
+    private var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    private let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
+    private var dataModelArr: [HourlyWeatherDetails]?
+    private var timer: Timer?
+    private var blinkStatus: Bool = false
+    private var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
     
-    fileprivate init() {
+    private init() {
         
         popOverView = NSPopover()
     }
@@ -59,14 +59,14 @@ extension AgentUICoordinator {
         statusItem.menu?.addItem(settingMenuItem)
     }
 
-    @objc fileprivate func settings(){
+    @objc private func settings() {
 
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.kMapviewController) as? NSViewController else { return }
         makePopOver(vc: vc, uiElement: statusItem)
     }
     
-    @objc fileprivate func refreshData() {
+    @objc private func refreshData() {
         
        self.delegate?.reloadData()
     }
@@ -94,7 +94,7 @@ extension AgentUICoordinator {
         timer?.fire()
     }
     
-    fileprivate func getAgentName() -> String {
+    private func getAgentName() -> String {
         
         var agentName = "Tracker"
         if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: Constants.Plist.kKeyAgentName) {
@@ -110,7 +110,7 @@ extension AgentUICoordinator {
         self.statusItem.button?.title = getAgentName()
     }
     
-    @objc fileprivate func blink() {
+    @objc private func blink() {
 
         let agentName = getAgentName()
         
@@ -124,17 +124,17 @@ extension AgentUICoordinator {
     }
 
     
-    fileprivate func displayPopOver(relativeTo uiElement: NSStatusItem) {
+    private func displayPopOver(relativeTo uiElement: NSStatusItem) {
         
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
     }
     
-    fileprivate func closePopOver() {
+    private func closePopOver() {
         
         popOverView.close()
     }
     
-    fileprivate func preparePopOver(with vc: NSViewController?) {
+    private func preparePopOver(with vc: NSViewController?) {
         
         (vc as? MapViewController)?.delegate = self
         popOverView.contentViewController = vc
@@ -142,14 +142,14 @@ extension AgentUICoordinator {
     }
     
     
-    fileprivate func updateUI(modelData: WeatherData){
+    private func updateUI(modelData: WeatherData){
         
         let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
         updateMenuUI(menuItemsArray: menuItems)
     }
     
     
-    fileprivate func addTimeZone(_ data: WeatherData, _ dynamicMenuItemsArray: inout [String]) {
+    private func addTimeZone(_ data: WeatherData, _ dynamicMenuItemsArray: inout [String]) {
         
         if let timeZoneInfo = data.timezone {
             
@@ -161,7 +161,7 @@ extension AgentUICoordinator {
         }
     }
     
-    fileprivate func updateDynamicMenuItems(staticMenuItems: Array<String>, data: WeatherData) -> Array<String> {
+    private func updateDynamicMenuItems(staticMenuItems: Array<String>, data: WeatherData) -> Array<String> {
         
         var title = Constants.ErrorMessage.kNoDataAvailable
         var dynamicMenuItemsArray = [String]()
@@ -211,7 +211,7 @@ extension AgentUICoordinator {
     }
     
     
-    fileprivate func prepareMenuItem(basedOn item: String) -> NSMenuItem {
+    private func prepareMenuItem(basedOn item: String) -> NSMenuItem {
         
         var menuItem: NSMenuItem
         
@@ -244,7 +244,7 @@ extension AgentUICoordinator {
         return menuItem
     }
     
-    fileprivate func updateMenuUI(menuItemsArray: [String]) {
+    private func updateMenuUI(menuItemsArray: [String]) {
         
         statusItem.menu?.removeAllItems()
         

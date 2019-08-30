@@ -23,13 +23,13 @@ extension WebServiceProtocol {
 class WebServiceHandler: NSObject {
     
     weak var delegate: WebServiceProtocol?
-    fileprivate var latitude: Double?
-    fileprivate var longitude: Double?
-    fileprivate var datasource: String?
-    fileprivate var dataUpdateDelegate: PareserDataUpdateDelegate?
+    private var latitude: Double?
+    private var longitude: Double?
+    private var datasource: String?
+    private var dataUpdateDelegate: PareserDataUpdateDelegate?
     
     
-    fileprivate var apiKey: String? {
+    private var apiKey: String? {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
@@ -51,7 +51,7 @@ class WebServiceHandler: NSObject {
 
     }
 
-    fileprivate func prepareRequest(source: String) -> URL? {
+    private func prepareRequest(source: String) -> URL? {
         
         guard let url = URL(string: source) else { return nil }
         return url
@@ -61,6 +61,7 @@ class WebServiceHandler: NSObject {
     func fetchData() {
  
         self.delegate?.startAnimation()
+        
         DispatchQueue.global(qos: .utility).async {
             
             guard let dataSrc = self.datasource else {

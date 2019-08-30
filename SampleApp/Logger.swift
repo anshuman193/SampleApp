@@ -20,7 +20,7 @@ class Logger: NSObject {
     }
 
     
-    fileprivate static var isLoggingEnabled: Bool {
+    private static var isLoggingEnabled: Bool {
         #if DEBUG
         return true
         #else
@@ -34,7 +34,7 @@ class Logger: NSObject {
         }
     }
     
-    fileprivate class func sourceFileName(filePath: String) -> String {
+    private class func sourceFileName(filePath: String) -> String {
         let components = filePath.components(separatedBy: "/")
         return components.isEmpty ? "" : components.last!
     }

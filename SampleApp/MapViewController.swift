@@ -20,12 +20,12 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     weak var delegate: MapViewObserver?
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var currLocationButton: NSButton!
-    fileprivate var latitude: Double = 0.0
-    fileprivate var longitude: Double = 0.0
-    fileprivate let defaults = UserDefaults.standard
-    fileprivate var timer: Timer?
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+    private let defaults = UserDefaults.standard
+    private var timer: Timer?
 
-    fileprivate var baseUrl: String? {
+    private var baseUrl: String? {
         
         return Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist, forKey: Constants.Plist.kBaseURL)
     }
@@ -86,19 +86,19 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     }
     
     
-    fileprivate func loadCoordinatesFromDefaults() {
+    private func loadCoordinatesFromDefaults() {
         
         latitude = defaults.double(forKey: Constants.Location.kLatitude)
         longitude = defaults.double(forKey: Constants.Location.kLongitude)
     }
     
-    fileprivate func updateDefaults(_ annotation: MKAnnotation) {
+    private func updateDefaults(_ annotation: MKAnnotation) {
         
         defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.kLatitude)
         defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.kLongitude)
     }
     
-    fileprivate func captureUserLocation() {
+    private func captureUserLocation() {
         
         let annotation = mapView.annotations[0]
         updateDefaults(annotation)
@@ -106,14 +106,14 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         Logger.debugLog("captured user location longitude \(annotation.coordinate.longitude)")
     }
     
-    fileprivate func populateLastKnownCoordinates(lat: Double, long: Double) {
+    private func populateLastKnownCoordinates(lat: Double, long: Double) {
         
         let anno = MKPointAnnotation()
         anno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         mapView.addAnnotation(anno)
     }
     
-    @objc fileprivate func mapClicked(recognizer: NSClickGestureRecognizer) {
+    @objc private func mapClicked(recognizer: NSClickGestureRecognizer) {
         
         mapView.removeAnnotations(mapView.annotations)
         let location = recognizer.location(in: mapView)
@@ -121,7 +121,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         pinAnnotation(at: coordinate)
     }
     
-    fileprivate func pinAnnotation(at coordinate: CLLocationCoordinate2D) {
+    private func pinAnnotation(at coordinate: CLLocationCoordinate2D) {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
@@ -130,7 +130,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     }
     
     
-    fileprivate func loadDataFromRemoteServer() {
+    private func loadDataFromRemoteServer() {
         
         if let baseurl = baseUrl, let webServiceHandler = WebServiceHandler(with:baseurl, latitude: latitude, longitude: longitude, parserDelegate: self) {
             

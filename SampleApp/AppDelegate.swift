@@ -20,20 +20,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    fileprivate func loadData(_ mapVC: MapViewController) {
+    private func loadData(_ mapVC: MapViewController) {
         
         let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
         mapVC.startLoadingData(withTimeInterval: interval)
     }
     
-    fileprivate func initializeController() {
+    private func initializeController() {
         
         let mapVC = MapViewController()
         AgentUICoordinator.shared.delegate = mapVC
         loadData(mapVC)
     }
     
-    fileprivate func initializeAppUI(){
+    private func initializeAppUI(){
         
         let agent = Utility.agentName(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyAgentName)
         AgentUICoordinator.shared.setup(withTitle: agent)

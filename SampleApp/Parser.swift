@@ -18,7 +18,7 @@ class Parser: NSObject {
     
     
     weak var delegate: PareserDataUpdateDelegate?
-    fileprivate var newData: Data?
+    private var newData: Data?
     
     init(_ data: Data, delegate: PareserDataUpdateDelegate?) {
         
