@@ -115,12 +115,14 @@ extension AgentUICoordinator {
         let agentName = getAgentName()
         
         if blinkStatus {
-            blinkStatus = false
+
             self.statusItem.button?.title = agentName
         } else {
-            blinkStatus = true
+
             self.statusItem.button?.title = Constants.StatusMessage.kPleaseWait
         }
+        
+        blinkStatus.toggle()
     }
 
     
