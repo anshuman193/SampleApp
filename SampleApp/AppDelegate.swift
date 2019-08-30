@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func loadData(_ mapVC: MapViewController) {
         
-        let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
+        let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
         mapVC.startLoadingData(withTimeInterval: interval)
     }
     
@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func initializeAppUI(){
         
-        let agent = Utility.agentName(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyAgentName)
+        let agent = Utility.agentName(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyAgentName)
         AgentUICoordinator.shared.setup(withTitle: agent)
         AgentUICoordinator.shared.configMenuItems()
         initializeController()

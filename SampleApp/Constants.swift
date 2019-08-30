@@ -13,43 +13,44 @@ struct Constants {
     static let kAgentDefaultName = "Tracker"
     
     struct MenuItemName {
-        static let kSettings = NSLocalizedString("Select your location on map", comment: "")
-        static let kRefresh = "Refresh"
-        static let kSeparator = "Separator"
-        static let kCurrentLocation = "Use Current Location"
+        static let timezone = NSLocalizedString("Time Zone", comment: "")
+        static let settings = NSLocalizedString("Select your location on map", comment: "")
+        static let refresh = NSLocalizedString("Refresh", comment: "")
+        static let separator = "Separator"
+        static let currentLocation = NSLocalizedString("Use Current Location", comment: "")
     }
     
     struct ErrorMessage {
-        static let kNoDataAvailable = "Data not available..."
-        static let kNothingToParse = "No data to parse...parsing aborted"
-        static let kParseErrorOccured = "Parsing error occured with error:"
-        static let kBadDataSource = "Bad data source"
-        static let kBadURL = "Bad URL"
-        static let kNoHourlyData = "No hourly data available"
+        static let noDataAvailable = "Data not available..."
+        static let nothingToParse = "No data to parse...parsing aborted"
+        static let parseErrorOccured = "Parsing error occured with error:"
+        static let badDataSource = "Bad data source"
+        static let badURL = "Bad URL"
+        static let noHourlyData = "No hourly data available"
     }
     
     struct StatusMessage {
-        static let kPleaseWait = "Loading..."
-        static let kUIInitiated = "initializeUI called"
-        static let kNoUpdateForUI = "Nothing to update in UI"
-        static let kNoTimeZoneInfo = "No timezone info available"
+        static let pleaseWait = "Loading..."
+        static let uiInitiated = "initializeUI called"
+        static let noUpdateForUI = "Nothing to update in UI"
+        static let noTimeZoneInfo = "No timezone info available"
     }
     
     struct Location {
-        static let kLatitude = "latitude"
-        static let kLongitude = "longitude"
+        static let latitude = "latitude"
+        static let longitude = "longitude"
     }
     
     struct StoryboardID {
-        static let kMapviewController = "mapviewcontroller"
+        static let mapviewController = "mapviewcontroller"
     }
     
     struct Plist {
-        static let kInfoPlist = "Info"
-        static let kConfigPlist = "Config"
-        static let kKeyAgentName = "Agent Name"
-        static let kKeyDataRefreshFrequency = "Data Refresh Frequency"
-        static let kBaseURL = "BaseURL"
+        static let infoPlist = "Info"
+        static let configPlist = "Config"
+        static let keyAgentName = "Agent Name"
+        static let keyDataRefreshFrequency = "Data Refresh Frequency"
+        static let baseURL = "BaseURL"
         
         
     }

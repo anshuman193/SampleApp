@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  SampleApp
+
+  Created by anshuman singh on 30/08/19.
+  Copyright © 2019 Anshuman Singh. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Rastreador del tiempo";

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060603822318F9E0007C1617 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 060603842318F9E0007C1617 /* Localizable.strings */; };
+		0606038D231923C7007C1617 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0606038F231923C7007C1617 /* InfoPlist.strings */; };
+		06060393231924E3007C1617 /* ConfigPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06060395231924E3007C1617 /* ConfigPlist.strings */; };
 		060AD556231419BD003B2853 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060AD555231419BD003B2853 /* Constants.swift */; };
 		065F116623178DC400841BB9 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065F116523178DC400841BB9 /* WeatherData.swift */; };
 		0F24C8DA231841E500416148 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F24C8D9231841E500416148 /* CoreLocation.framework */; };
@@ -47,6 +50,13 @@
 
 /* Begin PBXFileReference section */
 		0606037E2318F457007C1617 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		060603832318F9E0007C1617 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		060603852318F9E9007C1617 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0606038823192184007C1617 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		0606038E231923C7007C1617 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06060390231923CE007C1617 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06060394231924E3007C1617 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConfigPlist.strings; sourceTree = "<group>"; };
+		06060396231924E8007C1617 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConfigPlist.strings; sourceTree = "<group>"; };
 		060AD555231419BD003B2853 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		065F116523178DC400841BB9 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0F24C8D9231841E500416148 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -101,6 +111,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060603812318F938007C1617 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				060603842318F9E0007C1617 /* Localizable.strings */,
+				0606038F231923C7007C1617 /* InfoPlist.strings */,
+				06060395231924E3007C1617 /* ConfigPlist.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0606038623191641007C1617 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				065F116523178DC400841BB9 /* WeatherData.swift */,
+				0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0F24C8D8231841E500416148 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,10 +172,10 @@
 				0F5E044E231187CD002A89B8 /* WebServiceHandler.swift */,
 				0F82B8292312B1BA00A66B00 /* Parser.swift */,
 				0F394C6C2311108A003BEB8F /* Logger.swift */,
-				0F5E0452231188E2002A89B8 /* Utility.swift */,
-				0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */,
-				065F116523178DC400841BB9 /* WeatherData.swift */,
 				060AD555231419BD003B2853 /* Constants.swift */,
+				0F5E0452231188E2002A89B8 /* Utility.swift */,
+				0606038623191641007C1617 /* Models */,
+				060603812318F938007C1617 /* Resources */,
 				0F38CA70231066FC009AF085 /* Assets.xcassets */,
 				0F38CA72231066FC009AF085 /* Main.storyboard */,
 				0F38CA75231066FC009AF085 /* Info.plist */,
@@ -292,8 +321,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F5E045123118877002A89B8 /* Config.plist in Resources */,
+				0606038D231923C7007C1617 /* InfoPlist.strings in Resources */,
+				060603822318F9E0007C1617 /* Localizable.strings in Resources */,
 				0F38CA71231066FC009AF085 /* Assets.xcassets in Resources */,
 				0F38CA74231066FC009AF085 /* Main.storyboard in Resources */,
+				06060393231924E3007C1617 /* ConfigPlist.strings in Resources */,
 				0F82B82623129CF700A66B00 /* SampleResponse.json in Resources */,
 				0F394C6B23110199003BEB8F /* Info.plist in Resources */,
 			);
@@ -366,11 +398,39 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		060603842318F9E0007C1617 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				060603832318F9E0007C1617 /* es */,
+				060603852318F9E9007C1617 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0606038F231923C7007C1617 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0606038E231923C7007C1617 /* es */,
+				06060390231923CE007C1617 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		06060395231924E3007C1617 /* ConfigPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06060394231924E3007C1617 /* es */,
+				06060396231924E8007C1617 /* en */,
+			);
+			name = ConfigPlist.strings;
+			sourceTree = "<group>";
+		};
 		0F38CA72231066FC009AF085 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0F38CA73231066FC009AF085 /* Base */,
 				0606037E2318F457007C1617 /* es */,
+				0606038823192184007C1617 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

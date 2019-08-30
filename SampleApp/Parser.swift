@@ -31,7 +31,7 @@ class Parser: NSObject {
         
         guard let dataToParse = newData else {
             
-            Logger.debugLog(Constants.ErrorMessage.kNothingToParse)
+            Logger.debugLog(Constants.ErrorMessage.nothingToParse)
             return
         }
         
@@ -49,7 +49,7 @@ class Parser: NSObject {
             
         } catch let error {
             
-            Logger.debugLog(Constants.ErrorMessage.kParseErrorOccured + "\(error)")
+            Logger.debugLog(Constants.ErrorMessage.parseErrorOccured + "\(error)")
         }
         
     }

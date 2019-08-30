@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  SampleApp
+
+  Created by anshuman singh on 30/08/19.
+  Copyright © 2019 Anshuman Singh. All rights reserved.
+*/
+
+"Time Zone" = "Zona horaria";
+"Select your location on map" = "Selecciona tu ubicación en el mapa";
+"Refresh" = "Refrescar";
+"Use Current Location" = "Usar ubicación actual";

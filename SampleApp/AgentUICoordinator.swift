@@ -31,7 +31,7 @@ extension AgentUICoordinatorProtocol {
     private var dataModelArr: [HourlyWeatherDetails]?
     private var timer: Timer?
     private var blinkStatus: Bool = false
-    private var staticMenuItemsArray = [Constants.MenuItemName.kSeparator,Constants.MenuItemName.kRefresh, Constants.MenuItemName.kSettings, Constants.MenuItemName.kCurrentLocation]
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
     
     private init() {
         
@@ -62,7 +62,7 @@ extension AgentUICoordinator {
     @objc private func settings() {
 
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.kMapviewController) as? NSViewController else { return }
+        guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.mapviewController) as? NSViewController else { return }
         makePopOver(vc: vc, uiElement: statusItem)
     }
     
@@ -97,7 +97,7 @@ extension AgentUICoordinator {
     private func getAgentName() -> String {
         
         var agentName = "Tracker"
-        if let value = Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist , forKey: Constants.Plist.kKeyAgentName) {
+        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: Constants.Plist.keyAgentName) {
             agentName = value
         }
         
@@ -119,7 +119,7 @@ extension AgentUICoordinator {
             self.statusItem.button?.title = agentName
         } else {
 
-            self.statusItem.button?.title = Constants.StatusMessage.kPleaseWait
+            self.statusItem.button?.title = Constants.StatusMessage.pleaseWait
         }
         
         blinkStatus.toggle()
@@ -155,26 +155,26 @@ extension AgentUICoordinator {
         
         if let timeZoneInfo = data.timezone {
             
-            dynamicMenuItemsArray.append(timeZoneInfo)
-            dynamicMenuItemsArray.append(Constants.MenuItemName.kSeparator)
+            dynamicMenuItemsArray.append(Constants.MenuItemName.timezone + ": " + "\(timeZoneInfo)") 
+            dynamicMenuItemsArray.append(Constants.MenuItemName.separator)
         } else {
             
-            Logger.debugLog(Constants.StatusMessage.kNoTimeZoneInfo)
+            Logger.debugLog(Constants.StatusMessage.noTimeZoneInfo)
         }
     }
     
     private func updateDynamicMenuItems(staticMenuItems: Array<String>, data: WeatherData) -> Array<String> {
         
-        var title = Constants.ErrorMessage.kNoDataAvailable
+        var title = Constants.ErrorMessage.noDataAvailable
         var dynamicMenuItemsArray = [String]()
         
         addTimeZone(data, &dynamicMenuItemsArray)
         
-        title = Constants.ErrorMessage.kNoDataAvailable
+        title = Constants.ErrorMessage.noDataAvailable
         
         guard let hourlyData = data.hourly else {
             
-            Logger.debugLog(Constants.ErrorMessage.kNoHourlyData)
+            Logger.debugLog(Constants.ErrorMessage.noHourlyData)
             return staticMenuItems
         }
         
@@ -219,19 +219,19 @@ extension AgentUICoordinator {
         
         switch item {
             
-        case Constants.MenuItemName.kSettings:
+        case Constants.MenuItemName.settings:
             
             menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
             menuItem.target = self
             break
             
-        case Constants.MenuItemName.kRefresh:
+        case Constants.MenuItemName.refresh:
             
             menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
             menuItem.target = self
             break
             
-        case Constants.MenuItemName.kSeparator:
+        case Constants.MenuItemName.separator:
             
             menuItem = NSMenuItem.separator()
             break

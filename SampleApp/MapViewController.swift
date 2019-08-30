@@ -27,7 +27,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
 
     private var baseUrl: String? {
         
-        return Utility.readValue(fromplistFile: Constants.Plist.kConfigPlist, forKey: Constants.Plist.kBaseURL)
+        return Utility.readValue(fromplistFile: Constants.Plist.configPlist, forKey: Constants.Plist.baseURL)
     }
     
     override func viewWillAppear() {
@@ -88,14 +88,14 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     private func loadCoordinatesFromDefaults() {
         
-        latitude = defaults.double(forKey: Constants.Location.kLatitude)
-        longitude = defaults.double(forKey: Constants.Location.kLongitude)
+        latitude = defaults.double(forKey: Constants.Location.latitude)
+        longitude = defaults.double(forKey: Constants.Location.longitude)
     }
     
     private func updateDefaults(_ annotation: MKAnnotation) {
         
-        defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.kLatitude)
-        defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.kLongitude)
+        defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.latitude)
+        defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.longitude)
     }
     
     private func captureUserLocation() {
@@ -176,7 +176,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     func reloadData() {
         
-        let interval = Utility.refreshInterval(plistname: Constants.Plist.kConfigPlist, and: Constants.Plist.kKeyDataRefreshFrequency)
+        let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
         self.startLoadingData(withTimeInterval: interval)
     }
     

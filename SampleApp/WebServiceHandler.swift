@@ -66,13 +66,13 @@ class WebServiceHandler: NSObject {
             
             guard let dataSrc = self.datasource else {
                 
-                Logger.debugLog(Constants.ErrorMessage.kBadDataSource)
+                Logger.debugLog(Constants.ErrorMessage.badDataSource)
                 return
             }
             
             guard let url = self.prepareRequest(source: dataSrc) else {
                 
-                Logger.debugLog(Constants.ErrorMessage.kBadURL)
+                Logger.debugLog(Constants.ErrorMessage.badURL)
                 return
             }
             
@@ -82,11 +82,11 @@ class WebServiceHandler: NSObject {
                 
                 guard let newData = data else {
                     
-                    Logger.debugLog(Constants.ErrorMessage.kNoDataAvailable)
+                    Logger.debugLog(Constants.ErrorMessage.noDataAvailable)
                     return
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: { //TODO: Delay induced for demo purpose
                     
                     let responseParser = Parser(newData, delegate: self.dataUpdateDelegate)
                     responseParser.start()
