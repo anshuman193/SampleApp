@@ -12,7 +12,7 @@ import CoreLocation
 
 protocol MapViewObserver: class {
     
-    func update()
+    func doneButtonClicked()
 }
 
 class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
@@ -144,7 +144,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         if let mapVCdelegate = delegate {
             
             captureUserLocation()
-            mapVCdelegate.update()
+            mapVCdelegate.doneButtonClicked()
             reloadData()
         }
         Logger.debugLog("Done button clicked")

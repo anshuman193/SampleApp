@@ -81,7 +81,7 @@ extension AgentUICoordinator {
     
     //MARK: MapViewObserver
     
-    func update() {
+    func doneButtonClicked() {
         
         closePopOver()
     }
