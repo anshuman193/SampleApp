@@ -50,11 +50,11 @@ class WebServiceHandler: NSObject {
             return nil
         }
         
-        setup(latitude, longitude, baseURL, _apiKey, delegate)
+        setup(lat: latitude, long: longitude, baseurl: baseURL, apiKey: _apiKey, parserDelegate: delegate)
     }
     
-    
-    private func setup(_ latitude: Double, _ longitude: Double, _ baseURL: String, _ _apiKey: String, _ delegate: PareserDataUpdateDelegate) {
+
+    private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateDelegate) {
         
         let coordinates = String(format:"\(latitude),\(longitude)")
         self.datasource = baseURL + _apiKey + "/" + coordinates
