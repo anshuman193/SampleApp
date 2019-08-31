@@ -34,6 +34,7 @@ class WebServiceHandler: NSObject {
         return Utility.readValue(fromplistFile: "Config", forKey: "API Key")
     }
     
+    
     init?(with baseurl: String?, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
 
         super.init()
@@ -49,6 +50,12 @@ class WebServiceHandler: NSObject {
             return nil
         }
         
+        setup(latitude, longitude, baseURL, _apiKey, delegate)
+    }
+    
+    
+    private func setup(_ latitude: Double, _ longitude: Double, _ baseURL: String, _ _apiKey: String, _ delegate: PareserDataUpdateDelegate) {
+        
         let coordinates = String(format:"\(latitude),\(longitude)")
         self.datasource = baseURL + _apiKey + "/" + coordinates
         
@@ -61,6 +68,7 @@ class WebServiceHandler: NSObject {
         self.longitude = longitude
         self.dataUpdateDelegate = delegate
     }
+
     
     private func addLocaleInfoInRequest(request: String, localeInfo: String) -> String {
         
