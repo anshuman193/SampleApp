@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.446075"
+            timestampString = "588936393.756057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "187"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.4461811"
+            timestampString = "588936393.756161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.446285"
+            timestampString = "588936393.756281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.446365"
+            timestampString = "588936393.7563469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.44644"
+            timestampString = "588936393.7563961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/MapViewController.swift"
-            timestampString = "588925377.4465311"
+            timestampString = "588936393.756442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/WebServiceHandler.swift"
-            timestampString = "588925377.446618"
+            timestampString = "588936393.756495"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
@@ -122,11 +122,11 @@
                   moduleName = "Tracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/anshumansingh/Documents/Workspace/SampleApp/SampleApp/WebServiceHandler.swift"
-                  timestampString = "588918473.8504339"
+                  timestampString = "588935930.572893"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
                   offsetFromSymbolStart = "993">
                </Location>
                <Location
@@ -137,14 +137,62 @@
                   moduleName = "Tracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/anshumansingh/Documents/Workspace/SampleApp/SampleApp/WebServiceHandler.swift"
-                  timestampString = "588918473.852947"
+                  timestampString = "588935930.575837"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
                   offsetFromSymbolStart = "409">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SampleApp/Utility.swift"
+            timestampString = "588936393.756549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "readValue(fromplistFile:forKey:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SampleApp/Utility.swift"
+            timestampString = "588936393.756597"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "readValue(fromplistFile:forKey:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SampleApp/Utility.swift"
+            timestampString = "588936393.756642"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "readValue(fromplistFile:forKey:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

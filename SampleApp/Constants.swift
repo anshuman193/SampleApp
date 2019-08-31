@@ -33,7 +33,7 @@ struct Constants {
     }
     
     struct StatusMessage {
-        static let pleaseWait = "Loading..."
+        static let pleaseWait = NSLocalizedString("Loading...", comment: "")
         static let uiInitiated = "initializeUI called"
         static let noUpdateForUI = "Nothing to update in UI"
         static let noTimeZoneInfo = "No timezone info available"
