@@ -92,6 +92,7 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         
         latitude = defaults.double(forKey: Constants.Location.latitude)
         longitude = defaults.double(forKey: Constants.Location.longitude)
+//        let langStr = Locale.current.languageCode
     }
     
     private func updateDefaults(_ annotation: MKAnnotation) {

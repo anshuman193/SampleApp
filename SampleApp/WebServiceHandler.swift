@@ -51,9 +51,21 @@ class WebServiceHandler: NSObject {
         
         let coordinates = String(format:"\(latitude),\(longitude)")
         self.datasource = baseURL + _apiKey + "/" + coordinates
+        
+        if let langStr = Locale.current.languageCode, let dataSrc = self.datasource {
+            
+            self.datasource = addLocaleInfoInRequest(request: dataSrc, localeInfo: langStr)
+        }
+        
         self.latitude = latitude
         self.longitude = longitude
         self.dataUpdateDelegate = delegate
+    }
+    
+    private func addLocaleInfoInRequest(request: String, localeInfo: String) -> String {
+        
+        let req = request + "?" + "lang=" + localeInfo
+        return req
     }
 
     private func prepareRequest(source: String) -> URL? {
