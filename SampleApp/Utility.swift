@@ -41,12 +41,13 @@ class Utility: NSObject {
     }
     
     
-    class func agentName(plistname name: String, and key : String) -> String {
-        
-        var agentName = Constants.kAgentDefaultName
-        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: key) {
-            agentName = value
-        }
-        return agentName
-    }
+//    class func agentName(plistname name: String, and key : String) -> String {
+//        
+//        var agentName = Constants.agentDefaultName
+//        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: key) {
+//            agentName = value
+//        }
+//        let str = NSLocalizedString(agentName, comment: "")
+//        return str
+//    }
 }

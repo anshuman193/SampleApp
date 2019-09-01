@@ -10,10 +10,10 @@ import Foundation
 
 struct Constants {
     
-    static let kAgentDefaultName = "Tracker"
+    static let agentDefaultName = NSLocalizedString("Weather Tracker", comment: "")
     
     struct MenuItemName {
-        static let timezone = NSLocalizedString("Time Zone", comment: "")
+        static let timeZone = NSLocalizedString("Time Zone", comment: "")
         static let settings = NSLocalizedString("Select your location on map", comment: "")
         static let refresh = NSLocalizedString("Refresh", comment: "")
         static let separator = "Separator"
@@ -51,7 +51,6 @@ struct Constants {
     struct Plist {
         static let infoPlist = "Info"
         static let configPlist = "Config"
-        static let keyAgentName = "Agent Name"
         static let keyDataRefreshFrequency = "Data Refresh Frequency"
         static let baseURL = "BaseURL"
         

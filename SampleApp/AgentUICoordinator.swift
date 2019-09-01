@@ -93,29 +93,28 @@ extension AgentUICoordinator {
         timer?.fire()
     }
     
-    private func getAgentName() -> String {
-        
-        var agentName = "Tracker"
-        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: Constants.Plist.keyAgentName) {
-            agentName = value
-        }
-        
-        return agentName
-    }
+//    private func getAgentName() -> String {
+//        
+//        var agentName = "Tracker"
+//        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: Constants.Plist.keyAgentName) {
+//            agentName = value
+//        }
+//        
+//        return agentName
+//    }
     
     func stopTextAnimator(){
         
         timer?.invalidate()
-        self.statusItem.button?.title = getAgentName()
+        let str = Constants.agentDefaultName
+        self.statusItem.button?.title = str
     }
     
     @objc private func blink() {
 
-        let agentName = getAgentName()
-        
         if blinkStatus {
 
-            self.statusItem.button?.title = agentName
+            self.statusItem.button?.title = Constants.agentDefaultName
         } else {
 
             self.statusItem.button?.title = Constants.StatusMessage.pleaseWait
@@ -154,7 +153,7 @@ extension AgentUICoordinator {
         
         if let timeZoneInfo = data.timezone {
             
-            dynamicMenuItemsArray.append(Constants.MenuItemName.timezone + ": " + "\(timeZoneInfo)") 
+            dynamicMenuItemsArray.append(Constants.MenuItemName.timeZone + ": " + "\(timeZoneInfo)") 
             dynamicMenuItemsArray.append(Constants.MenuItemName.separator)
         } else {
             
@@ -200,7 +199,8 @@ extension AgentUICoordinator {
             
             if let visibility = hourlyData?.visibility {
                 
-                title.append(" | Visibility: \(visibility)")
+                let visibilityTitle = NSLocalizedString("Visibility", comment: "")
+                title.append(" | \(visibilityTitle) : \(visibility)")
             }
             
 

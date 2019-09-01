@@ -6,8 +6,10 @@
   Copyright © 2019 Anshuman Singh. All rights reserved.
 */
 
+"Weather Tracker" = "Rastreador del tiempo";
 "Loading..." = "Cargando...";
 "Time Zone" = "Zona horaria";
+"Visibility" = "Visibilidad";
 "Select your location on map" = "Selecciona tu ubicación en el mapa";
 "Refresh" = "Refrescar";
 "Use Current Location" = "Usar ubicación actual";

@@ -6,8 +6,10 @@
   Copyright © 2019 Anshuman Singh. All rights reserved.
 */
 
+"Weather Tracker" = "Weather Tracker";
 "Loading..." = "Loading...";
 "Time Zone" = "Time Zone";
+"Visibility" = "Visibility";
 "Select your location on map" = "Select your location on map";
 "Refresh" = "Refresh";
 "Use Current Location" = "Use Current Location";

@@ -36,8 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func initializeAppUI(){
         
-        let agent = Utility.agentName(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyAgentName)
-        AgentUICoordinator.shared.setup(withTitle: agent)
+        AgentUICoordinator.shared.setup(withTitle: Constants.agentDefaultName)
         AgentUICoordinator.shared.configMenuItems()
         initializeController()
     }
