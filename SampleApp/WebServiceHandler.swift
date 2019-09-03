@@ -23,11 +23,14 @@ extension WebServiceProtocol {
 class WebServiceHandler: NSObject {
     
     weak var delegate: WebServiceProtocol?
+  
     private var latitude: Double?
-    private var longitude: Double?
-    private var datasource: String?
-    private var dataUpdateDelegate: PareserDataUpdateDelegate?
     
+    private var longitude: Double?
+    
+    private var datasource: String?
+    
+    private var dataUpdateDelegate: PareserDataUpdateDelegate?
     
     private var apiKey: String? {
         

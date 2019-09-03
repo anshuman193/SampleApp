@@ -24,12 +24,19 @@ extension AgentUICoordinatorProtocol {
 @objcMembers class AgentUICoordinator: MapViewObserver {
     
     static let shared = AgentUICoordinator()
+    
     weak var delegate: AgentUICoordinatorProtocol?
+    
     private var popOverView: NSPopover
+    
     private var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    
     private let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
+    
     private var timer: Timer?
+    
     private var blinkStatus: Bool = false
+    
     private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
     
     private init() {
@@ -93,15 +100,6 @@ extension AgentUICoordinator {
         timer?.fire()
     }
     
-//    private func getAgentName() -> String {
-//        
-//        var agentName = "Tracker"
-//        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: Constants.Plist.keyAgentName) {
-//            agentName = value
-//        }
-//        
-//        return agentName
-//    }
     
     func stopTextAnimator(){
         

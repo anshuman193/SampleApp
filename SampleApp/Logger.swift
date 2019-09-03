@@ -11,6 +11,7 @@ import Foundation
 class Logger: NSObject {
     
     static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
+ 
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat

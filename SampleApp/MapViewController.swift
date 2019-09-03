@@ -18,12 +18,19 @@ protocol MapViewObserver: class {
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
  
     weak var delegate: MapViewObserver?
+    
     private var webSrvcHandler: WebServiceHandler?
+    
     @IBOutlet var mapView: MKMapView!
+    
     @IBOutlet var currLocationButton: NSButton!
+    
     private var latitude: Double = 0.0
+    
     private var longitude: Double = 0.0
+    
     private let defaults = UserDefaults.standard
+    
     private var timer: Timer?
 
     private var baseUrl: String? {
