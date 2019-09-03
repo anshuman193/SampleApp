@@ -24,7 +24,6 @@
 		0F5E044F231187CD002A89B8 /* WebServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5E044E231187CD002A89B8 /* WebServiceHandler.swift */; };
 		0F5E045123118877002A89B8 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5E045023118877002A89B8 /* Config.plist */; };
 		0F5E0453231188E2002A89B8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5E0452231188E2002A89B8 /* Utility.swift */; };
-		0F82B8242311A1EA00A66B00 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F82B8232311A1EA00A66B00 /* GenericViewController.swift */; };
 		0F82B82623129CF700A66B00 /* SampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F82B82523129CF700A66B00 /* SampleResponse.json */; };
 		0F82B8282312AE6700A66B00 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */; };
 		0F82B82A2312B1BA00A66B00 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F82B8292312B1BA00A66B00 /* Parser.swift */; };
@@ -78,7 +77,6 @@
 		0F5E044E231187CD002A89B8 /* WebServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceHandler.swift; sourceTree = "<group>"; };
 		0F5E045023118877002A89B8 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0F5E0452231188E2002A89B8 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		0F82B8232311A1EA00A66B00 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		0F82B82523129CF700A66B00 /* SampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleResponse.json; sourceTree = "<group>"; };
 		0F82B8272312AE6700A66B00 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		0F82B8292312B1BA00A66B00 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			children = (
 				0F38CA6C231066FC009AF085 /* AppDelegate.swift */,
 				0FD3615F23113D7E0022BAF7 /* AgentUICoordinator.swift */,
-				0F82B8232311A1EA00A66B00 /* GenericViewController.swift */,
 				0F38CA6E231066FC009AF085 /* MapViewController.swift */,
 				0F5E044E231187CD002A89B8 /* WebServiceHandler.swift */,
 				0F82B8292312B1BA00A66B00 /* Parser.swift */,
@@ -356,7 +353,6 @@
 				0F394C6D2311108A003BEB8F /* Logger.swift in Sources */,
 				0F5E0453231188E2002A89B8 /* Utility.swift in Sources */,
 				0F5E044F231187CD002A89B8 /* WebServiceHandler.swift in Sources */,
-				0F82B8242311A1EA00A66B00 /* GenericViewController.swift in Sources */,
 				065F116623178DC400841BB9 /* WeatherData.swift in Sources */,
 				060AD556231419BD003B2853 /* Constants.swift in Sources */,
 				0F82B82A2312B1BA00A66B00 /* Parser.swift in Sources */,

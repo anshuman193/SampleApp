@@ -15,7 +15,7 @@ protocol MapViewObserver: class {
     func doneButtonClicked()
 }
 
-class MapViewController: GenericViewController<ViewControllerType.Type>, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
+class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
  
     weak var delegate: MapViewObserver?
     private var webSrvcHandler: WebServiceHandler?
@@ -38,20 +38,34 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         mapView.addGestureRecognizer(recognizer)
 //        getCurrentLocationInfo()
     }
+
     
+    override func viewDidAppear() {
+        
+        showLastAnnotatedLocationOnMap()
+    }
+    
+
     override func viewWillDisappear() {
         
         super.viewWillDisappear()
         captureUserLocation()
         Logger.debugLog("viewWillDisappear")
     }
+    
 
+    func startLoadingData(withTimeInterval value: Int) {
+        
+        startTimerForDataLoad(timeInterval: Double(value))
+    }
 
+    
     private func prepareWebServiceHandler() {
         
         self.webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: latitude, longitude: longitude, parserDelegate: self)
         self.webSrvcHandler?.delegate = self
     }
+
 
     private func getCurrentLocationInfo() {
         
@@ -67,11 +81,13 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         }
     }
     
-    func startLoadingData(withTimeInterval value: Int) {
-        
-        startTimerForDataLoad(timeInterval: Double(value))
-    }
     
+    private func showLastAnnotatedLocationOnMap() {
+        let lat = defaults.double(forKey: Constants.Location.latitude)
+        let long = defaults.double(forKey: Constants.Location.longitude)
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        mapView.setCenter(coordinate, animated: true)
+    }
     
     private func startTimerForDataLoad(timeInterval: TimeInterval) {
         
@@ -92,7 +108,6 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
         
         latitude = defaults.double(forKey: Constants.Location.latitude)
         longitude = defaults.double(forKey: Constants.Location.longitude)
-//        let langStr = Locale.current.languageCode
     }
     
     private func updateDefaults(_ annotation: MKAnnotation) {
@@ -103,10 +118,13 @@ class MapViewController: GenericViewController<ViewControllerType.Type>, Pareser
     
     private func captureUserLocation() {
         
-        let annotation = mapView.annotations[0]
-        updateDefaults(annotation)
-        Logger.debugLog("captured user location latitude \(annotation.coordinate.latitude)")
-        Logger.debugLog("captured user location longitude \(annotation.coordinate.longitude)")
+        if (mapView.annotations.count > 0) {
+            
+            let annotation = mapView.annotations[0]
+            updateDefaults(annotation)
+            Logger.debugLog("captured user location latitude \(annotation.coordinate.latitude)")
+            Logger.debugLog("captured user location longitude \(annotation.coordinate.longitude)")
+        }
     }
     
     private func populateLastKnownCoordinates(lat: Double, long: Double) {
