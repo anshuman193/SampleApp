@@ -36,7 +36,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         super.viewWillAppear()
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
-//        getCurrentLocationInfo()
+        getCurrentLocationInfo()
     }
 
     
@@ -75,8 +75,8 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
             
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.distanceFilter = 10.0
             locationManager.requestLocation()
-
             locationManager.startUpdatingLocation()
         }
     }
@@ -203,7 +203,14 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        defaults.set(locValue.latitude, forKey: Constants.Location.latitude)
+        defaults.set(locValue.longitude, forKey: Constants.Location.longitude)
+        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        Logger.debugLog("locationManager didFailWithError \(error)")
     }
     
 }
