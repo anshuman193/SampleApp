@@ -13,6 +13,7 @@ struct Constants {
     static let agentDefaultName = NSLocalizedString("Weather Tracker", comment: "")
     
     struct MenuItemName {
+        
         static let timeZone = NSLocalizedString("Time Zone", comment: "")
         static let settings = NSLocalizedString("Select your location on map", comment: "")
         static let refresh = NSLocalizedString("Refresh", comment: "")
@@ -21,6 +22,7 @@ struct Constants {
     }
     
     struct ErrorMessage {
+        
         static let noDataAvailable = "Data not available..."
         static let nothingToParse = "No data to parse...parsing aborted"
         static let parseErrorOccured = "Parsing error occured with error:"
@@ -29,10 +31,10 @@ struct Constants {
         static let noHourlyData = "No hourly data available"
         static let webServiceHandlerErrorNoAPIKey = "Can't initialize WebServiceHandler because API Key is nil"
         static let webServiceHandlerErrorNoBaseURL = "Can't initialize WebServiceHandler because base URL is nil"
-        
     }
     
     struct StatusMessage {
+        
         static let pleaseWait = NSLocalizedString("Loading...", comment: "")
         static let uiInitiated = "initializeUI called"
         static let noUpdateForUI = "Nothing to update in UI"
@@ -40,21 +42,22 @@ struct Constants {
     }
     
     struct Location {
+        
         static let latitude = "latitude"
         static let longitude = "longitude"
     }
     
     struct StoryboardID {
+        
         static let mapviewController = "mapviewcontroller"
     }
     
     struct Plist {
+        
         static let infoPlist = "Info"
         static let configPlist = "Config"
         static let keyDataRefreshFrequency = "Data Refresh Frequency"
         static let baseURL = "BaseURL"
-        
-        
     }
     
 }

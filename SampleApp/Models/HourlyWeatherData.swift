@@ -12,6 +12,7 @@ import Foundation
 struct HourlyWeatherData: Codable {
     
     var summary: String?
+   
     var hourlyDetailsArray: [HourlyWeatherDetails?]
     
     enum CodingKeys: String, CodingKey {
@@ -24,11 +25,17 @@ struct HourlyWeatherData: Codable {
 struct HourlyWeatherDetails: Codable {
     
     var time: Int?
+    
     var summary: String?
+    
     var temperature: Double?
+    
     var feelsLikeTemperature: Double?
+    
     var windSpeed: Double?
+    
     var windGust: Double?
+    
     var visibility: Double?
     
     enum Codingkeys: String, CodingKey {
