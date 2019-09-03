@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import SampleApp
+@testable import WeatherTracker
 
 class SampleAppTests: XCTestCase {
 

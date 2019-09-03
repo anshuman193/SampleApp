@@ -1,6 +1,6 @@
 //
 //  MapViewController.swift
-//  SampleApp
+//  WeatherTracker
 //
 //  Created by Anshuman Singh on 8/23/19.
 //  Copyright © 2019 Anshuman Singh. All rights reserved.
