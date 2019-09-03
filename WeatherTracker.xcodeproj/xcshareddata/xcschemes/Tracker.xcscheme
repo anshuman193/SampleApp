@@ -17,7 +17,7 @@
                BlueprintIdentifier = "0F38CA68231066FC009AF085"
                BuildableName = "Tracker.app"
                BlueprintName = "Tracker"
-               ReferencedContainer = "container:SampleApp.xcodeproj">
+               ReferencedContainer = "container:WeatherTracker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F38CA7A231066FC009AF085"
-               BuildableName = "SampleAppTests.xctest"
-               BlueprintName = "SampleAppTests"
-               ReferencedContainer = "container:SampleApp.xcodeproj">
+               BuildableName = "WeatherTrackerTests.xctest"
+               BlueprintName = "WeatherTrackerTests"
+               ReferencedContainer = "container:WeatherTracker.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F38CA85231066FC009AF085"
-               BuildableName = "SampleAppUITests.xctest"
-               BlueprintName = "SampleAppUITests"
-               ReferencedContainer = "container:SampleApp.xcodeproj">
+               BuildableName = "WeatherTrackerUITests.xctest"
+               BlueprintName = "WeatherTrackerUITests"
+               ReferencedContainer = "container:WeatherTracker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,7 +55,7 @@
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
             BlueprintName = "Tracker"
-            ReferencedContainer = "container:SampleApp.xcodeproj">
+            ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,7 +80,7 @@
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
             BlueprintName = "Tracker"
-            ReferencedContainer = "container:SampleApp.xcodeproj">
+            ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -99,7 +99,7 @@
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
             BlueprintName = "Tracker"
-            ReferencedContainer = "container:SampleApp.xcodeproj">
+            ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

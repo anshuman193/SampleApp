@@ -67,10 +67,10 @@
 		0F38CA73231066FC009AF085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F38CA75231066FC009AF085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F38CA76231066FC009AF085 /* SampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SampleApp.entitlements; sourceTree = "<group>"; };
-		0F38CA7B231066FC009AF085 /* SampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA7F231066FC009AF085 /* SampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppTests.swift; sourceTree = "<group>"; };
 		0F38CA81231066FC009AF085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0F38CA86231066FC009AF085 /* SampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA8A231066FC009AF085 /* SampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppUITests.swift; sourceTree = "<group>"; };
 		0F38CA8C231066FC009AF085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F394C6C2311108A003BEB8F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -154,8 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				0F38CA69231066FC009AF085 /* Tracker.app */,
-				0F38CA7B231066FC009AF085 /* SampleAppTests.xctest */,
-				0F38CA86231066FC009AF085 /* SampleAppUITests.xctest */,
+				0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */,
+				0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,9 +227,9 @@
 			productReference = 0F38CA69231066FC009AF085 /* Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0F38CA7A231066FC009AF085 /* SampleAppTests */ = {
+		0F38CA7A231066FC009AF085 /* WeatherTrackerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F38CA92231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleAppTests" */;
+			buildConfigurationList = 0F38CA92231066FC009AF085 /* Build configuration list for PBXNativeTarget "WeatherTrackerTests" */;
 			buildPhases = (
 				0F38CA77231066FC009AF085 /* Sources */,
 				0F38CA78231066FC009AF085 /* Frameworks */,
@@ -240,14 +240,14 @@
 			dependencies = (
 				0F38CA7D231066FC009AF085 /* PBXTargetDependency */,
 			);
-			name = SampleAppTests;
+			name = WeatherTrackerTests;
 			productName = SampleAppTests;
-			productReference = 0F38CA7B231066FC009AF085 /* SampleAppTests.xctest */;
+			productReference = 0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0F38CA85231066FC009AF085 /* SampleAppUITests */ = {
+		0F38CA85231066FC009AF085 /* WeatherTrackerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F38CA95231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleAppUITests" */;
+			buildConfigurationList = 0F38CA95231066FC009AF085 /* Build configuration list for PBXNativeTarget "WeatherTrackerUITests" */;
 			buildPhases = (
 				0F38CA82231066FC009AF085 /* Sources */,
 				0F38CA83231066FC009AF085 /* Frameworks */,
@@ -258,9 +258,9 @@
 			dependencies = (
 				0F38CA88231066FC009AF085 /* PBXTargetDependency */,
 			);
-			name = SampleAppUITests;
+			name = WeatherTrackerUITests;
 			productName = SampleAppUITests;
-			productReference = 0F38CA86231066FC009AF085 /* SampleAppUITests.xctest */;
+			productReference = 0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -291,7 +291,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0F38CA64231066FC009AF085 /* Build configuration list for PBXProject "SampleApp" */;
+			buildConfigurationList = 0F38CA64231066FC009AF085 /* Build configuration list for PBXProject "WeatherTracker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -306,8 +306,8 @@
 			projectRoot = "";
 			targets = (
 				0F38CA68231066FC009AF085 /* Tracker */,
-				0F38CA7A231066FC009AF085 /* SampleAppTests */,
-				0F38CA85231066FC009AF085 /* SampleAppUITests */,
+				0F38CA7A231066FC009AF085 /* WeatherTrackerTests */,
+				0F38CA85231066FC009AF085 /* WeatherTrackerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -493,6 +493,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -548,6 +549,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -605,7 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SampleApp.app/Contents/MacOS/SampleApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherTracker.app/Contents/MacOS/WeatherTracker";
 			};
 			name = Debug;
 		};
@@ -625,7 +627,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.SampleApp.SampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SampleApp.app/Contents/MacOS/SampleApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherTracker.app/Contents/MacOS/WeatherTracker";
 			};
 			name = Release;
 		};
@@ -670,7 +672,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0F38CA64231066FC009AF085 /* Build configuration list for PBXProject "SampleApp" */ = {
+		0F38CA64231066FC009AF085 /* Build configuration list for PBXProject "WeatherTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F38CA8D231066FC009AF085 /* Debug */,
@@ -688,7 +690,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F38CA92231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleAppTests" */ = {
+		0F38CA92231066FC009AF085 /* Build configuration list for PBXNativeTarget "WeatherTrackerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F38CA93231066FC009AF085 /* Debug */,
@@ -697,7 +699,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F38CA95231066FC009AF085 /* Build configuration list for PBXNativeTarget "SampleAppUITests" */ = {
+		0F38CA95231066FC009AF085 /* Build configuration list for PBXNativeTarget "WeatherTrackerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F38CA96231066FC009AF085 /* Debug */,
