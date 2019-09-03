@@ -55,7 +55,6 @@
 		065EF8BC231E797700714FD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		065EF8BD231E797700714FD6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		065EF8BE231E797700714FD6 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		065EF8BF231E797700714FD6 /* SampleApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SampleApp.entitlements; sourceTree = "<group>"; };
 		065EF8C0231E797700714FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		065EF8C3231E797700714FD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		065EF8C5231E797700714FD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -117,19 +116,15 @@
 			children = (
 				065EF8D7231E797700714FD6 /* AgentUICoordinator.swift */,
 				065EF8D5231E797700714FD6 /* AppDelegate.swift */,
+				065EF8C0231E797700714FD6 /* MapViewController.swift */,
+				065EF8D1231E797700714FD6 /* WebServiceHandler.swift */,
 				065EF8D4231E797700714FD6 /* Parser.swift */,
 				065EF8D2231E797700714FD6 /* Utility.swift */,
-				065EF8D1231E797700714FD6 /* WebServiceHandler.swift */,
-				065EF8BA231E797700714FD6 /* Constants.swift */,
 				065EF8BE231E797700714FD6 /* Logger.swift */,
-				065EF8BF231E797700714FD6 /* SampleApp.entitlements */,
-				065EF8C0231E797700714FD6 /* MapViewController.swift */,
+				065EF8BA231E797700714FD6 /* Constants.swift */,
 				065EF8CC231E797700714FD6 /* Models */,
 				065EF8C1231E797700714FD6 /* Resources */,
 				065EF8CB231E797700714FD6 /* Assets.xcassets */,
-				065EF8CF231E797700714FD6 /* Main.storyboard */,
-				065EF8D3231E797700714FD6 /* Config.plist */,
-				065EF8D6231E797700714FD6 /* Info.plist */,
 			);
 			path = WeatherTracker;
 			sourceTree = "<group>";
@@ -137,6 +132,7 @@
 		065EF8C1231E797700714FD6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				065EF8CF231E797700714FD6 /* Main.storyboard */,
 				065EF8BB231E797700714FD6 /* Main.strings */,
 				065EF8C2231E797700714FD6 /* Localizable.strings */,
 				065EF8C4231E797700714FD6 /* InfoPlist.strings */,
@@ -183,6 +179,8 @@
 		0F38CA60231066FC009AF085 = {
 			isa = PBXGroup;
 			children = (
+				065EF8D6231E797700714FD6 /* Info.plist */,
+				065EF8D3231E797700714FD6 /* Config.plist */,
 				0F24C8DB231843C100416148 /* Tracker.entitlements */,
 				0F82B82523129CF700A66B00 /* SampleResponse.json */,
 				065EF8B9231E797700714FD6 /* WeatherTracker */,
@@ -566,7 +564,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/WeatherTracker/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -585,7 +583,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/WeatherTracker/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

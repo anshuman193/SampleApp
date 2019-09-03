@@ -89,6 +89,7 @@ class WebServiceHandler: NSObject {
     func fetchData() {
  
         self.delegate?.startAnimation()
+
         DispatchQueue.global(qos: .utility).async { [weak self]  in
             
             guard let weakSelf = self, let dataSrc = weakSelf.datasource else {
@@ -109,18 +110,32 @@ class WebServiceHandler: NSObject {
                 
                 guard let newData = data else {
                     
+                    DispatchQueue.main.async {
+                        weakSelf.delegate?.stopAnimation()
+                    }
+                    
                     Logger.debugLog(Constants.ErrorMessage.noDataAvailable)
                     return
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
+                if let err = error {
                     
-                    let responseParser = Parser(newData, delegate: weakSelf.dataUpdateDelegate)
-                    responseParser.start()
-                    weakSelf.delegate?.stopAnimation()
+                    DispatchQueue.main.async {
+                        weakSelf.delegate?.stopAnimation()
+                    }
+
+                    Logger.debugLog("Web service returned with error \(err)")
                     
-                })
-                
+                } else {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
+                        
+                        let responseParser = Parser(newData, delegate: weakSelf.dataUpdateDelegate)
+                        responseParser.start()
+                        weakSelf.delegate?.stopAnimation()
+                    })
+                }
+
             }).resume()
             
             }

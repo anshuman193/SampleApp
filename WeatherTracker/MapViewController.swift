@@ -161,7 +161,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     private func loadDataFromRemoteServer() {
 
         self.webSrvcHandler?.fetchData()
-        
     }
     
     @IBAction func doneButtonAction(_ sender: Any){
