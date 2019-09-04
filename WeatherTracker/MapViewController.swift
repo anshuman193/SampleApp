@@ -15,6 +15,7 @@ protocol MapViewObserver: class {
 }
 
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
+    
  
     weak var delegate: MapViewObserver?
     
@@ -196,10 +197,16 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     //MARK:PareserDataUpdateDelegate
     
-    func newDataDidBecomeAvaialble(model: WeatherData) {
+    func didParseData(model: WeatherData?) {
         
-        Logger.debugLog("newDataDidBecomeAvaialble")
-        uiCoordinator?.refreshMenuItems(model: model)
+        guard let data = model else {
+            
+            Logger.debugLog("No new data")
+            return
+        }
+        
+        Logger.debugLog("new data became avaialble")
+        uiCoordinator?.refreshMenuItems(model: data)
     }
 
     

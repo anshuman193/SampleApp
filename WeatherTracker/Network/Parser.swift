@@ -11,7 +11,7 @@ import Foundation
 
 protocol PareserDataUpdateDelegate: class {
 
-    func newDataDidBecomeAvaialble(model: WeatherData)
+    func didParseData(model: WeatherData?)
 }
 
 class Parser: NSObject {
@@ -21,14 +21,23 @@ class Parser: NSObject {
  
     private var newData: Data?
     
+    private var decodedData: WeatherData? {
+        
+        didSet {
+            delegate?.didParseData(model: decodedData)
+        }
+    }
+    
     init(_ data: Data, delegate: PareserDataUpdateDelegate?) {
         
         super.init()
         newData = data
         self.delegate = delegate
+        start()
     }
     
-    func start() {
+    
+    private func start() {
         
         guard let dataToParse = newData else {
             
@@ -45,9 +54,8 @@ class Parser: NSObject {
         
         do {
             
-            let decodedData = try decoder.decode(WeatherData.self, from: data)
-            delegate?.newDataDidBecomeAvaialble(model: decodedData)
-            
+            decodedData = try decoder.decode(WeatherData.self, from: data)
+
         } catch let error {
             
             Logger.debugLog(Constants.ErrorMessage.parseErrorOccured + "\(error)")

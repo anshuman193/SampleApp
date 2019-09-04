@@ -130,8 +130,7 @@ class WebServiceHandler: NSObject {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
                         
-                        let responseParser = Parser(newData, delegate: weakSelf.dataUpdateDelegate)
-                        responseParser.start()
+                        _ = Parser(newData, delegate: weakSelf.dataUpdateDelegate)
                         weakSelf.delegate?.stopAnimation()
                     })
                 }
