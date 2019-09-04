@@ -114,8 +114,8 @@
 		065EF8B9231E797700714FD6 /* WeatherTracker */ = {
 			isa = PBXGroup;
 			children = (
-				065EF8D7231E797700714FD6 /* AgentUICoordinator.swift */,
 				065EF8D5231E797700714FD6 /* AppDelegate.swift */,
+				065EF8D7231E797700714FD6 /* AgentUICoordinator.swift */,
 				065EF8C0231E797700714FD6 /* MapViewController.swift */,
 				065EF8D1231E797700714FD6 /* WebServiceHandler.swift */,
 				065EF8D4231E797700714FD6 /* Parser.swift */,

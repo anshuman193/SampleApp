@@ -27,20 +27,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mapVC.startLoadingData(withTimeInterval: interval)
     }
     
-    private func initializeController() {
+    private func initializeAppUI() {
         
-        let mapVC = MapViewController()
-        AgentUICoordinator.shared.delegate = mapVC
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        guard let mapVC = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.mapviewController)
+            as? MapViewController else  {
+
+            Logger.debugLog("Could not initialize MapViewCOntroller")
+            return
+        }
+
+        mapVC.setup()
         loadData(mapVC)
     }
-    
-    private func initializeAppUI(){
-        
-        AgentUICoordinator.shared.setup(withTitle: Constants.agentDefaultName)
-        AgentUICoordinator.shared.configMenuItems()
-        initializeController()
-    }
-
-
 }
 

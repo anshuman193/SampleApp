@@ -12,23 +12,21 @@ import CoreLocation
 
 protocol MapViewObserver: class {
     
-    func doneButtonClicked()
+//    func doneButtonClicked()
 }
 
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
  
     weak var delegate: MapViewObserver?
     
+    private let popOverView = NSPopover()
+    
     private var webSrvcHandler: WebServiceHandler?
     
     @IBOutlet var mapView: MKMapView!
     
     @IBOutlet var currLocationButton: NSButton!
-    
-    private var latitude: Double = 0.0
-    
-    private var longitude: Double = 0.0
-    
+        
     private let defaults = UserDefaults.standard
     
     private var timer: Timer?
@@ -37,6 +35,36 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         return Utility.readValue(fromplistFile: Constants.Plist.configPlist, forKey: Constants.Plist.baseURL)
     }
+    
+    private var userDefaultsCoordinates: (latitude: Double, longitude: Double) {
+    
+        let latitude = defaults.double(forKey: Constants.Location.latitude)
+        let longitude = defaults.double(forKey: Constants.Location.longitude)
+        return (latitude, longitude)
+    }
+    
+    
+    private var uiCoordinator: AgentUICoordinator? = {
+        
+        let uiCoordinator = AgentUICoordinator()
+        return uiCoordinator
+    }()
+    
+    
+    
+    func setup() {
+        
+        guard let uiCoordinator = uiCoordinator else {
+            
+            Logger.debugLog("Failed to Initialize MapViewController")
+            return
+        }
+        
+        uiCoordinator.delegate = self
+        uiCoordinator.setup(withTitle: Constants.agentDefaultName)
+        
+    }
+    
     
     override func viewWillAppear() {
         
@@ -69,7 +97,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     private func prepareWebServiceHandler() {
         
-        self.webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: latitude, longitude: longitude, parserDelegate: self)
+        self.webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: userDefaultsCoordinates.latitude, longitude: userDefaultsCoordinates.longitude, parserDelegate: self)
         self.webSrvcHandler?.delegate = self
     }
 
@@ -90,6 +118,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     
     private func showLastAnnotatedLocationOnMap() {
+        
         let lat = defaults.double(forKey: Constants.Location.latitude)
         let long = defaults.double(forKey: Constants.Location.longitude)
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -105,18 +134,11 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     @objc private func loadData() {
         
-        loadCoordinatesFromDefaults()
         prepareWebServiceHandler()
         loadDataFromRemoteServer()
     }
     
-    
-    private func loadCoordinatesFromDefaults() {
         
-        latitude = defaults.double(forKey: Constants.Location.latitude)
-        longitude = defaults.double(forKey: Constants.Location.longitude)
-    }
-    
     private func updateDefaults(_ annotation: MKAnnotation) {
         
         defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.latitude)
@@ -165,12 +187,9 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     @IBAction func doneButtonAction(_ sender: Any){
         
-        if let mapVCdelegate = delegate {
-            
-            captureUserLocation()
-            mapVCdelegate.doneButtonClicked()
-            reloadData()
-        }
+        captureUserLocation()
+        closePopOver()
+        reloadData()
         Logger.debugLog("Done button clicked")
     }
     
@@ -180,7 +199,8 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     func newDataDidBecomeAvaialble(model: WeatherData) {
         
         Logger.debugLog("newDataDidBecomeAvaialble")
-        AgentUICoordinator.shared.refreshMenuItems(model: model)
+        uiCoordinator?.refreshMenuItems(model: model)
+//        AgentUICoordinator.shared.refreshMenuItems(model: model)
     }
 
     
@@ -188,12 +208,14 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     func startAnimation() {
         
-        AgentUICoordinator.shared.startTextAnimator()
+        uiCoordinator?.startTextAnimator()
+//        AgentUICoordinator.shared.startTextAnimator()
     }
     
     func stopAnimation() {
         
-        AgentUICoordinator.shared.stopTextAnimator()
+        uiCoordinator?.stopTextAnimator()
+//        AgentUICoordinator.shared.stopTextAnimator()
     }
     
     //MARK:AgentUICoordinatorProtocol
@@ -202,6 +224,23 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
         self.startLoadingData(withTimeInterval: interval)
+    }
+    
+    
+    func closePopOver() {
+        
+        popOverView.close()
+    }
+
+    func showMapInPopOver() {
+        
+        guard let uiElement = uiCoordinator?.statusItem else {
+            return
+        }
+        
+        popOverView.contentViewController = self
+        popOverView.behavior = .transient
+        popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
     }
     
     //MARK:CLLocationManagerDelegate

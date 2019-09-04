@@ -13,6 +13,8 @@ import MapKit
 protocol AgentUICoordinatorProtocol: class {
     
     func reloadData()
+    func showMapInPopOver()
+//    func closePopOver()
 }
 
 
@@ -23,15 +25,7 @@ extension AgentUICoordinatorProtocol {
 
 @objcMembers class AgentUICoordinator: MapViewObserver {
     
-    static let shared = AgentUICoordinator()
-    
     weak var delegate: AgentUICoordinatorProtocol?
-    
-    private var popOverView: NSPopover
-    
-    private var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    
-    private let settingMenuItem = NSMenuItem(title: "Settings", action: #selector(settings), keyEquivalent: " ")
     
     private var timer: Timer?
     
@@ -39,67 +33,44 @@ extension AgentUICoordinatorProtocol {
     
     private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
     
-    private init() {
+    
+    var statusItem: NSStatusItem  = {
         
-        popOverView = NSPopover()
-    }
+        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        item.menu = NSMenu()
+        return item
+    }()
+    
 }
 
 extension AgentUICoordinator {
     
+    //MARK: Initail Setup
+    
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-        Logger.debugLog("initializeUI called")
+        configMenuItems()
     }
     
-    func refreshMenuItems(model: WeatherData) {
-
-        updateUI(modelData: model)
-    }
-    
-    func configMenuItems() {
+    private func configMenuItems() {
 
         statusItem.menu = NSMenu()
-        settingMenuItem.target = self
-        statusItem.menu?.addItem(settingMenuItem)
-    }
-
-    @objc private func settings() {
-
-        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.mapviewController) as? NSViewController else { return }
-        makePopOver(vc: vc, uiElement: statusItem)
+        updateMenuUI(menuItemsArray: staticMenuItemsArray)
     }
     
-    @objc private func refreshData() {
+    
+    //MARK: Helpers
+    
+    func refreshMenuItems(model: WeatherData) {
         
-       self.delegate?.reloadData()
+        updateUI(modelData: model)
     }
-
-    
-    func makePopOver(vc: NSViewController, uiElement: NSStatusItem) -> Void {
-        
-        preparePopOver(with: vc)
-        displayPopOver(relativeTo: self.statusItem)
-    }
-    
-    
-    //MARK: MapViewObserver
-    
-    func doneButtonClicked() {
-        
-        closePopOver()
-    }
-    
-    //MARK: helper methods
-
 
     func startTextAnimator(){
         timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(self.blink), userInfo: nil, repeats: true)
         timer?.fire()
     }
-    
     
     func stopTextAnimator(){
         
@@ -121,24 +92,6 @@ extension AgentUICoordinator {
         blinkStatus.toggle()
     }
 
-    
-    private func displayPopOver(relativeTo uiElement: NSStatusItem) {
-        
-        popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
-    }
-    
-    private func closePopOver() {
-        
-        popOverView.close()
-    }
-    
-    private func preparePopOver(with vc: NSViewController?) {
-        
-        (vc as? MapViewController)?.delegate = self
-        popOverView.contentViewController = vc
-        popOverView.behavior = .transient
-    }
-    
     
     private func updateUI(modelData: WeatherData){
         
@@ -254,6 +207,19 @@ extension AgentUICoordinator {
         }
     }
     
+    //MARK: Menu click action
+    
+    @objc private func settings() {
+        
+        Logger.debugLog("Settings Menu Item selected")
+        self.delegate?.showMapInPopOver()
+    }
+    
+    
+    @objc private func refreshData() {
+        
+        self.delegate?.reloadData()
+    }
 
 }
 
