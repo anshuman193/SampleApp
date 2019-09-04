@@ -115,13 +115,12 @@
 			isa = PBXGroup;
 			children = (
 				065EF8D5231E797700714FD6 /* AppDelegate.swift */,
-				065EF8D7231E797700714FD6 /* AgentUICoordinator.swift */,
 				065EF8C0231E797700714FD6 /* MapViewController.swift */,
-				065EF8D1231E797700714FD6 /* WebServiceHandler.swift */,
-				065EF8D4231E797700714FD6 /* Parser.swift */,
 				065EF8D2231E797700714FD6 /* Utility.swift */,
 				065EF8BE231E797700714FD6 /* Logger.swift */,
 				065EF8BA231E797700714FD6 /* Constants.swift */,
+				06BB6BA6231FF19900319B3E /* Network */,
+				06BB6BA5231FF17500319B3E /* Helper */,
 				065EF8CC231E797700714FD6 /* Models */,
 				065EF8C1231E797700714FD6 /* Resources */,
 				065EF8CB231E797700714FD6 /* Assets.xcassets */,
@@ -166,6 +165,23 @@
 				065EF8F1231E79B100714FD6 /* Info.plist */,
 			);
 			path = WeatherTrackerUITests;
+			sourceTree = "<group>";
+		};
+		06BB6BA5231FF17500319B3E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				065EF8D7231E797700714FD6 /* AgentUICoordinator.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		06BB6BA6231FF19900319B3E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				065EF8D1231E797700714FD6 /* WebServiceHandler.swift */,
+				065EF8D4231E797700714FD6 /* Parser.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		0F24C8D8231841E500416148 /* Frameworks */ = {

@@ -14,7 +14,6 @@ protocol AgentUICoordinatorProtocol: class {
     
     func reloadData()
     func showMapInPopOver()
-//    func closePopOver()
 }
 
 

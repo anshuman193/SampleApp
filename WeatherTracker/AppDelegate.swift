@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        initializeAppUI()
+        initializeApp()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -27,13 +27,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mapVC.startLoadingData(withTimeInterval: interval)
     }
     
-    private func initializeAppUI() {
+    private func initializeApp() {
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        
         guard let mapVC = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.mapviewController)
             as? MapViewController else  {
 
-            Logger.debugLog("Could not initialize MapViewCOntroller")
+            Logger.debugLog("FATAL: Could not initialize MapViewController")
             return
         }
 
