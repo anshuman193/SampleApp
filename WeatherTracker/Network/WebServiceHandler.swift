@@ -60,11 +60,11 @@ class WebServiceHandler: NSObject {
     private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateDelegate) {
         
         let coordinates = String(format:"\(latitude),\(longitude)")
-        self.datasource = baseURL + _apiKey + "/" + coordinates
+        datasource = baseURL + _apiKey + "/" + coordinates
         
         if let langStr = Locale.current.languageCode, let dataSrc = self.datasource {
             
-            self.datasource = addLocaleInfoInRequest(request: dataSrc, localeInfo: langStr)
+            datasource = addLocaleInfoInRequest(request: dataSrc, localeInfo: langStr)
         }
         
         self.latitude = latitude
@@ -88,7 +88,7 @@ class WebServiceHandler: NSObject {
     
     func fetchData() {
  
-        self.delegate?.startAnimation()
+        delegate?.startAnimation()
 
         DispatchQueue.global(qos: .utility).async { [weak self]  in
             

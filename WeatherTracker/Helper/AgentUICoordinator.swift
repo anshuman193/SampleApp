@@ -67,7 +67,7 @@ extension AgentUICoordinator {
     }
 
     func startTextAnimator(){
-        timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(self.blink), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(blink), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
@@ -75,17 +75,17 @@ extension AgentUICoordinator {
         
         timer?.invalidate()
         let str = Constants.agentDefaultName
-        self.statusItem.button?.title = str
+        statusItem.button?.title = str
     }
     
     @objc private func blink() {
 
         if blinkStatus {
 
-            self.statusItem.button?.title = Constants.agentDefaultName
+            statusItem.button?.title = Constants.agentDefaultName
         } else {
 
-            self.statusItem.button?.title = Constants.StatusMessage.pleaseWait
+            statusItem.button?.title = Constants.StatusMessage.pleaseWait
         }
         
         blinkStatus.toggle()
@@ -211,13 +211,13 @@ extension AgentUICoordinator {
     @objc private func settings() {
         
         Logger.debugLog("Settings Menu Item selected")
-        self.delegate?.showMapInPopOver()
+        delegate?.showMapInPopOver()
     }
     
     
     @objc private func refreshData() {
         
-        self.delegate?.reloadData()
+        delegate?.reloadData()
     }
 
 }

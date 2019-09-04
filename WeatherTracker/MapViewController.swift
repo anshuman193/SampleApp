@@ -99,8 +99,8 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     private func prepareWebServiceHandler() {
         
-        self.webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: userDefaultsCoordinates.latitude, longitude: userDefaultsCoordinates.longitude, parserDelegate: self)
-        self.webSrvcHandler?.delegate = self
+        webSrvcHandler =  WebServiceHandler(with:baseUrl, latitude: userDefaultsCoordinates.latitude, longitude: userDefaultsCoordinates.longitude, parserDelegate: self)
+        webSrvcHandler?.delegate = self
     }
 
 
@@ -182,8 +182,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     private func loadDataFromRemoteServer() {
 
-        self.webSrvcHandler?.delegate = self
-        self.webSrvcHandler?.fetchData()
+        webSrvcHandler?.fetchData()
     }
     
     @IBAction func doneButtonAction(_ sender: Any){
@@ -239,7 +238,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     func reloadData() {
         
         let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
-        self.startLoadingData(withTimeInterval: interval)
+        startLoadingData(withTimeInterval: interval)
     }
     
     //MARK:CLLocationManagerDelegate

@@ -46,7 +46,7 @@ class Parser: NSObject {
         do {
             
             let decodedData = try decoder.decode(WeatherData.self, from: data)
-            self.delegate?.newDataDidBecomeAvaialble(model: decodedData)
+            delegate?.newDataDidBecomeAvaialble(model: decodedData)
             
         } catch let error {
             
