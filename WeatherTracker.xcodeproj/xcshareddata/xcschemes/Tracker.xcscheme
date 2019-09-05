@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F38CA68231066FC009AF085"
                BuildableName = "Tracker.app"
-               BlueprintName = "Tracker"
+               BlueprintName = "Weather Tracker"
                ReferencedContainer = "container:WeatherTracker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,7 +54,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
+            BlueprintName = "Weather Tracker"
             ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,8 +65,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "en"
-      region = "IN"
+      language = "es"
+      region = "MX"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -79,7 +79,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
+            BlueprintName = "Weather Tracker"
             ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -98,7 +98,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F38CA68231066FC009AF085"
             BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
+            BlueprintName = "Weather Tracker"
             ReferencedContainer = "container:WeatherTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

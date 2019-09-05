@@ -226,6 +226,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     func closePopOver() {
         
+        
         popOverView.close()
     }
     

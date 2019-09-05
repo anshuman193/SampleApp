@@ -13,3 +13,5 @@
 "Select your location on map" = "Selecciona tu ubicación en el mapa";
 "Refresh" = "Refrescar";
 "Use Current Location" = "Usar ubicación actual";
+"Refresh action will reload data" = "La acción de actualización volverá a cargar los datos";
+"This action will open map view" = "Esta acción abrirá la vista de mapa";

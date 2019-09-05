@@ -41,6 +41,12 @@ struct Constants {
         static let noTimeZoneInfo = "No timezone info available"
     }
     
+    struct AccessibilityStrings {
+        
+        static let refreshActionHint = NSLocalizedString("Refresh action will reload data", comment:"")
+        static let settingActionHint = NSLocalizedString("This action will opne map view", comment:"")
+    }
+    
     struct Location {
         
         static let latitude = "latitude"

@@ -32,7 +32,6 @@ extension AgentUICoordinatorProtocol {
     
     private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
     
-    
     var statusItem: NSStatusItem  = {
         
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -49,7 +48,7 @@ extension AgentUICoordinator {
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-        configMenuItems()
+            configMenuItems()
     }
     
     private func configMenuItems() {
@@ -171,12 +170,14 @@ extension AgentUICoordinator {
         case Constants.MenuItemName.settings:
             
             menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.settingActionHint)
             menuItem.target = self
             break
             
         case Constants.MenuItemName.refresh:
             
             menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.refreshActionHint)
             menuItem.target = self
             break
             
@@ -191,9 +192,9 @@ extension AgentUICoordinator {
             menuItem.isEnabled = false
             
         }
-        
         return menuItem
     }
+
     
     private func updateMenuUI(menuItemsArray: [String]) {
         
@@ -219,6 +220,13 @@ extension AgentUICoordinator {
         
         delegate?.reloadData()
     }
+    
+    
+    // MARK: Accessibility
+
+//    func applyAccessibility(_ recipe: Recipe) {
+//
+//    }
 
 }
 
