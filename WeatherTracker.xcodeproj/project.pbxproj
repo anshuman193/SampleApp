@@ -79,7 +79,7 @@
 		065EF8F1231E79B100714FD6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F24C8D9231841E500416148 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0F24C8DB231843C100416148 /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tracker.entitlements; sourceTree = "<group>"; };
-		0F38CA69231066FC009AF085 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F38CA69231066FC009AF085 /* Weather Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F82B82523129CF700A66B00 /* SampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleResponse.json; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 		0F38CA6A231066FC009AF085 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F38CA69231066FC009AF085 /* Tracker.app */,
+				0F38CA69231066FC009AF085 /* Weather Tracker.app */,
 				0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */,
 				0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */,
 			);
@@ -220,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F38CA68231066FC009AF085 /* Tracker */ = {
+		0F38CA68231066FC009AF085 /* Weather Tracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Tracker" */;
+			buildConfigurationList = 0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Weather Tracker" */;
 			buildPhases = (
 				0F38CA65231066FC009AF085 /* Sources */,
 				0F38CA66231066FC009AF085 /* Frameworks */,
@@ -232,9 +232,9 @@
 			);
 			dependencies = (
 			);
-			name = Tracker;
+			name = "Weather Tracker";
 			productName = SampleApp;
-			productReference = 0F38CA69231066FC009AF085 /* Tracker.app */;
+			productReference = 0F38CA69231066FC009AF085 /* Weather Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F38CA7A231066FC009AF085 /* WeatherTrackerTests */ = {
@@ -315,7 +315,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0F38CA68231066FC009AF085 /* Tracker */,
+				0F38CA68231066FC009AF085 /* Weather Tracker */,
 				0F38CA7A231066FC009AF085 /* WeatherTrackerTests */,
 				0F38CA85231066FC009AF085 /* WeatherTrackerUITests */,
 			);
@@ -396,12 +396,12 @@
 /* Begin PBXTargetDependency section */
 		0F38CA7D231066FC009AF085 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F38CA68231066FC009AF085 /* Tracker */;
+			target = 0F38CA68231066FC009AF085 /* Weather Tracker */;
 			targetProxy = 0F38CA7C231066FC009AF085 /* PBXContainerItemProxy */;
 		};
 		0F38CA88231066FC009AF085 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F38CA68231066FC009AF085 /* Tracker */;
+			target = 0F38CA68231066FC009AF085 /* Weather Tracker */;
 			targetProxy = 0F38CA87231066FC009AF085 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -587,7 +587,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.WeatherTracker.WeatherTracker;
-				PRODUCT_NAME = Tracker;
+				PRODUCT_NAME = "Weather Tracker";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -606,7 +606,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anshuman.WeatherTracker.WeatherTracker;
-				PRODUCT_NAME = Tracker;
+				PRODUCT_NAME = "Weather Tracker";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -701,7 +701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Tracker" */ = {
+		0F38CA8F231066FC009AF085 /* Build configuration list for PBXNativeTarget "Weather Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F38CA90231066FC009AF085 /* Debug */,

@@ -10,14 +10,7 @@ import Cocoa
 import MapKit
 import CoreLocation
 
-protocol MapViewObserver: class {
-    
-}
-
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
-    
- 
-    weak var delegate: MapViewObserver?
     
     private let popOverView = NSPopover()
     

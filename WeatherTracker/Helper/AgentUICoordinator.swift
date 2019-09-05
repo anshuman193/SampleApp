@@ -22,7 +22,7 @@ extension AgentUICoordinatorProtocol {
     func reloadData() { Logger.debugLog("reloadData") }
 }
 
-@objcMembers class AgentUICoordinator: MapViewObserver {
+@objcMembers class AgentUICoordinator {
     
     weak var delegate: AgentUICoordinatorProtocol?
     
@@ -79,14 +79,7 @@ extension AgentUICoordinator {
     
     @objc private func blink() {
 
-        if blinkStatus {
-
-            statusItem.button?.title = Constants.agentDefaultName
-        } else {
-
-            statusItem.button?.title = Constants.StatusMessage.pleaseWait
-        }
-        
+        statusItem.button?.title = blinkStatus ? Constants.agentDefaultName : Constants.StatusMessage.pleaseWait
         blinkStatus.toggle()
     }
 
