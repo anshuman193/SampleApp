@@ -30,7 +30,7 @@ extension AgentUICoordinatorProtocol {
     
     private var blinkStatus: Bool = false
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -174,6 +174,14 @@ extension AgentUICoordinator {
             menuItem.target = self
             break
             
+        case Constants.MenuItemName.quitApp:
+            
+            menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "R")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.refreshActionHint)
+            menuItem.target = self
+            break
+
+            
         case Constants.MenuItemName.separator:
             
             menuItem = NSMenuItem.separator()
@@ -212,6 +220,11 @@ extension AgentUICoordinator {
     @objc private func refreshData() {
         
         delegate?.reloadData()
+    }
+
+    @objc private func quitApp() {
+        
+        exit(0)
     }
 
 }

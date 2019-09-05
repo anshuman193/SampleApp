@@ -19,6 +19,7 @@ struct Constants {
         static let refresh = NSLocalizedString("Refresh", comment: "")
         static let separator = "Separator"
         static let currentLocation = NSLocalizedString("Use Current Location", comment: "")
+        static let quitApp = NSLocalizedString("Quit", comment: "")
         static let visibility = NSLocalizedString("Visibility", comment: "")
         
     }
