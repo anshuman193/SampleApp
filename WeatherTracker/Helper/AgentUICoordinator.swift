@@ -65,12 +65,13 @@ extension AgentUICoordinator {
         updateUI(modelData: model)
     }
 
-    func startTextAnimator(){
+    func startTextAnimator() {
+        
         timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(blink), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
-    func stopTextAnimator(){
+    func stopTextAnimator() {
         
         timer?.invalidate()
         let str = Constants.agentDefaultName
@@ -84,7 +85,7 @@ extension AgentUICoordinator {
     }
 
     
-    private func updateUI(modelData: WeatherData){
+    private func updateUI(modelData: WeatherData) {
         
         let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
         updateMenuUI(menuItemsArray: menuItems)
@@ -141,8 +142,7 @@ extension AgentUICoordinator {
             
             if let visibility = hourlyData?.visibility {
                 
-                let visibilityTitle = NSLocalizedString("Visibility", comment: "")
-                title.append(" | \(visibilityTitle) : \(visibility)")
+                title.append(" | \(Constants.MenuItemName.visibility) : \(visibility)")
             }
             
 
@@ -213,13 +213,6 @@ extension AgentUICoordinator {
         
         delegate?.reloadData()
     }
-    
-    
-    // MARK: Accessibility
-
-//    func applyAccessibility(_ recipe: Recipe) {
-//
-//    }
 
 }
 
