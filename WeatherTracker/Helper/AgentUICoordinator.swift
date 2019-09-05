@@ -176,7 +176,7 @@ extension AgentUICoordinator {
             
         case Constants.MenuItemName.quitApp:
             
-            menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "R")
+            menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "Q")
             menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.refreshActionHint)
             menuItem.target = self
             break
