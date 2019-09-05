@@ -142,7 +142,7 @@ extension AgentUICoordinator {
             
             if let visibility = hourlyData?.visibility {
                 
-                title.append(" | \(Constants.MenuItemName.visibility) : \(visibility)")
+                title.append(" , \(Constants.MenuItemName.visibility) : \(visibility)")
             }
             
 
