@@ -47,7 +47,9 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need to access location for fetching accurate weather info</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To update weather data</string>
+	<key>NSLocationUsageDescription</key>
+	<string>To update weather data in agent App</string>
 </dict>
 </plist>

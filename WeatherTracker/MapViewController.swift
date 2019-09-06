@@ -10,14 +10,7 @@ import Cocoa
 import MapKit
 import CoreLocation
 
-protocol MapViewObserver: class {
-    
-}
-
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
-    
- 
-    weak var delegate: MapViewObserver?
     
     private let popOverView = NSPopover()
     
@@ -78,7 +71,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     override func viewDidAppear() {
         
-        showLastAnnotatedLocationOnMap()
+        showLastAnnotatedLocation()
     }
     
 
@@ -109,18 +102,44 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         let locationManager = CLLocationManager()
         
-        if CLLocationManager.locationServicesEnabled() {
+        switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways:
+                Logger.debugLog("authorizedAlways")
+                break
+
+        case .denied:
+            Logger.debugLog("denied")
+            break
+
+        case .notDetermined:
+            Logger.debugLog("notDetermined")
+            break
             
+        case .restricted:
+            Logger.debugLog("restricted")
+            break
+            
+            default:
+                Logger.debugLog("default")
+            
+        }
+        
+        
+        
+        if CLLocationManager.locationServicesEnabled() {
+        
+
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.distanceFilter = 10.0
             locationManager.requestLocation()
+            
             locationManager.startUpdatingLocation()
         }
     }
     
     
-    private func showLastAnnotatedLocationOnMap() {
+    private func showLastAnnotatedLocation() {
         
         let coordinate = CLLocationCoordinate2D(latitude: userDefaultsCoordinates.latitude, longitude: userDefaultsCoordinates.longitude)
         mapView.setCenter(coordinate, animated: true)
@@ -139,7 +158,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         loadDataFromRemoteServer()
     }
     
-        
     private func updateDefaults(_ annotation: MKAnnotation) {
         
         defaults.set(annotation.coordinate.latitude, forKey: Constants.Location.latitude)
@@ -155,13 +173,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
             Logger.debugLog("captured user location latitude \(annotation.coordinate.latitude)")
             Logger.debugLog("captured user location longitude \(annotation.coordinate.longitude)")
         }
-    }
-    
-    private func populateLastKnownCoordinates(lat: Double, long: Double) {
-        
-        let anno = MKPointAnnotation()
-        anno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        mapView.addAnnotation(anno)
     }
     
     @objc private func mapClicked(recognizer: NSClickGestureRecognizer) {
@@ -226,6 +237,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     func closePopOver() {
         
+        
         popOverView.close()
     }
     
@@ -250,6 +262,23 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     //MARK:CLLocationManagerDelegate
     
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        
+        Logger.debugLog("didDetermineState");
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        
+        Logger.debugLog("didStartMonitoringFor");
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateTo newLocation: CLLocation, from oldLocation: CLLocation) {
+        
+        Logger.debugLog("didUpdateTo newLocation");
+    }
+    
+   
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
