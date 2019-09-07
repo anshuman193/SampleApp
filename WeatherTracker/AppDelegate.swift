@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let mapVC = storyboard.instantiateController(withIdentifier: Constants.StoryboardID.mapviewController)
             as? MapViewController else  {
 
-            Logger.debugLog("FATAL: Could not initialize MapViewController")
+            Logger.debugLog("FATAL: Could not initialize the App")
             return
         }
 

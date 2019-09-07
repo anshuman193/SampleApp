@@ -22,7 +22,7 @@ extension AgentUICoordinatorProtocol {
     func reloadData() { Logger.debugLog("reloadData") }
 }
 
-@objcMembers class AgentUICoordinator: MapViewObserver {
+@objcMembers class AgentUICoordinator {
     
     weak var delegate: AgentUICoordinatorProtocol?
     
@@ -30,8 +30,7 @@ extension AgentUICoordinatorProtocol {
     
     private var blinkStatus: Bool = false
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation]
-    
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -49,7 +48,7 @@ extension AgentUICoordinator {
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-        configMenuItems()
+            configMenuItems()
     }
     
     private func configMenuItems() {
@@ -66,12 +65,13 @@ extension AgentUICoordinator {
         updateUI(modelData: model)
     }
 
-    func startTextAnimator(){
+    func startTextAnimator() {
+        
         timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(blink), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
-    func stopTextAnimator(){
+    func stopTextAnimator() {
         
         timer?.invalidate()
         let str = Constants.agentDefaultName
@@ -80,19 +80,12 @@ extension AgentUICoordinator {
     
     @objc private func blink() {
 
-        if blinkStatus {
-
-            statusItem.button?.title = Constants.agentDefaultName
-        } else {
-
-            statusItem.button?.title = Constants.StatusMessage.pleaseWait
-        }
-        
+        statusItem.button?.title = blinkStatus ? Constants.agentDefaultName : Constants.StatusMessage.pleaseWait
         blinkStatus.toggle()
     }
 
     
-    private func updateUI(modelData: WeatherData){
+    private func updateUI(modelData: WeatherData) {
         
         let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
         updateMenuUI(menuItemsArray: menuItems)
@@ -149,8 +142,7 @@ extension AgentUICoordinator {
             
             if let visibility = hourlyData?.visibility {
                 
-                let visibilityTitle = NSLocalizedString("Visibility", comment: "")
-                title.append(" | \(visibilityTitle) : \(visibility)")
+                title.append(" , \(Constants.MenuItemName.visibility) : \(visibility)")
             }
             
 
@@ -171,14 +163,24 @@ extension AgentUICoordinator {
         case Constants.MenuItemName.settings:
             
             menuItem = NSMenuItem(title: item, action: #selector(settings), keyEquivalent: "S")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.settingActionHint)
             menuItem.target = self
             break
             
         case Constants.MenuItemName.refresh:
             
             menuItem = NSMenuItem(title: item, action: #selector(refreshData), keyEquivalent: "R")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.refreshActionHint)
             menuItem.target = self
             break
+            
+        case Constants.MenuItemName.quitApp:
+            
+            menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "Q")
+            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.quitActionHint)
+            menuItem.target = self
+            break
+
             
         case Constants.MenuItemName.separator:
             
@@ -191,9 +193,9 @@ extension AgentUICoordinator {
             menuItem.isEnabled = false
             
         }
-        
         return menuItem
     }
+
     
     private func updateMenuUI(menuItemsArray: [String]) {
         
@@ -218,6 +220,11 @@ extension AgentUICoordinator {
     @objc private func refreshData() {
         
         delegate?.reloadData()
+    }
+
+    @objc private func quitApp() {
+        
+        exit(0)
     }
 
 }

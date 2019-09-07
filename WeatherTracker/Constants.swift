@@ -19,6 +19,9 @@ struct Constants {
         static let refresh = NSLocalizedString("Refresh", comment: "")
         static let separator = "Separator"
         static let currentLocation = NSLocalizedString("Use Current Location", comment: "")
+        static let quitApp = NSLocalizedString("Quit", comment: "")
+        static let visibility = NSLocalizedString("Visibility", comment: "")
+        
     }
     
     struct ErrorMessage {
@@ -39,6 +42,13 @@ struct Constants {
         static let uiInitiated = "initializeUI called"
         static let noUpdateForUI = "Nothing to update in UI"
         static let noTimeZoneInfo = "No timezone info available"
+    }
+    
+    struct AccessibilityStrings {
+        
+        static let refreshActionHint = NSLocalizedString("Refresh action will reload data", comment:"")
+        static let settingActionHint = NSLocalizedString("This action will opne map view", comment:"")
+        static let quitActionHint = NSLocalizedString("This action will quit the App", comment:"")
     }
     
     struct Location {

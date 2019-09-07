@@ -13,3 +13,7 @@
 "Select your location on map" = "Select your location on map";
 "Refresh" = "Refresh";
 "Use Current Location" = "Use Current Location";
+"Refresh action will reload data" = "Refresh action will reload data";
+"This action will open map view" = "This action will open map view";
+"This action will quit the App" = "This action will quit the App";
+"Quit" = "Quit";
