@@ -174,6 +174,14 @@ extension AgentUICoordinator {
             menuItem.target = self
             break
             
+        case Constants.MenuItemName.currentLocation:
+            
+            menuItem = NSMenuItem(title: item, action: #selector(userCurrLocationForWeatherData), keyEquivalent: "C")
+//            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.quitActionHint)
+            menuItem.target = self
+            break
+
+            
         case Constants.MenuItemName.quitApp:
             
             menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "Q")
@@ -222,6 +230,10 @@ extension AgentUICoordinator {
         delegate?.reloadData()
     }
 
+    @objc private func userCurrLocationForWeatherData() {
+        
+    }
+    
     @objc private func quitApp() {
         
         exit(0)

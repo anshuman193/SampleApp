@@ -57,6 +57,12 @@ struct Constants {
         static let longitude = "longitude"
     }
     
+    struct UserCurrentLocation {
+        
+        static let latitude = "latitude"
+        static let longitude = "longitude"
+    }
+    
     struct StoryboardID {
         
         static let mapviewController = "mapviewcontroller"

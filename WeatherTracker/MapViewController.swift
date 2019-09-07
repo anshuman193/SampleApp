@@ -12,6 +12,8 @@ import CoreLocation
 
 class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
     
+    let locationHelper = LocationManagerHelper()
+    
     private let popOverView = NSPopover()
     
     private var webSrvcHandler: WebServiceHandler?
@@ -55,7 +57,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         uiCoordinator.delegate = self
         uiCoordinator.setup(withTitle: Constants.agentDefaultName)
-        
+//        startGatheringUserLocationInfo()
     }
     
     //MARK: View Controller Lifecyle
@@ -65,7 +67,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         super.viewWillAppear()
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
-        getCurrentLocationInfo()
     }
 
     
@@ -85,6 +86,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
 
     //MARK: Helpers
     
+    
     func startLoadingData(withTimeInterval value: Int) {
         
         startTimerForDataLoad(timeInterval: Double(value))
@@ -97,47 +99,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         webSrvcHandler?.delegate = self
     }
 
-
-    private func getCurrentLocationInfo() {
-        
-        let locationManager = CLLocationManager()
-        
-        switch CLLocationManager.authorizationStatus() {
-            case .authorizedAlways:
-                Logger.debugLog("authorizedAlways")
-                break
-
-        case .denied:
-            Logger.debugLog("denied")
-            break
-
-        case .notDetermined:
-            Logger.debugLog("notDetermined")
-            break
-            
-        case .restricted:
-            Logger.debugLog("restricted")
-            break
-            
-            default:
-                Logger.debugLog("default")
-            
-        }
-        
-        
-        
-        if CLLocationManager.locationServicesEnabled() {
-        
-
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.distanceFilter = 10.0
-            locationManager.requestLocation()
-            
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
     
     private func showLastAnnotatedLocation() {
         
@@ -260,37 +221,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         startLoadingData(withTimeInterval: interval)
     }
     
-    //MARK:CLLocationManagerDelegate
-    
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        
-        Logger.debugLog("didDetermineState");
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        
-        Logger.debugLog("didStartMonitoringFor");
-    }
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateTo newLocation: CLLocation, from oldLocation: CLLocation) {
-        
-        Logger.debugLog("didUpdateTo newLocation");
-    }
-    
-   
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        defaults.set(locValue.latitude, forKey: Constants.Location.latitude)
-        defaults.set(locValue.longitude, forKey: Constants.Location.longitude)
-        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        Logger.debugLog("locationManager didFailWithError \(error)")
-    }
     
 }
 
