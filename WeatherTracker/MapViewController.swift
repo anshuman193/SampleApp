@@ -46,6 +46,11 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     }()
     
     
+    lazy private var isCurrentLocationAvailable: Bool = {
+        
+        return locationHelper.isUserCurrentLocationAvailable
+    }()
+
     
     func setup() {
         
@@ -57,8 +62,8 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         uiCoordinator.delegate = self
         uiCoordinator.setup(withTitle: Constants.agentDefaultName)
-//        startGatheringUserLocationInfo()
     }
+    
     
     //MARK: View Controller Lifecyle
     
@@ -73,18 +78,33 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     override func viewDidAppear() {
         
         showLastAnnotatedLocation()
+        
     }
     
 
     override func viewWillDisappear() {
         
         super.viewWillDisappear()
-        captureUserLocation()
+        captureUserSelectedLocation()
         Logger.debugLog("viewWillDisappear")
     }
     
 
     //MARK: Helpers
+    
+    
+//    private func prepareAndShowMap() {
+//        
+//        if isCurrentLocationAvailable {
+//            
+//            let coordinate = CLLocationCoordinate2D(latitude: locationHelper.userCurrentCoordinates.latitude, longitude: locationHelper.userCurrentCoordinates.longitude)
+//            mapView.setCenter(coordinate, animated: true)
+//        } else {
+//            
+//            showLastAnnotatedLocation()
+//        }
+//    }
+
     
     
     func startLoadingData(withTimeInterval value: Int) {
@@ -125,7 +145,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.longitude)
     }
     
-    private func captureUserLocation() {
+    private func captureUserSelectedLocation() {
         
         if (mapView.annotations.count > 0) {
             
@@ -160,7 +180,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     @IBAction func doneButtonAction(_ sender: Any){
         
-        captureUserLocation()
+        captureUserSelectedLocation()
         closePopOver()
         reloadData()
         Logger.debugLog("Done button clicked")

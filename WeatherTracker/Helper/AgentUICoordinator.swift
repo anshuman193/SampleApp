@@ -30,7 +30,7 @@ extension AgentUICoordinatorProtocol {
     
     private var blinkStatus: Bool = false
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
