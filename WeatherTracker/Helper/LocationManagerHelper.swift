@@ -52,8 +52,10 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     
     private func notifyForCurrLocation() {
         
-        
-        NotificationCenter.default.post(name: .currentLocationDidChangeNotification, object: isUserCurrentLocationAvailable)
+        if isUserCurrentLocationAvailable {
+            
+            NotificationCenter.default.post(name: .currentLocationDidBecomeAvailable, object: isUserCurrentLocationAvailable)
+        }
     }
     
     private func startGatheringUserLocationInfo() {

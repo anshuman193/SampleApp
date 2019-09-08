@@ -128,11 +128,12 @@ class WebServiceHandler: NSObject {
                     
                 } else {
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: { //TODO: Delay induced for demo purpose
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: { //TODO: Delay induced for demo purpose
                         
                         _ = Parser(newData, delegate: weakSelf.dataUpdateDelegate)
                         weakSelf.delegate?.stopAnimation()
                     })
+                    
                 }
 
             }).resume()

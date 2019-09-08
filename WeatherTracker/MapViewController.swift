@@ -206,6 +206,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     
     func startAnimation() {
         
+        stopAnimation()
         uiCoordinator?.startTextAnimator()
     }
     

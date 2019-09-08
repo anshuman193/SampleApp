@@ -26,13 +26,22 @@ extension AgentUICoordinatorProtocol {
     
     weak var delegate: AgentUICoordinatorProtocol?
     
+    private var weatherDataModel: WeatherData?
+    
     private var timer: Timer?
     
     private var blinkStatus: Bool = false
     
     private let nc = NotificationCenter.default
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+    private var menuItems: Array<String>? {
+        
+        didSet {
+            updateMenuUI(menuItemsArray: menuItems)
+        }
+    }
+    
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -50,15 +59,10 @@ extension AgentUICoordinator {
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-        configMenuItems()
-        nc.addObserver(self, selector: #selector(handleCurrentLocationChange), name: .currentLocationDidChangeNotification, object: nil)
-
-    }
-    
-    private func configMenuItems() {
-
+//        configMenuItems()
         statusItem.menu = NSMenu()
-        updateMenuUI(menuItemsArray: staticMenuItemsArray)
+        nc.addObserver(self, selector: #selector(handleCurrentLocationChange), name: .currentLocationDidBecomeAvailable, object:nil)
+
     }
     
     
@@ -66,6 +70,7 @@ extension AgentUICoordinator {
     
     func refreshMenuItems(model: WeatherData) {
         
+        weatherDataModel = model
         updateUI(modelData: model)
     }
 
@@ -91,8 +96,7 @@ extension AgentUICoordinator {
     
     private func updateUI(modelData: WeatherData) {
         
-        let menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
-        updateMenuUI(menuItemsArray: menuItems)
+        menuItems = updateDynamicMenuItems(staticMenuItems: staticMenuItemsArray, data: modelData)
     }
     
     
@@ -211,11 +215,15 @@ extension AgentUICoordinator {
     }
 
     
-    private func updateMenuUI(menuItemsArray: [String]) {
+    private func updateMenuUI(menuItemsArray: [String]?) {
+        
+        guard let menuItemsArr = menuItemsArray else {
+            return
+        }
         
         statusItem.menu?.removeAllItems()
         
-        for item in menuItemsArray {
+        for item in menuItemsArr {
             
             let menuItem = prepareMenuItem(basedOn: item)
             statusItem.menu?.addItem(menuItem)
@@ -238,6 +246,7 @@ extension AgentUICoordinator {
 
     @objc private func userCurrLocationForWeatherData() {
         
+        handleCurrentLocationChange()
     }
     
     @objc private func quitApp() {
@@ -247,12 +256,15 @@ extension AgentUICoordinator {
     
     @objc private func handleCurrentLocationChange() {
         
-//        let currLocMenuItem = statusItem.menu?.item(withTitle: Constants.MenuItemName.currentLocation)
-//        
-//        if let idx = statusItem.menu?.indexOfItem(withTitle: Constants.MenuItemName.currentLocation) {
-//            statusItem.menu?.removeItem(at: idx)
-//        }
-        
+        staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+
+        let latitude = UserDefaults.standard.double(forKey: Constants.UserCurrentLocation.latitude)
+        let longitude = UserDefaults.standard.double(forKey: Constants.UserCurrentLocation.longitude)
+
+        UserDefaults.standard.set(latitude, forKey: Constants.Location.latitude)
+        UserDefaults.standard.set(longitude, forKey: Constants.Location.longitude)
+
+        delegate?.reloadData()
     }
 
 }
