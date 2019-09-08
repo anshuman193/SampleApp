@@ -11,7 +11,12 @@ import CoreLocation
 
 class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     
-    private(set) var isUserCurrentLocationAvailable = false
+    private(set) var isUserCurrentLocationAvailable: Bool = false {
+        
+        didSet {
+            notifyForCurrLocation()
+        }
+    }
     
     private let locationManager = CLLocationManager()
     
@@ -30,8 +35,8 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        defaults.set(locValue.latitude, forKey: Constants.Location.latitude)
-        defaults.set(locValue.longitude, forKey: Constants.Location.longitude)
+        defaults.set(locValue.latitude, forKey: Constants.UserCurrentLocation.latitude)
+        defaults.set(locValue.longitude, forKey: Constants.UserCurrentLocation.longitude)
         Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
         isUserCurrentLocationAvailable = true
     }
@@ -39,11 +44,17 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         Logger.debugLog("locationManager didFailWithError \(error)")
+        isUserCurrentLocationAvailable = false
     }
     
     
     //MARK: Helpers
     
+    private func notifyForCurrLocation() {
+        
+        
+        NotificationCenter.default.post(name: .currentLocationDidChangeNotification, object: isUserCurrentLocationAvailable)
+    }
     
     private func startGatheringUserLocationInfo() {
         

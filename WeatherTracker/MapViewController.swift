@@ -32,7 +32,7 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
     }
     
     private var userDefaultsCoordinates: (latitude: Double, longitude: Double) {
-    
+        
         let latitude = defaults.double(forKey: Constants.Location.latitude)
         let longitude = defaults.double(forKey: Constants.Location.longitude)
         return (latitude, longitude)

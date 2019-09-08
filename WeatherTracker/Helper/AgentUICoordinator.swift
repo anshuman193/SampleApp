@@ -30,7 +30,9 @@ extension AgentUICoordinatorProtocol {
     
     private var blinkStatus: Bool = false
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
+    private let nc = NotificationCenter.default
+    
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -48,7 +50,9 @@ extension AgentUICoordinator {
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-            configMenuItems()
+        configMenuItems()
+        nc.addObserver(self, selector: #selector(handleCurrentLocationChange), name: .currentLocationDidChangeNotification, object: nil)
+
     }
     
     private func configMenuItems() {
@@ -179,6 +183,8 @@ extension AgentUICoordinator {
             menuItem = NSMenuItem(title: item, action: #selector(userCurrLocationForWeatherData), keyEquivalent: "C")
 //            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.quitActionHint)
             menuItem.target = self
+//            menuItem.isEnabled = true
+
             break
 
             
@@ -237,6 +243,16 @@ extension AgentUICoordinator {
     @objc private func quitApp() {
         
         exit(0)
+    }
+    
+    @objc private func handleCurrentLocationChange() {
+        
+//        let currLocMenuItem = statusItem.menu?.item(withTitle: Constants.MenuItemName.currentLocation)
+//        
+//        if let idx = statusItem.menu?.indexOfItem(withTitle: Constants.MenuItemName.currentLocation) {
+//            statusItem.menu?.removeItem(at: idx)
+//        }
+        
     }
 
 }
