@@ -15,7 +15,7 @@ struct Constants {
     struct MenuItemName {
         
         static let timeZone = NSLocalizedString("Time Zone", comment: "")
-        static let settings = NSLocalizedString("Select your location on map", comment: "")
+        static let settings = NSLocalizedString("Set your location on map", comment: "")
         static let refresh = NSLocalizedString("Refresh", comment: "")
         static let separator = "Separator"
         static let currentLocation = NSLocalizedString("Use Current Location", comment: "")

@@ -10,7 +10,7 @@
 "Loading..." = "Cargando...";
 "Time Zone" = "Zona horaria";
 "Visibility" = "Visibilidad";
-"Select your location on map" = "Selecciona tu ubicación en el mapa";
+"Set your location on map" = "Selecciona tu ubicación en el mapa";
 "Refresh" = "Refrescar";
 "Use Current Location" = "Usar ubicación actual";
 "Refresh action will reload data" = "La acción de actualización volverá a cargar los datos";

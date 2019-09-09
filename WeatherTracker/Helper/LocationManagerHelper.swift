@@ -34,10 +34,17 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        defaults.set(locValue.latitude, forKey: Constants.UserCurrentLocation.latitude)
-        defaults.set(locValue.longitude, forKey: Constants.UserCurrentLocation.longitude)
-        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
+//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        defaults.set(locValue.latitude, forKey: Constants.UserCurrentLocation.latitude)
+//        defaults.set(locValue.longitude, forKey: Constants.UserCurrentLocation.longitude)
+//        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
+        
+        for loc in locations {
+            
+            Logger.debugLog("lat \(loc.coordinate.latitude)")
+            Logger.debugLog("long \(loc.coordinate.longitude)")
+        }
+        
         isUserCurrentLocationAvailable = true
     }
     
