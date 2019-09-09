@@ -10,7 +10,7 @@ import Cocoa
 import MapKit
 import CoreLocation
 
-class MapViewController: NSViewController, PareserDataUpdateDelegate, WebServiceProtocol, AgentUICoordinatorProtocol, CLLocationManagerDelegate {
+class MapViewController: NSViewController {
     
     let locationHelper = LocationManagerHelper()
     
@@ -64,7 +64,6 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         uiCoordinator.setup(withTitle: Constants.agentDefaultName)
     }
     
-    
     //MARK: View Controller Lifecyle
     
     override func viewWillAppear() {
@@ -73,14 +72,12 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(mapClicked))
         mapView.addGestureRecognizer(recognizer)
     }
-
     
     override func viewDidAppear() {
         
         showLastAnnotatedLocation()
         
     }
-    
 
     override func viewWillDisappear() {
         
@@ -88,24 +85,8 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         captureUserSelectedLocation()
         Logger.debugLog("viewWillDisappear")
     }
-    
 
     //MARK: Helpers
-    
-    
-//    private func prepareAndShowMap() {
-//        
-//        if isCurrentLocationAvailable {
-//            
-//            let coordinate = CLLocationCoordinate2D(latitude: locationHelper.userCurrentCoordinates.latitude, longitude: locationHelper.userCurrentCoordinates.longitude)
-//            mapView.setCenter(coordinate, animated: true)
-//        } else {
-//            
-//            showLastAnnotatedLocation()
-//        }
-//    }
-
-    
     
     func startLoadingData(withTimeInterval value: Int) {
         
@@ -186,6 +167,38 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         Logger.debugLog("Done button clicked")
     }
     
+    //MARK: Handle Popover
+    
+    func closePopOver() {
+
+        popOverView.close()
+    }
+    
+}
+
+extension MapViewController: AgentUICoordinatorProtocol {
+    
+    //MARK:AgentUICoordinatorProtocol
+    
+    func reloadData() {
+        
+        let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
+        startLoadingData(withTimeInterval: interval)
+    }
+    
+    func showMapInPopOver() {
+        
+        guard let uiElement = uiCoordinator?.statusItem else {
+            return
+        }
+        
+        popOverView.contentViewController = self
+        popOverView.behavior = .transient
+        popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
+    }
+}
+
+extension MapViewController: PareserDataUpdateProtocol {
     
     //MARK:PareserDataUpdateDelegate
     
@@ -201,6 +214,9 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         uiCoordinator?.refreshMenuItems(model: data)
     }
 
+}
+
+extension MapViewController: WebServiceProtocol {
     
     //MARK:WebServiceProtocol
     
@@ -214,35 +230,4 @@ class MapViewController: NSViewController, PareserDataUpdateDelegate, WebService
         
         uiCoordinator?.stopTextAnimator()
     }
-    
-    //MARK: Handle Popover
-    
-    func closePopOver() {
-        
-        
-        popOverView.close()
-    }
-    
-    func showMapInPopOver() {
-        
-        guard let uiElement = uiCoordinator?.statusItem else {
-            return
-        }
-        
-        popOverView.contentViewController = self
-        popOverView.behavior = .transient
-        popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
-    }
-    
-    //MARK:AgentUICoordinatorProtocol
-    
-    func reloadData() {
-        
-        let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
-        startLoadingData(withTimeInterval: interval)
-    }
-    
-    
 }
-
-

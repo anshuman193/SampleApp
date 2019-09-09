@@ -30,7 +30,7 @@ class WebServiceHandler: NSObject {
     
     private var datasource: String?
     
-    private var dataUpdateDelegate: PareserDataUpdateDelegate?
+    private var dataUpdateDelegate: PareserDataUpdateProtocol?
     
     private var apiKey: String? {
         
@@ -38,7 +38,7 @@ class WebServiceHandler: NSObject {
     }
     
     
-    init?(with baseurl: String?, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateDelegate) {
+    init?(with baseurl: String?, latitude: Double, longitude: Double, parserDelegate delegate:PareserDataUpdateProtocol) {
 
         super.init()
         guard let _apiKey = self.apiKey else {
@@ -57,7 +57,7 @@ class WebServiceHandler: NSObject {
     }
     
 
-    private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateDelegate) {
+    private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateProtocol) {
         
         let coordinates = String(format:"\(latitude),\(longitude)")
         datasource = baseURL + _apiKey + "/" + coordinates

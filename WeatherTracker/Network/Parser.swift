@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol PareserDataUpdateDelegate: class {
+protocol PareserDataUpdateProtocol: class {
 
     func didParseData(model: WeatherData?)
 }
@@ -17,7 +17,7 @@ protocol PareserDataUpdateDelegate: class {
 class Parser: NSObject {
     
     
-    weak var delegate: PareserDataUpdateDelegate?
+    weak var delegate: PareserDataUpdateProtocol?
  
     private var newData: Data?
     
@@ -28,7 +28,7 @@ class Parser: NSObject {
         }
     }
     
-    init(_ data: Data, delegate: PareserDataUpdateDelegate?) {
+    init(_ data: Data, delegate: PareserDataUpdateProtocol?) {
         
         super.init()
         newData = data
