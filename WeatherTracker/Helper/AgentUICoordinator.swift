@@ -32,7 +32,11 @@ extension AgentUICoordinatorProtocol {
     
     private var blinkStatus: Bool = false
     
+    private var usingCurrentLocation: Bool = false
+    
     private let nc = NotificationCenter.default
+    
+    private let defaults = UserDefaults.standard
     
     private var menuItems: Array<String>? {
         
@@ -41,7 +45,7 @@ extension AgentUICoordinatorProtocol {
         }
     }
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -59,9 +63,8 @@ extension AgentUICoordinator {
     func setup(withTitle name: String) {
         
         statusItem.button?.title = name
-//        configMenuItems()
         statusItem.menu = NSMenu()
-        nc.addObserver(self, selector: #selector(handleCurrentLocationChange), name: .currentLocationDidBecomeAvailable, object:nil)
+//        nc.addObserver(self, selector: #selector(handleCurrentLocationMenuItemSelection), name: .currentLocationDidBecomeAvailable, object:nil)
 
     }
     
@@ -184,11 +187,10 @@ extension AgentUICoordinator {
             
         case Constants.MenuItemName.currentLocation:
             
-            menuItem = NSMenuItem(title: item, action: #selector(userCurrLocationForWeatherData), keyEquivalent: "C")
+            menuItem = NSMenuItem(title: item, action: #selector(handleCurrentLocationMenuItemSelection), keyEquivalent: "C")
 //            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.quitActionHint)
             menuItem.target = self
-//            menuItem.isEnabled = true
-
+            menuItem.state = usingCurrentLocation ? NSControl.StateValue.on : NSControl.StateValue.off
             break
 
             
@@ -235,6 +237,7 @@ extension AgentUICoordinator {
     @objc private func settings() {
         
         Logger.debugLog("Settings Menu Item selected")
+        usingCurrentLocation = false
         delegate?.showMapInPopOver()
     }
     
@@ -244,9 +247,21 @@ extension AgentUICoordinator {
         delegate?.reloadData()
     }
 
-    @objc private func userCurrLocationForWeatherData() {
+    @objc private func handleCurrentLocationMenuItemSelection() {
         
-        handleCurrentLocationChange()
+        usingCurrentLocation.toggle()
+        
+        if usingCurrentLocation {
+            
+            let latitude = defaults.double(forKey: Constants.UserCurrentLocation.latitude)
+            let longitude = defaults.double(forKey: Constants.UserCurrentLocation.longitude)
+
+            
+            defaults.set(latitude, forKey: Constants.Location.latitude)
+            defaults.set(longitude, forKey: Constants.Location.longitude)
+        }
+
+        refreshData()
     }
     
     @objc private func quitApp() {
@@ -254,18 +269,5 @@ extension AgentUICoordinator {
         exit(0)
     }
     
-    @objc private func handleCurrentLocationChange() {
-        
-        staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
-
-        let latitude = UserDefaults.standard.double(forKey: Constants.UserCurrentLocation.latitude)
-        let longitude = UserDefaults.standard.double(forKey: Constants.UserCurrentLocation.longitude)
-
-        UserDefaults.standard.set(latitude, forKey: Constants.Location.latitude)
-        UserDefaults.standard.set(longitude, forKey: Constants.Location.longitude)
-
-        delegate?.reloadData()
-    }
-
 }
 

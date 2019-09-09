@@ -11,12 +11,12 @@ import CoreLocation
 
 class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     
-    private(set) var isUserCurrentLocationAvailable: Bool = false {
-        
-        didSet {
-            notifyForCurrLocation()
-        }
-    }
+//    private(set) var isUserCurrentLocationAvailable: Bool = false {
+//
+//        didSet {
+//            notifyForCurrLocation()
+//        }
+//    }
     
     private let locationManager = CLLocationManager()
     
@@ -35,35 +35,36 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
 //        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        defaults.set(locValue.latitude, forKey: Constants.UserCurrentLocation.latitude)
-//        defaults.set(locValue.longitude, forKey: Constants.UserCurrentLocation.longitude)
 //        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
         
         for loc in locations {
             
-            Logger.debugLog("lat \(loc.coordinate.latitude)")
-            Logger.debugLog("long \(loc.coordinate.longitude)")
+            defaults.set(loc.coordinate.latitude, forKey: Constants.UserCurrentLocation.latitude)
+            defaults.set(loc.coordinate.longitude, forKey: Constants.UserCurrentLocation.longitude)
+
+            Logger.debugLog("current location lat \(loc.coordinate.latitude)")
+            Logger.debugLog("current location long \(loc.coordinate.longitude)")
         }
         
-        isUserCurrentLocationAvailable = true
+//        isUserCurrentLocationAvailable = true
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         Logger.debugLog("locationManager didFailWithError \(error)")
-        isUserCurrentLocationAvailable = false
+//        isUserCurrentLocationAvailable = false
     }
     
     
     //MARK: Helpers
     
-    private func notifyForCurrLocation() {
-        
-        if isUserCurrentLocationAvailable {
-            
-            NotificationCenter.default.post(name: .currentLocationDidBecomeAvailable, object: isUserCurrentLocationAvailable)
-        }
-    }
+//    private func notifyForCurrLocation() {
+//
+//        if isUserCurrentLocationAvailable {
+//
+//            NotificationCenter.default.post(name: .currentLocationDidBecomeAvailable, object: isUserCurrentLocationAvailable)
+//        }
+//    }
     
     private func startGatheringUserLocationInfo() {
         

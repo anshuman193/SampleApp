@@ -46,10 +46,10 @@ class MapViewController: NSViewController {
     }()
     
     
-    lazy private var isCurrentLocationAvailable: Bool = {
-        
-        return locationHelper.isUserCurrentLocationAvailable
-    }()
+//    lazy private var isCurrentLocationAvailable: Bool = {
+//
+//        return locationHelper.isUserCurrentLocationAvailable
+//    }()
 
     
     func setup() {
