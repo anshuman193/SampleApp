@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WebServiceProtocol: class {
     
@@ -57,10 +58,15 @@ class WebServiceHandler: NSObject {
     }
     
 
-    private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateProtocol) {
+    private func setLocationAndApiKeyInfo(_ latitude: Double, _ longitude: Double, _ baseURL: String, _ _apiKey: String) {
         
         let coordinates = String(format:"\(latitude),\(longitude)")
         datasource = baseURL + _apiKey + "/" + coordinates
+    }
+    
+    private func setup(lat latitude: Double, long longitude: Double, baseurl baseURL: String, apiKey _apiKey: String, parserDelegate delegate: PareserDataUpdateProtocol) {
+        
+        setLocationAndApiKeyInfo(latitude, longitude, baseURL, _apiKey)
         
         if let langStr = Locale.current.languageCode, let dataSrc = self.datasource {
             

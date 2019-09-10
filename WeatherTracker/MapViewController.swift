@@ -60,6 +60,7 @@ class MapViewController: NSViewController {
             return
         }
         
+        locationHelper.delegate = uiCoordinator
         uiCoordinator.delegate = self
         uiCoordinator.setup(withTitle: Constants.agentDefaultName)
     }

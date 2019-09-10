@@ -30,6 +30,8 @@ extension AgentUICoordinatorProtocol {
     
     private var timer: Timer?
     
+    private var currentLocation: CLLocation? = nil
+    
     private var blinkStatus: Bool = false
     
     private var usingCurrentLocation: Bool = false
@@ -45,7 +47,7 @@ extension AgentUICoordinatorProtocol {
         }
     }
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -54,6 +56,25 @@ extension AgentUICoordinatorProtocol {
         return item
     }()
     
+}
+
+
+extension AgentUICoordinator: LocationManagerHelperProtocol {
+    
+    func currentLocationDidBecomeAvailable(locations: [CLLocation]) {
+        
+        extractAndSetMostRecentLocation(locationArray: locations)
+    }
+    
+    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) {
+        
+        let lastItemIndex = locationArray.count - 1
+        currentLocation = locationArray[lastItemIndex]
+        
+        staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+
+        refreshData()
+    }
 }
 
 extension AgentUICoordinator {
@@ -251,15 +272,15 @@ extension AgentUICoordinator {
         
         usingCurrentLocation.toggle()
         
-        if usingCurrentLocation {
-            
-            let latitude = defaults.double(forKey: Constants.UserCurrentLocation.latitude)
-            let longitude = defaults.double(forKey: Constants.UserCurrentLocation.longitude)
-
-            
-            defaults.set(latitude, forKey: Constants.Location.latitude)
-            defaults.set(longitude, forKey: Constants.Location.longitude)
-        }
+//        if usingCurrentLocation {
+//
+//            let latitude = defaults.double(forKey: Constants.UserCurrentLocation.latitude)
+//            let longitude = defaults.double(forKey: Constants.UserCurrentLocation.longitude)
+//
+//
+//            defaults.set(latitude, forKey: Constants.Location.latitude)
+//            defaults.set(longitude, forKey: Constants.Location.longitude)
+//        }
 
         refreshData()
     }

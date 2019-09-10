@@ -9,15 +9,19 @@
 import Foundation
 import CoreLocation
 
+protocol LocationManagerHelperProtocol:  class {
+    
+    func currentLocationDidBecomeAvailable(locations: [CLLocation])
+}
+
 class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
+
+    weak var delegate: LocationManagerHelperProtocol?
     
-//    private(set) var isUserCurrentLocationAvailable: Bool = false {
-//
-//        didSet {
-//            notifyForCurrLocation()
-//        }
-//    }
+    private var locationArray: [CLLocation]?
     
+    private(set) var isUserCurrentLocationAvailable = false
+
     private let locationManager = CLLocationManager()
     
     private let defaults = UserDefaults.standard
@@ -34,37 +38,31 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        Logger.debugLog("Current location = \(locValue.latitude) \(locValue.longitude)")
-        
-        for loc in locations {
-            
-            defaults.set(loc.coordinate.latitude, forKey: Constants.UserCurrentLocation.latitude)
-            defaults.set(loc.coordinate.longitude, forKey: Constants.UserCurrentLocation.longitude)
-
-            Logger.debugLog("current location lat \(loc.coordinate.latitude)")
-            Logger.debugLog("current location long \(loc.coordinate.longitude)")
-        }
-        
-//        isUserCurrentLocationAvailable = true
+        locationArray = locations
+        isUserCurrentLocationAvailable = true
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         Logger.debugLog("locationManager didFailWithError \(error)")
-//        isUserCurrentLocationAvailable = false
+        isUserCurrentLocationAvailable = false
     }
     
     
     //MARK: Helpers
     
-//    private func notifyForCurrLocation() {
-//
-//        if isUserCurrentLocationAvailable {
-//
-//            NotificationCenter.default.post(name: .currentLocationDidBecomeAvailable, object: isUserCurrentLocationAvailable)
-//        }
-//    }
+    private func notifyForCurrLocation() {
+
+        guard let locArr = locationArray else {
+            
+            return
+        }
+        
+        if isUserCurrentLocationAvailable {
+            
+            delegate?.currentLocationDidBecomeAvailable(locations: locArr)
+        }
+}
     
     private func startGatheringUserLocationInfo() {
         
