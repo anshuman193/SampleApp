@@ -77,10 +77,3 @@ struct Constants {
     }
     
 }
-
-
-extension NSNotification.Name {
-    
-    public static let currentLocationDidBecomeAvailable: NSNotification.Name = NSNotification.Name(rawValue: "CurrentLocationDidBecomeAvailable")
-
-}

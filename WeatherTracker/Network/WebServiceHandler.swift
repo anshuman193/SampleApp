@@ -13,12 +13,6 @@ protocol WebServiceProtocol: class {
     
     func startAnimation()
     func stopAnimation()
-    func parseData(data: Data)
-}
-
-extension WebServiceProtocol {
-    
-    func parseData(data: Data){}
 }
 
 class WebServiceHandler: NSObject {

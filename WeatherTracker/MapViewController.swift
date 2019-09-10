@@ -251,13 +251,13 @@ extension MapViewController: LocationManagerHelperProtocol {
     
     func currentLocationAvailablityDidSucceed(locations: [CLLocation]) {
         
-        if let currLocation = extractAndSetMostRecentLocation(locationArray: locations) {
+        if let currLocation = getMostRecentLocation(locationArray: locations) {
             
             updateData(with: currLocation)
         }
     }
     
-    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) -> CLLocation? {
+    private func getMostRecentLocation(locationArray: [CLLocation]) -> CLLocation? {
         
         let lastItemIndex = locationArray.count - 1
         currentLocation = locationArray[lastItemIndex]
@@ -272,6 +272,6 @@ extension MapViewController: LocationManagerHelperProtocol {
     
     private func updateData(with currentloc: CLLocation) {
         
-       refreshData(with: currentloc)
+       self.refreshData(with: currentloc)
     }
 }

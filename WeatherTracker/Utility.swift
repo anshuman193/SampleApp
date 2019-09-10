@@ -40,14 +40,4 @@ class Utility: NSObject {
         return interval
     }
     
-    
-//    class func agentName(plistname name: String, and key : String) -> String {
-//        
-//        var agentName = Constants.agentDefaultName
-//        if let value = Utility.readValue(fromplistFile: Constants.Plist.configPlist , forKey: key) {
-//            agentName = value
-//        }
-//        let str = NSLocalizedString(agentName, comment: "")
-//        return str
-//    }
 }
