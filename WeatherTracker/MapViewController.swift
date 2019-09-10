@@ -20,8 +20,10 @@ class MapViewController: NSViewController {
     
     @IBOutlet var mapView: MKMapView!
     
-    @IBOutlet var currLocationButton: NSButton!
-        
+    @IBOutlet var doneButton: NSButton!
+    
+    @IBOutlet var currentLocationButton: NSButton!
+
     private let defaults = UserDefaults.standard
     
     private var timer: Timer?
@@ -160,13 +162,21 @@ class MapViewController: NSViewController {
         webSrvcHandler?.fetchData()
     }
     
-    @IBAction func doneButtonAction(_ sender: Any){
+    @IBAction func doneButtonAction(_ sender: Any) {
         
         captureUserSelectedLocation()
         closePopOver()
         refreshData()
         Logger.debugLog("Done button clicked")
     }
+
+    @IBAction func currentLocationButtonAction(_ sender: Any) {
+        
+        locationHelper.useCurrentLocationToFetchData()
+        closePopOver()
+        Logger.debugLog("Current Location button clicked")
+    }
+
     
     //MARK: Handle Popover
     

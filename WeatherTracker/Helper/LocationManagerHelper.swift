@@ -19,7 +19,7 @@ class LocationManagerHelper: NSObject {
 
     weak var delegate: LocationManagerHelperProtocol?
     
-    private var locationArray: [CLLocation]?
+    private var locationArray = [CLLocation]()
     
     private(set) var isUserCurrentLocationAvailable = false
 
@@ -36,6 +36,14 @@ class LocationManagerHelper: NSObject {
     
 
     //MARK: Helpers
+    
+    func useCurrentLocationToFetchData() {
+        
+        if locationArray.count > 0 {
+            
+            delegate?.currentLocationAvailablityDidSucceed(locations: locationArray)
+        }
+    }
     
     private func startGatheringUserLocationInfo() {
         
@@ -84,6 +92,7 @@ extension LocationManagerHelper: CLLocationManagerDelegate {
         
         isUserCurrentLocationAvailable = true
         delegate?.currentLocationAvailablityDidSucceed(locations: locations)
+        locationArray = locations
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
