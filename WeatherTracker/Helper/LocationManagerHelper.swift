@@ -11,7 +11,8 @@ import CoreLocation
 
 protocol LocationManagerHelperProtocol:  class {
     
-    func currentLocationDidBecomeAvailable(locations: [CLLocation])
+    func currentLocationAvailablityDidSucceed(locations: [CLLocation])
+    func currentLocationAvailablityDidFail()
 }
 
 class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
@@ -40,12 +41,14 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
         
         locationArray = locations
         isUserCurrentLocationAvailable = true
+        notifyForCurrLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         Logger.debugLog("locationManager didFailWithError \(error)")
         isUserCurrentLocationAvailable = false
+        delegate?.currentLocationAvailablityDidFail()
     }
     
     
@@ -60,7 +63,7 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
         
         if isUserCurrentLocationAvailable {
             
-            delegate?.currentLocationDidBecomeAvailable(locations: locArr)
+            delegate?.currentLocationAvailablityDidSucceed(locations: locArr)
         }
 }
     

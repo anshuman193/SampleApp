@@ -32,7 +32,7 @@ extension AgentUICoordinatorProtocol {
     
     private var timer: Timer?
     
-    private var currentLocation: CLLocation? = nil
+//    private var currentLocation: CLLocation? = nil
     
     private var blinkStatus: Bool = false
     
@@ -49,7 +49,7 @@ extension AgentUICoordinatorProtocol {
         }
     }
     
-    private var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
+    var staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.quitApp]
     
     var statusItem: NSStatusItem  = {
         
@@ -60,32 +60,6 @@ extension AgentUICoordinatorProtocol {
     
 }
 
-
-extension AgentUICoordinator: LocationManagerHelperProtocol {
-    
-    func currentLocationDidBecomeAvailable(locations: [CLLocation]) {
-        
-        extractAndSetMostRecentLocation(locationArray: locations)
-    }
-    
-    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) {
-        
-        let lastItemIndex = locationArray.count - 1
-        currentLocation = locationArray[lastItemIndex]
-        
-        guard let currLoc = currentLocation else { return }
-        
-        updateMenuAndRefreshData(with: currLoc)
-    }
-    
-    private func updateMenuAndRefreshData(with currentloc: CLLocation) {
-        
-        staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
-        
-        delegate?.refreshData(with: currentloc)
-    }
-}
-
 extension AgentUICoordinator {
     
     //MARK: Initail Setup
@@ -94,7 +68,6 @@ extension AgentUICoordinator {
         
         statusItem.button?.title = name
         statusItem.menu = NSMenu()
-//        nc.addObserver(self, selector: #selector(handleCurrentLocationMenuItemSelection), name: .currentLocationDidBecomeAvailable, object:nil)
 
     }
     

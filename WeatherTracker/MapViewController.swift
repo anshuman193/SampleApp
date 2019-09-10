@@ -12,6 +12,8 @@ import CoreLocation
 
 class MapViewController: NSViewController {
     
+    private var currentLocation: CLLocation? = nil
+    
     let locationHelper = LocationManagerHelper()
     
     private let popOverView = NSPopover()
@@ -46,12 +48,6 @@ class MapViewController: NSViewController {
     }()
     
     
-//    lazy private var isCurrentLocationAvailable: Bool = {
-//
-//        return locationHelper.isUserCurrentLocationAvailable
-//    }()
-
-    
     func setup() {
         
         guard let uiCoordinator = uiCoordinator else {
@@ -60,7 +56,7 @@ class MapViewController: NSViewController {
             return
         }
         
-        locationHelper.delegate = uiCoordinator
+        locationHelper.delegate = self
         uiCoordinator.delegate = self
         uiCoordinator.setup(withTitle: Constants.agentDefaultName)
     }
@@ -180,7 +176,6 @@ class MapViewController: NSViewController {
 
         popOverView.close()
     }
-    
 }
 
 extension MapViewController: AgentUICoordinatorProtocol {
@@ -204,7 +199,7 @@ extension MapViewController: AgentUICoordinatorProtocol {
         guard let uiElement = uiCoordinator?.statusItem else {
             return
         }
-        
+
         popOverView.contentViewController = self
         popOverView.behavior = .transient
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
@@ -242,5 +237,37 @@ extension MapViewController: WebServiceProtocol {
     func stopAnimation() {
         
         uiCoordinator?.stopTextAnimator()
+    }
+}
+
+
+extension MapViewController: LocationManagerHelperProtocol {
+    
+    
+    func currentLocationAvailablityDidFail() {
+        
+        refreshData()
+    }
+    
+    func currentLocationAvailablityDidSucceed(locations: [CLLocation]) {
+        
+        extractAndSetMostRecentLocation(locationArray: locations)
+    }
+    
+    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) {
+        
+        let lastItemIndex = locationArray.count - 1
+        currentLocation = locationArray[lastItemIndex]
+        
+        guard let currLoc = currentLocation else { return }
+        
+        updateMenuAndRefreshData(with: currLoc)
+    }
+    
+    private func updateMenuAndRefreshData(with currentloc: CLLocation) {
+        
+        uiCoordinator?.staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+        
+       refreshData(with: currentloc)
     }
 }

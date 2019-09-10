@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    private func loadData(_ mapVC: MapViewController) {
+    private func initializeData(_ mapVC: MapViewController) {
         
         let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
         mapVC.startLoadingData(withTimeInterval: interval)
@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         mapVC.setup()
-        loadData(mapVC)
+        initializeData(mapVC)
     }
 }
 
