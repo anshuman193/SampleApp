@@ -12,8 +12,6 @@ import CoreLocation
 
 class MapViewController: NSViewController {
     
-    private var currentLocation: CLLocation? = nil
-    
     let locationHelper = LocationManagerHelper()
     
     private let popOverView = NSPopover()
@@ -243,7 +241,6 @@ extension MapViewController: WebServiceProtocol {
 
 extension MapViewController: LocationManagerHelperProtocol {
     
-    
     func currentLocationAvailablityDidFail() {
         
         refreshData()
@@ -251,23 +248,14 @@ extension MapViewController: LocationManagerHelperProtocol {
     
     func currentLocationAvailablityDidSucceed(locations: [CLLocation]) {
         
-        if let currLocation = getMostRecentLocation(locationArray: locations) {
-            
-            updateData(with: currLocation)
-        }
+        let currLocation = getMostRecentLocation(locationArray: locations)
+        updateData(with: currLocation)
     }
     
-    private func getMostRecentLocation(locationArray: [CLLocation]) -> CLLocation? {
+    private func getMostRecentLocation(locationArray: [CLLocation]) -> CLLocation {
         
         let lastItemIndex = locationArray.count - 1
-        currentLocation = locationArray[lastItemIndex]
-        
-        guard let currLoc = currentLocation else {
-            
-            return nil
-        }
-        
-        return currLoc
+        return locationArray[lastItemIndex]
     }
     
     private func updateData(with currentloc: CLLocation) {
