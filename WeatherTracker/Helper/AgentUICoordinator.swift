@@ -12,14 +12,16 @@ import MapKit
 
 protocol AgentUICoordinatorProtocol: class {
     
-    func reloadData()
+    func refreshData()
+    func refreshData(with location: CLLocation)
     func showMapInPopOver()
 }
 
 
 extension AgentUICoordinatorProtocol {
     
-    func reloadData() { Logger.debugLog("reloadData") }
+    func refreshData(with location: CLLocation) { Logger.debugLog("reload data with location") }
+    func refreshData() { Logger.debugLog("reloadData") }
 }
 
 @objcMembers class AgentUICoordinator {
@@ -71,9 +73,16 @@ extension AgentUICoordinator: LocationManagerHelperProtocol {
         let lastItemIndex = locationArray.count - 1
         currentLocation = locationArray[lastItemIndex]
         
+        guard let currLoc = currentLocation else { return }
+        
+        updateMenuAndRefreshData(with: currLoc)
+    }
+    
+    private func updateMenuAndRefreshData(with currentloc: CLLocation) {
+        
         staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
-
-        refreshData()
+        
+        delegate?.refreshData(with: currentloc)
     }
 }
 
@@ -265,23 +274,12 @@ extension AgentUICoordinator {
     
     @objc private func refreshData() {
         
-        delegate?.reloadData()
+        delegate?.refreshData()
     }
 
     @objc private func handleCurrentLocationMenuItemSelection() {
         
         usingCurrentLocation.toggle()
-        
-//        if usingCurrentLocation {
-//
-//            let latitude = defaults.double(forKey: Constants.UserCurrentLocation.latitude)
-//            let longitude = defaults.double(forKey: Constants.UserCurrentLocation.longitude)
-//
-//
-//            defaults.set(latitude, forKey: Constants.Location.latitude)
-//            defaults.set(longitude, forKey: Constants.Location.longitude)
-//        }
-
         refreshData()
     }
     

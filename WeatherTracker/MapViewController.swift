@@ -127,6 +127,12 @@ class MapViewController: NSViewController {
         defaults.set(annotation.coordinate.longitude, forKey: Constants.Location.longitude)
     }
     
+    private func updateDefaults(_ location: CLLocation) {
+        
+        defaults.set(location.coordinate.latitude, forKey: Constants.Location.latitude)
+        defaults.set(location.coordinate.longitude, forKey: Constants.Location.longitude)
+    }
+    
     private func captureUserSelectedLocation() {
         
         if (mapView.annotations.count > 0) {
@@ -164,7 +170,7 @@ class MapViewController: NSViewController {
         
         captureUserSelectedLocation()
         closePopOver()
-        reloadData()
+        refreshData()
         Logger.debugLog("Done button clicked")
     }
     
@@ -181,10 +187,16 @@ extension MapViewController: AgentUICoordinatorProtocol {
     
     //MARK:AgentUICoordinatorProtocol
     
-    func reloadData() {
+    func refreshData() {
         
         let interval = Utility.refreshInterval(plistname: Constants.Plist.configPlist, and: Constants.Plist.keyDataRefreshFrequency)
         startLoadingData(withTimeInterval: interval)
+    }
+    
+    func refreshData(with location: CLLocation) {
+        
+        updateDefaults(location)
+        refreshData()
     }
     
     func showMapInPopOver() {
