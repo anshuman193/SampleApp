@@ -251,22 +251,26 @@ extension MapViewController: LocationManagerHelperProtocol {
     
     func currentLocationAvailablityDidSucceed(locations: [CLLocation]) {
         
-        extractAndSetMostRecentLocation(locationArray: locations)
+        if let currLocation = extractAndSetMostRecentLocation(locationArray: locations) {
+            
+            updateData(with: currLocation)
+        }
     }
     
-    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) {
+    private func extractAndSetMostRecentLocation(locationArray: [CLLocation]) -> CLLocation? {
         
         let lastItemIndex = locationArray.count - 1
         currentLocation = locationArray[lastItemIndex]
         
-        guard let currLoc = currentLocation else { return }
+        guard let currLoc = currentLocation else {
+            
+            return nil
+        }
         
-        updateMenuAndRefreshData(with: currLoc)
+        return currLoc
     }
     
-    private func updateMenuAndRefreshData(with currentloc: CLLocation) {
-        
-        uiCoordinator?.staticMenuItemsArray = [Constants.MenuItemName.separator,Constants.MenuItemName.refresh, Constants.MenuItemName.settings, Constants.MenuItemName.currentLocation, Constants.MenuItemName.quitApp]
+    private func updateData(with currentloc: CLLocation) {
         
        refreshData(with: currentloc)
     }

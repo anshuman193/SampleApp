@@ -15,7 +15,7 @@ protocol LocationManagerHelperProtocol:  class {
     func currentLocationAvailablityDidFail()
 }
 
-class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
+class LocationManagerHelper: NSObject {
 
     weak var delegate: LocationManagerHelperProtocol?
     
@@ -34,38 +34,8 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
         startGatheringUserLocationInfo()
     }
     
-    
-    //MARK:CLLocationManagerDelegate
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        locationArray = locations
-        isUserCurrentLocationAvailable = true
-        notifyForCurrLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        Logger.debugLog("locationManager didFailWithError \(error)")
-        isUserCurrentLocationAvailable = false
-        delegate?.currentLocationAvailablityDidFail()
-    }
-    
-    
     //MARK: Helpers
-    
-    private func notifyForCurrLocation() {
-
-        guard let locArr = locationArray else {
-            
-            return
-        }
-        
-        if isUserCurrentLocationAvailable {
-            
-            delegate?.currentLocationAvailablityDidSucceed(locations: locArr)
-        }
-}
     
     private func startGatheringUserLocationInfo() {
         
@@ -103,6 +73,24 @@ class LocationManagerHelper: NSObject, CLLocationManagerDelegate {
         default:
             Logger.debugLog("Unknown")
         }
+    }
+}
+
+extension LocationManagerHelper: CLLocationManagerDelegate {
+    
+    //MARK:CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        isUserCurrentLocationAvailable = true
+        delegate?.currentLocationAvailablityDidSucceed(locations: locations)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        Logger.debugLog("locationManager didFailWithError \(error)")
+        isUserCurrentLocationAvailable = false
+        delegate?.currentLocationAvailablityDidFail()
     }
 
 }

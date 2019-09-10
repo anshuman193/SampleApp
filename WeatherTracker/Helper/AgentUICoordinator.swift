@@ -32,8 +32,6 @@ extension AgentUICoordinatorProtocol {
     
     private var timer: Timer?
     
-//    private var currentLocation: CLLocation? = nil
-    
     private var blinkStatus: Bool = false
     
     private var usingCurrentLocation: Bool = false
@@ -188,15 +186,6 @@ extension AgentUICoordinator {
             menuItem.target = self
             break
             
-        case Constants.MenuItemName.currentLocation:
-            
-            menuItem = NSMenuItem(title: item, action: #selector(handleCurrentLocationMenuItemSelection), keyEquivalent: "C")
-//            menuItem.setAccessibilityHelp(Constants.AccessibilityStrings.quitActionHint)
-            menuItem.target = self
-            menuItem.state = usingCurrentLocation ? NSControl.StateValue.on : NSControl.StateValue.off
-            break
-
-            
         case Constants.MenuItemName.quitApp:
             
             menuItem = NSMenuItem(title: item, action: #selector(quitApp), keyEquivalent: "Q")
@@ -250,12 +239,6 @@ extension AgentUICoordinator {
         delegate?.refreshData()
     }
 
-    @objc private func handleCurrentLocationMenuItemSelection() {
-        
-        usingCurrentLocation.toggle()
-        refreshData()
-    }
-    
     @objc private func quitApp() {
         
         exit(0)
