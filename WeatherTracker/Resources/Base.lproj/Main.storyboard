@@ -714,7 +714,7 @@
                                 <rect key="frame" x="20" y="102" width="560" height="347"/>
                                 <accessibility description="Map to set your location"/>
                             </mapView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9K9-Ie-jKV">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9K9-Ie-jKV" userLabel="Current Location Button">
                                 <rect key="frame" x="19.5" y="34" width="167" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="166" id="m5m-fy-31c"/>
@@ -722,8 +722,8 @@
                                 <buttonCell key="cell" type="roundTextured" title="Set Current Location" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kUh-w5-UL8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <accessibility description="Close map pop over"/>
                                 </buttonCell>
+                                <accessibility description="Set current location"/>
                                 <connections>
                                     <action selector="currentLocationButtonAction:" target="XfG-lQ-9wD" id="aMt-rL-KAK"/>
                                 </connections>
@@ -736,8 +736,8 @@
                                 <buttonCell key="cell" type="roundTextured" title="Done" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Kf-ga-J9O">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <accessibility description="Close map pop over"/>
                                 </buttonCell>
+                                <accessibility description="Close map pop over"/>
                                 <connections>
                                     <action selector="doneButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>
                                 </connections>

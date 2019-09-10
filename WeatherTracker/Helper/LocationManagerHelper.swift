@@ -21,8 +21,6 @@ class LocationManagerHelper: NSObject {
     
     private var locationArray = [CLLocation]()
     
-    private(set) var isUserCurrentLocationAvailable = false
-
     private let locationManager = CLLocationManager()
     
     private let defaults = UserDefaults.standard
@@ -90,7 +88,6 @@ extension LocationManagerHelper: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        isUserCurrentLocationAvailable = true
         delegate?.currentLocationAvailablityDidSucceed(locations: locations)
         locationArray = locations
     }
@@ -98,7 +95,6 @@ extension LocationManagerHelper: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         Logger.debugLog("locationManager didFailWithError \(error)")
-        isUserCurrentLocationAvailable = false
         delegate?.currentLocationAvailablityDidFail()
     }
 

@@ -83,6 +83,8 @@
 		0F38CA69231066FC009AF085 /* Weather Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA7B231066FC009AF085 /* WeatherTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F38CA86231066FC009AF085 /* WeatherTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F54F0612328133600D4FA8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		0F54F0622328133A00D4FA8C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		0F82B82523129CF700A66B00 /* SampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleResponse.json; sourceTree = "<group>"; };
 		0FC1E8F42323E0F9000A6ADF /* Weather Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Weather Tracker.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -451,6 +453,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				065EF8D0231E797700714FD6 /* Base */,
+				0F54F0612328133600D4FA8C /* en */,
+				0F54F0622328133A00D4FA8C /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

@@ -16,6 +16,8 @@ class MapViewController: NSViewController {
     
     private let popOverView = NSPopover()
     
+    private(set) var isUserCurrentLocationAvailable = false
+    
     private var webSrvcHandler: WebServiceHandler?
     
     @IBOutlet var mapView: MKMapView!
@@ -209,8 +211,12 @@ extension MapViewController: AgentUICoordinatorProtocol {
         }
 
         popOverView.contentViewController = self
+
         popOverView.behavior = .transient
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
+        currentLocationButton.title = Constants.MenuItemName.useMyCurrentLocation
+        currentLocationButton.isEnabled = isUserCurrentLocationAvailable
+
     }
 }
 
@@ -253,11 +259,13 @@ extension MapViewController: LocationManagerHelperProtocol {
     
     func currentLocationAvailablityDidFail() {
         
+        isUserCurrentLocationAvailable = false
         refreshData()
     }
     
     func currentLocationAvailablityDidSucceed(locations: [CLLocation]) {
         
+        isUserCurrentLocationAvailable = true
         let currLocation = getMostRecentLocation(locationArray: locations)
         updateData(with: currLocation)
     }
