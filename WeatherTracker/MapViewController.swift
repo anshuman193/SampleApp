@@ -215,7 +215,9 @@ extension MapViewController: AgentUICoordinatorProtocol {
         popOverView.behavior = .transient
         popOverView.show(relativeTo: uiElement.button!.bounds, of: uiElement.button!, preferredEdge: .maxY)
         currentLocationButton.title = Constants.MenuItemName.useMyCurrentLocation
+        currentLocationButton.setAccessibilityHelp(Constants.MenuItemName.useMyCurrentLocation)
         currentLocationButton.isEnabled = isUserCurrentLocationAvailable
+        doneButton.setAccessibilityHelp(Constants.MenuItemName.useMyCurrentLocation)
 
     }
 }

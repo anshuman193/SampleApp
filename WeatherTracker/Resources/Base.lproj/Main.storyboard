@@ -715,7 +715,7 @@
                                 <accessibility description="Map to set your location"/>
                             </mapView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9K9-Ie-jKV" userLabel="Current Location Button">
-                                <rect key="frame" x="19.5" y="34" width="167" height="23"/>
+                                <rect key="frame" x="20" y="34" width="166" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="166" id="m5m-fy-31c"/>
                                 </constraints>
@@ -723,13 +723,12 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <accessibility description="Set current location"/>
                                 <connections>
                                     <action selector="currentLocationButtonAction:" target="XfG-lQ-9wD" id="aMt-rL-KAK"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-TV-sFx" userLabel="Done Button">
-                                <rect key="frame" x="458.5" y="34" width="122" height="23"/>
+                                <rect key="frame" x="459" y="34" width="121" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="sLO-le-Mgb"/>
                                 </constraints>
@@ -737,7 +736,6 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <accessibility description="Close map pop over"/>
                                 <connections>
                                     <action selector="doneButtonAction:" target="XfG-lQ-9wD" id="zrF-m1-wm9"/>
                                 </connections>
@@ -755,8 +753,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currLocationButton" destination="ihi-TV-sFx" id="nzF-1v-NOy"/>
                         <outlet property="currentLocationButton" destination="9K9-Ie-jKV" id="o5t-OU-amJ"/>
+                        <outlet property="doneButton" destination="ihi-TV-sFx" id="Jdz-RW-LHR"/>
                         <outlet property="mapView" destination="YmK-mo-ZcL" id="7ik-xe-2Q7"/>
                     </connections>
                 </viewController>

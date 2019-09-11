@@ -22,6 +22,7 @@ struct Constants {
         static let quitApp = NSLocalizedString("Quit", comment: "")
         static let visibility = NSLocalizedString("Visibility", comment: "")
         static let useMyCurrentLocation = NSLocalizedString("Use My Current Location", comment:"")
+        static let doneButton = NSLocalizedString("Done Button", comment:"")
 
         
     }
